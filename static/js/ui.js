@@ -58,6 +58,7 @@ ui.init = function(user) {
     $(".monitor").each(function(i, elem) {
         $(this).data("hacker", hacker_ids[i]);
     });
+    
 }
 
 $(".hacker").click(function() {
