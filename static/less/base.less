@@ -197,9 +197,11 @@ button {
 }
 
 #carpet {
+    pointer-events: none;
     width: 300%;
     height: 100%;
     background-image: url("../images/carpet_pattern.jpg");
+    z-index: 2;
     transform: rotateX(45deg);
     -webkit-transform: rotateX(45deg); /* Safari and Chrome */
     transform-origin: 0% 0% 0%;
@@ -250,6 +252,30 @@ button {
     background-position: right bottom;
     background-repeat: no-repeat;
     background-image: url("../images/tables.png");
+}
+
+#sleep_button {
+    position: relative;
+    color: white;
+    .gradient(#333333, #333333, #555555);
+    padding: 8px 8px;
+    width: 120px;
+    .rounded(3px);
+    display: inline-block;
+    margin-top: 2px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#sleep_button:hover {
+    .gradient(#444444, #444444, #666666);
+}
+
+#sleep_button:active {
+    position: relative;
+    top: 1px;
+    .gradient(#333333, #555555, #333333);
 }
 
 #target_window {
@@ -480,6 +506,7 @@ button {
 }
 
 .head_back img {
+    cursor: pointer;
     position: relative;
 }
 

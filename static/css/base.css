@@ -178,9 +178,11 @@ button:hover {
   background-repeat: no-repeat;
 }
 #carpet {
+  pointer-events: none;
   width: 300%;
   height: 100%;
   background-image: url("../images/carpet_pattern.jpg");
+  z-index: 2;
   transform: rotateX(45deg);
   -webkit-transform: rotateX(45deg);
   /* Safari and Chrome */
@@ -238,6 +240,44 @@ button:hover {
   background-position: right bottom;
   background-repeat: no-repeat;
   background-image: url("../images/tables.png");
+}
+#sleep_button {
+  position: relative;
+  color: white;
+  background: #333333;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #333333), color-stop(1, #555555));
+  background: -ms-linear-gradient(bottom, #333333, #555555);
+  background: -moz-linear-gradient(center bottom, #333333 0%, #555555 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#333333', GradientType=0);
+  padding: 8px 8px;
+  width: 120px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  display: inline-block;
+  margin-top: 2px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 9999;
+}
+#sleep_button:hover {
+  background: #444444;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #444444), color-stop(1, #666666));
+  background: -ms-linear-gradient(bottom, #444444, #666666);
+  background: -moz-linear-gradient(center bottom, #444444 0%, #666666 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#444444', GradientType=0);
+}
+#sleep_button:active {
+  position: relative;
+  top: 1px;
+  background: #333333;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #555555), color-stop(1, #333333));
+  background: -ms-linear-gradient(bottom, #555555, #333333);
+  background: -moz-linear-gradient(center bottom, #555555 0%, #333333 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#555555', GradientType=0);
 }
 #target_window {
   position: absolute;
@@ -505,6 +545,7 @@ button:hover {
   height: 100px;
 }
 .head_back img {
+  cursor: pointer;
   position: relative;
 }
 #head_back1 {
