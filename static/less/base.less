@@ -483,6 +483,16 @@ button {
     -o-animation: bob 3s 1s infinite; /* Opera */
 }
 
+#head_back1.sleep img {
+    animation: none;
+    -moz-animation: none;
+    -webkit-animation: none;
+    -o-animation: none;
+    
+    position: relative:
+    top: 10px;
+}
+
 #head_back2 {
     .head_pos(1);
 }
@@ -492,6 +502,16 @@ button {
     -moz-animation: bob 3s .2s infinite; /* Firefox */
     -webkit-animation: bob 3s .2s infinite; /* Safari and Chrome */
     -o-animation: bob 3s .2s infinite; /* Opera */
+}
+
+#head_back2.sleep img {
+    animation: none;
+    -moz-animation: none;
+    -webkit-animation: none;
+    -o-animation: none;
+    
+    position: relative:
+    top: 10px;
 }
 
 #head_back3 {
@@ -505,6 +525,16 @@ button {
     -o-animation: bob 3s 1.4s infinite; /* Opera */
 }
 
+#head_back3.sleep img {
+    animation: none;
+    -moz-animation: none;
+    -webkit-animation: none;
+    -o-animation: none;
+    
+    position: relative:
+    top: 10px;
+}
+
 #head_back4 {
     .head_pos(3);
 }
@@ -516,9 +546,17 @@ button {
     -o-animation: bob 3s .7s infinite; /* Opera */
 }
 
-/* Opponent Heads */
+#head_back4.sleep img {
+    animation: none;
+    -moz-animation: none;
+    -webkit-animation: none;
+    -o-animation: none;
+    
+    position: relative:
+    top: 10px;
+}
 
-/* Head Backs */
+/* Opponent Heads & Monitor Backs */
 #monitor_backs {
     position: absolute;
     z-index: 3;
@@ -754,6 +792,22 @@ button {
 }
 
 /* HEAD BOB */
+@-webkit-keyframes bob {
+    0% {
+        top: 0px
+    }
+    40% {
+        top: -4px;
+    }
+    80% {
+        top: 0px
+    }
+    100% {
+        top: 0px;
+    }
+}
+
+/* Sleep */
 @-webkit-keyframes bob {
     0% {
         top: 0px

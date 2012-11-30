@@ -509,6 +509,14 @@ button:hover {
   /* Opera */
 
 }
+#head_back1.sleep img {
+  animation: none;
+  -moz-animation: none;
+  -webkit-animation: none;
+  -o-animation: none;
+  position: relative:
+    top: 10px;
+}
 #head_back2 {
   position: absolute;
   left: 358px;
@@ -525,6 +533,14 @@ button:hover {
   -o-animation: bob 3s .2s infinite;
   /* Opera */
 
+}
+#head_back2.sleep img {
+  animation: none;
+  -moz-animation: none;
+  -webkit-animation: none;
+  -o-animation: none;
+  position: relative:
+    top: 10px;
 }
 #head_back3 {
   position: absolute;
@@ -543,6 +559,14 @@ button:hover {
   /* Opera */
 
 }
+#head_back3.sleep img {
+  animation: none;
+  -moz-animation: none;
+  -webkit-animation: none;
+  -o-animation: none;
+  position: relative:
+    top: 10px;
+}
 #head_back4 {
   position: absolute;
   left: 590px;
@@ -560,8 +584,15 @@ button:hover {
   /* Opera */
 
 }
-/* Opponent Heads */
-/* Head Backs */
+#head_back4.sleep img {
+  animation: none;
+  -moz-animation: none;
+  -webkit-animation: none;
+  -o-animation: none;
+  position: relative:
+    top: 10px;
+}
+/* Opponent Heads & Monitor Backs */
 #monitor_backs {
   position: absolute;
   z-index: 3;
@@ -844,6 +875,21 @@ button:hover {
   }
 }
 /* HEAD BOB */
+@-webkit-keyframes bob {
+  0% {
+    top: 0px;
+  }
+  40% {
+    top: -4px;
+  }
+  80% {
+    top: 0px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+/* Sleep */
 @-webkit-keyframes bob {
   0% {
     top: 0px;
