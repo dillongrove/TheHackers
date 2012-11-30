@@ -76,10 +76,18 @@ ui.updateVisualStats = function() {
     }
 }
 
-ui.updateMonitors = function() {
+ui.updateClasses = function() {
     $(".monitor").each(function(i, elem) {
         var hacker = engine.hackers[USER_HACKERS[i]];
         $(elem).attr("class", "monitor");
+        if (hacker.talents.length > 0)
+            $(elem).addClass(hacker.talents[0].toLowerCase()); //Add class
+        $(elem).addClass(hacker['state']);
+    });
+    
+    $(".head_back").each(function(i, elem) {
+        var hacker = engine.hackers[USER_HACKERS[i]];
+        $(elem).attr("class", "head_back");
         if (hacker.talents.length > 0)
             $(elem).addClass(hacker.talents[0].toLowerCase()); //Add class
         $(elem).addClass(hacker['state']);

@@ -185,8 +185,21 @@ class API_NodeCompletedHandler(FBRequestHandler):
             self.response.out.write(json.dumps({"error": "couldn't find current match"}))
             return
 
+            
         #Update the match data
         userindex = match.users.index(self._current_user.id)
+        
+        #Add food at the halfway point
+        if ((match.outcome[userindex] < 50) and (int(progress) >= 50) and int(progress) > match.outcome[userindex]):
+            in_stock = match.food_stockpile 
+            MAX_STOCK = [3, 4, 2]
+            
+            match.food_stockpile = [random.randint(in_stock[0], MAX_STOCK[0]),
+                                    random.randint(in_stock[1], MAX_STOCK[1]),
+                                    random.randint(in_stock[2], MAX_STOCK[2])]
+            broadcast(match, json.dumps({"food": match.food_stockpile}))
+        
+        
         match.outcome[userindex] = int(progress)
         match.put()
 
@@ -329,6 +342,17 @@ class DBCleanHandler(webapp2.RequestHandler):
             m.delete()
         self.response.out.write("Datastore cleared of matches & hackers");
 
+class InviteTestHandler(FBRequestHandler):
+    def get(self):
+        self._current_user = self.require_login()
+        if not self._current_user:
+            self.response.out.write(json.dumps({"error": "please log in"}))
+            return
+            
+        response = sendInvitation(self._current_user, "1374889427")
+        
+        self.response.out.write(response)
+        
             
 app = webapp2.WSGIApplication([
     ('/', HomepageHandler),
@@ -343,7 +367,8 @@ app = webapp2.WSGIApplication([
     ('/hackathon/eat/(\w+)', API_EatFoodHandler),
     ('/hackathon/addFood', API_AddFoodHandler),
     ('/test/channelTest', ChannelTestHandler),
-    ('/test/bork', DBCleanHandler)
+    ('/test/bork', DBCleanHandler),
+    ('/test/invite', InviteTestHandler)
 ], debug=True)
 
 def main():

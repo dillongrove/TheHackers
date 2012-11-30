@@ -86,7 +86,7 @@ engine.feed_hacker = function(hacker_id, food) {
 };  
 
 engine.assign_to_node = function(hacker_id, node_id) {
-    console.log("Assigning "+hacker_id+" to "+node_id);
+    //console.log("Assigning "+hacker_id+" to "+node_id);
     var hacker = engine.hackers[hacker_id];
     
     if (hacker['stats']['active_node']) {
@@ -143,12 +143,11 @@ engine.node_completed = function(node_id) {
                 graph.revealNode(children[c]);
         }
         
-        
-        
         //TODO: send progress to server
         var progress_index = engine.users.indexOf(USER);
         console.log(progress_index);
         engine.progress[progress_index] = Math.max(engine.progress[progress_index], graph.node_data[node_id]['wave']/graph.max_wave * 100);
+        console.log("Progress:" +engine.progress[progress_index]);
         $.get('/hackathon/node_done/' + Math.floor(engine.progress[progress_index]), {}, function(data) {
             console.log(data);
         });
@@ -175,7 +174,7 @@ engine.update = function() {
     engine.update_hackers();
     engine.update_nodes();
     ui.updateVisualStats();
-    ui.updateMonitors();
+    ui.updateClasses();
     graph.updateNodes();
     if (!engine.gameOver)
         window.setTimeout(engine.update, GAME_SPEED);
