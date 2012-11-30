@@ -3,7 +3,36 @@
     <head>
         <title>Your Hacker Team</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <link href="/static/css/base.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/create.css" rel="stylesheet" type="text/css">
+        <style>
+            #page {
+                text-align: center;
+            }
+            #start_hackathon {
+                width: 100px;
+                height: 30px;
+                background: #D0D0D0;
+                border: none;
+                font-size: 18px;
+            }
+            #start_hackathon:hover {
+                background: #F0F0F0;
+                transition: background 0.5s;
+                -webkit-transition: background 0.5s;
+            }
+            #start_hackathon:active {
+                background: #C0C0C0;
+            }
+            .level {
+                position: absolute;
+                top: 7px;
+                right: 5px;
+                font-size: 16px;
+                border: 1px solid #666;
+                border-radius: 10px;
+                background: #000;
+            }
+        </style>
     </head>
     <body>
         <div id="page">
@@ -11,17 +40,30 @@
             <button id="start_hackathon">Play</button>
             <div id="waiting_for_game" class="hidden">Waiting for game...</div>
             <h1>Your hackathon team</h1>
-            <h2>Teammembers</h2>
-            TODO display in nice blocks like creation page<br/>
-            {% for hacker in user.hackers %}
-                {{ hacker.first_name }} {{ hacker.last_name }}<br/>
-            {% endfor %}
+            <div id="your_hackers"></div>
         </div>
 
         <script src="/static/js/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+        <script src="/static/js/util.js"></script>
         <!-- user interaction, etc -->
         <script>
+            {% for hacker in user.hackers %}
+                var html = insert_hacker({
+                    name: '{{ hacker.first_name }} {{ hacker.last_name }}',
+                    level: {{ hacker.level }},
+                    clss: '{{ hacker.class }}',
+                    img: '{{ hacker.imageset }}',
+                    energy: {{ hacker.base_energy }},
+                    productivity: {{ hacker.base_productivity }},
+                    teamwork: {{ hacker.base_teamwork }}
+                }, true);
+                $("#your_hackers").append(html);
+            {% endfor %}
+            $(".statbar").each(function(index) {
+                make_stat_bar($(this), 100);
+            });
+
             $("#start_hackathon").click(function() {
                 $.get('/hackathon/find', {}, function(data) {
                     // TODO check for error
@@ -29,6 +71,25 @@
                 });
                 $("#waiting_for_game").show();
             });
+            function insert_hacker(args) {
+                var output = $("<div class='hacker element'></div>")
+                        .append("<div class='level'>" + args.level + "</div>")
+                        .append("<div class='name'>" + args.name + "</div>")
+                        .append("<div class='class'>" + args.clss + "</div>")
+                        .append("<img src='/static/images/hackers/" + args.img + "front.png' />")
+                        .data('name', args.name)
+                        .data('clss', args.clss)
+                        .data('img', args.img)
+                        .data('energy', args.energy)
+                        .data('productivity', args.productivity)
+                        .data('teamwork', args.teamwork);
+                var table = $("<table class='stats_table'></table>")
+                        .append("<tr><th><div class='energy icon' title='Energy determines how long the hacker can work for'></div></th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
+                        .append("<tr><th><div class='productivity icon' title='Productivity determines how quickly the hacker works'></div></th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
+                        .append("<tr><th><div class='teamwork icon' title='Teamwork determines how effectively the hacker works with others'></div></th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
+                output.append(table);
+                return output;
+            }
         </script>
         <!-- channel messaging -->
         <script >

@@ -217,7 +217,6 @@ button {
 #target_window {
     position: absolute;
     top: -340px;
-    height: 600px;
     width: 150px;
     background-color: #ededed;
     .rounded(5px);
@@ -297,6 +296,17 @@ button {
     -moz-animation: rotate_in 1s; /* Firefox */
     -webkit-animation: rotate_in 1s; /* Safari and Chrome */
     -o-animation: rotate_in 1s; /* Opera */
+}
+
+.selected_char_pic_out {
+    position: relative;
+    left: -160px;
+
+    .rotation(0deg);
+    animation: rotate_out .5s;
+    -moz-animation: rotate_out .5s; /* Firefox */
+    -webkit-animation: rotate_out .5s; /* Safari and Chrome */
+    -o-animation: rotate_out .5s; /* Opera */
 }
 
 .selected_char_name_wrapper {
@@ -451,6 +461,8 @@ button {
 .productivity.icon { background-image: url('/static/images/icons/productivity.png'); }
 
 /* Animations */
+
+/* ROTATE IN */
 @keyframes rotate_in {
     from {
         .rotation(0deg);
@@ -492,5 +504,51 @@ button {
     to {
         .rotation(30deg);
         left: -80px;
+    }
+}
+
+/* ROTATE OUT */
+
+@keyframes rotate_out {
+    from {
+        .rotation(30deg);
+        left: -80px;   
+    }
+    to {
+        .rotation(0deg);
+        left: -160px;
+    }
+}
+
+@-moz-keyframes rotate_out {
+    from {
+        .rotation(30deg);
+        left: -80px;   
+    }
+    to {
+        .rotation(0deg);
+        left: -160px;   
+    }
+}
+
+@-webkit-keyframes rotate_out {
+    from {
+        .rotation(30deg);
+        left: -80px;   
+    }
+    to {
+        .rotation(0deg);
+        left: -160px;
+    }
+}
+
+@-o-keyframes rotate_out {
+    from {
+        .rotation(30deg);
+        left: -80px;   
+    }
+    to {
+        .rotation(0deg);
+        left: -160px;
     }
 }
