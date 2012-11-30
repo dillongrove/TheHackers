@@ -34,6 +34,11 @@ function generate_class() {
     var classes = ['Programming', 'Design', 'Business'];
     return classes[generate_int(0, classes.length - 1)];
 }
+// selects a random image
+function generate_image() {
+    var imagesets = ['zuck', 'girl1', 'girl2', 'guy1', 'guy2'];
+    return imagesets[generate_int(0, imagesets.length - 1)];
+}
 
 // ==== Other helper functions
 // return a shallow copy of the object
