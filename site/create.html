@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Recruit your team</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link href="/static/css/create.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="page">
+            <h1>Available Hackers (<span id="spots">4</span> spots remaining)</h1>
+            <div id="available_hackers"></div>
+            <h1>Your Hackers</h1>
+            <div id="your_hackers"></div>
+        </div>
+
+        <script src="/static/js/jquery-1.8.3.min.js"></script>
+        <script src="/static/js/fake-names.js"></script>
+        <script src="/static/js/util.js"></script>
+        <script>
+            var HACKER_CHOICES = 8; // number of hackers to generate
+            var TEAM_SIZE = 4;
+            var CURRENT_TEAM = [];
+            {% for hacker in user.hackers %} // insert team members you already have
+                var html = insert_hacker({
+                    name: '{{ hacker.name }}',
+                    clss: '{{ hacker.class }}',
+                    energy: {{ hacker.base_energy }},
+                    productivity: {{ hacker.base_productivity }},
+                    teamwork: {{ hacker.base_teamwork }}
+                });
+                $("#your_hackers").append(html);
+                recruit_hacker(html);
+            {% endfor %}
+
+            $(function() {
+                if (CURRENT_TEAM.length === TEAM_SIZE) {
+                    window.location = '/loadout';
+                }
+                // generate a list of hackers & display to user
+                for (var i = 0; i < HACKER_CHOICES; i++) {
+                    var name = generate_name();
+                    var clss = generate_class();
+                    var energy = generate_normal_int(1, 100);
+                    var productivity = generate_normal_int(1, 100);
+                    var teamwork = generate_normal_int(1, 100);
+                    var html = insert_hacker({
+                        name: name,
+                        clss: clss,
+                        energy: energy,
+                        productivity: productivity,
+                        teamwork: teamwork
+                    });
+                    $("#available_hackers").append(html);
+
+                }
+                // statbar-ize each stat
+                $(".statbar").each(function(index) {
+                    make_stat_bar($(this), 100);
+                });
+            });
+
+            // when a user clicks a hacker, send all their info to server & increment current team
+                // if current team = team size, go to /loadout
+            $(document).on("click", ".recruit", function() {
+                var parent = $(this).closest('.hacker');
+                // send to server
+                $.get('/recruit',
+                    {
+                        name: parent.data('name'),
+                        clss: [parent.data('clss')],
+                        energy: parent.data('energy'),
+                        productivity: parent.data('productivity'),
+                        teamwork: parent.data('teamwork')
+                    }
+                , function(data) {
+                    console.log(data);
+                    if (CURRENT_TEAM.length === TEAM_SIZE) {
+                        window.location = '/loadout';
+                    }
+                });
+                recruit_hacker(parent); // change UI
+            });
+
+            // hacker template
+            function insert_hacker(args) {
+                var output = $("<div class='hacker element'></div>")
+                        .append("<div class='name'>" + args.name + "</div>")
+                        .append("<div class='class'>" + args.clss + "</div>")
+                        .append("<img src='/static/images/hackers/zuckfront.png' />")
+                        .data('name', args.name)
+                        .data('clss', args.clss)
+                        .data('energy', args.energy)
+                        .data('productivity', args.productivity)
+                        .data('teamwork', args.teamwork);
+                var table = $("<table></table>")
+                        .append("<tr><th>Energy</th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
+                        .append("<tr><th>Productivity</th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
+                        .append("<tr><th>Teamwork</th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
+                output.append(table)
+                        .append("<button class='recruit'>Add to team ></button>");
+                return output;
+            }
+            function recruit_hacker(div) {
+                $("#your_hackers").prepend(div);
+                div.children('button').remove();
+                div.addClass('recruited');
+                CURRENT_TEAM.push(div.data('name'));
+                $("#spots").html((TEAM_SIZE - CURRENT_TEAM.length));
+            }
+        </script>
+    </body>
+</html>

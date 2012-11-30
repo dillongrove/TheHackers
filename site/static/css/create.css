@@ -1,0 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+body,
+html {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  background: #2a2a2a;
+  color: #e6e6e6;
+}
+#page {
+  width: 760px;
+  margin: auto;
+}
+.design {
+  color: #a0b3db;
+}
+.programming {
+  color: #69cd7c;
+}
+.design_bg {
+  background-color: #a0b3db;
+}
+.programming_bg {
+  background-color: #69cd7c;
+}
+.bar_outer {
+  height: 15px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.bar_outer .bar_inner {
+  height: 100%;
+  display: inline-block;
+  background: #e6e6e6;
+}
+.bar_outer .blank {
+  background: #2a2a2a;
+}
+.right {
+  float: right;
+}
+.hidden {
+  display: none;
+}
+button:hover {
+  cursor: pointer;
+}
+.hacker {
+  width: 245px;
+  margin: 0px 3px 22px 3px;
+  display: inline-block;
+  text-align: center;
+}
+.hacker .name {
+  font-size: 16px;
+  font-weight: bold;
+}
+.hacker img {
+  padding: 2px;
+}
+.hacker table {
+  width: 100%;
+}
+.hacker table th {
+  width: 10%;
+  white-space: nowrap;
+  text-align: right;
+}
+.hacker table td {
+  width: 100%;
+}
+.hacker table td .bar_inner {
+  box-shadow: inset 0 0 10px #000000;
+}
+.hacker table td .blank {
+  background-color: #373737;
+  box-shadow: none;
+}
+.hacker .recruit {
+  margin-top: 5px;
+  font-size: 14px;
+  background-color: #3c3c3c;
+  border: 1px solid #5d5d5d;
+  border-radius: 3px;
+  color: #e6e6e6;
+}
+.hacker .recruit:hover {
+  background-color: #494949;
+}
+.hacker .recruit:active {
+  background-color: #323232;
+}

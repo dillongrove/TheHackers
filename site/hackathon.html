@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hackulator</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link href="/static/css/base.css" rel="stylesheet" type="text/css" />
+        <style>
+            .selected { background: #ccc; }
+        </style>
+    </head>
+    <body>
+        <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
+        {% if users.0.name == user.name %}
+            <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
+        {% else %}
+            <h1>{{ users.1.name }} vs {{ users.0.name }}</h1>
+        {% endif %}
+        {{ user }}<br/>
+        {{ project }}<br/>
+        {{ users }}<br/>
+        {{ hackers }}<br/>
+
+        <button id="complete_node">Complete node</button>
+        <div id="hackers">
+            {% for hacker in user.hackers %}
+                <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.name }}</div>
+            {% endfor %}
+        </div>
+        <button class="action">Do Something</button>
+
+        <script>
+            var HACKERS = {{ hackers|safe }};
+        </script>
+        <script src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+        <script src="/static/js/ui.js"></script>
+        <script src="/static/js/graph.js"></script>
+        <!-- channel messaging -->
+        <script >
+            var TOKEN = "{{ token }}";
+        </script>
+        <script src="/static/js/channel.js"></script>
+    </body>
+</html>

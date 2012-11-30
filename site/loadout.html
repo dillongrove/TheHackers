@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hackulator</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link href="/static/css/base.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
+        <button id="start_hackathon">Play</button>
+        <div id="waiting_for_game" class="hidden">Waiting for game...</div>
+        <h1>{{ user.name }}</h1>
+        <img src="https://graph.facebook.com/{{ user.id }}/picture?type=large" />
+        <h2>Your team</h2>
+        {% for hacker in user.hackers %}
+            {{ hacker.name }}<br/>
+        {% endfor %}
+
+        <script src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+        <!-- user interaction, etc -->
+        <script>
+            $("#start_hackathon").click(function() {
+                $.get('/hackathon/find', {}, function(data) {
+                    // TODO check for error
+                    console.log(data);
+                });
+                $("#waiting_for_game").show();
+            });
+        </script>
+        <!-- channel messaging -->
+        <script >
+            var TOKEN = "{{ token }}";
+            var channel = {};
+            channel.disconnected = false;
+            var loadTimeout = null;
+
+            channel.init = function() {
+                try{
+                    var channel_instance = new goog.appengine.Channel(TOKEN);
+                    var socket = channel_instance.open();
+                    socket.onopen = function(){channel.onConnect()};
+                    socket.onmessage = function(msg){channel.onMessage(msg.data)};
+                    socket.onerror = function(err) {console.log(err);};
+                    socket.onclose = function(){channel.onDisconnect()};
+                }
+                catch(ex){console.log("SocketIO Error: "+ex); }
+
+                loadTimeout = setTimeout(function () {
+                    $("#connection_failure").show();
+                }, 10000);
+            }
+
+            channel.onConnect = function() {
+                clearTimeout(loadTimeout);
+                console.log('Connected');
+            }
+
+            channel.onMessage = function(msg) {
+                var args = jQuery.parseJSON(msg);
+                if (args.success === "match found") {
+                    window.location = "/hackathon";
+                }
+            }
+
+            channel.onDisconnect = function() {
+                console.log("Websocket disconnected, reconnecting...");
+            }
+
+            channel.quit = function(){
+                if (typeof sock !== 'undefined')
+                    sock.close();
+                sock=null;
+            }
+
+            channel.init();
+        </script>
+    </body>
+</html>

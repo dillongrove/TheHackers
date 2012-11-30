@@ -1,0 +1,102 @@
+<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+
+<script>
+var channel = {};
+channel.disconnected = false;
+var loadTimeout = null;
+
+channel.init = function() {
+//Called on box load
+  try{
+    var channel_instance = new goog.appengine.Channel(channel_token);
+    var socket = channel_instance.open();
+    socket.onopen = function(){channel.onConnect()};
+    socket.onmessage = function(msg){channel.onMessage(msg.data)};
+    socket.onerror = function(err) {console.log(err);};
+    socket.onclose = function(){channel.onDisconnect()};
+  }
+  catch(ex){console.log("SocketIO Error: "+ex); }
+  
+  loadTimeout = setTimeout(function () {
+		$(".throbber_float").fadeOut(200, function() {$(this).html("<h3>There was a problem connecting, sorry!<h3><h4>Please try again later.</h4>").fadeIn(400);});
+  }, 10000);
+  
+  $(".throbber_window, .throbber_float").delay(2000).fadeIn(750);
+}
+
+channel.onConnect = function() {
+	$(".throbber_window, .throbber_float").stop(true,false).fadeOut(100);
+		
+	//Clear all folders/items
+  $(".items > .item").remove();
+  boxPass = "";
+  console.log("Using box "+boxName);
+  $.get("/reload", {"box":boxName,"password":boxPass}, channel.onMessage);
+	clearTimeout(loadTimeout);
+}
+
+channel.onMessage = function(msg) {
+	var args = jQuery.parseJSON(msg);
+	console.log("Received Message:");
+	console.dir(args);	
+	if (args.type == "Folder")
+		channel.onFolders(args);
+	else if (args.type == "Remove")
+		channel.onRemove(args);
+	else if (args.type == "Alert")
+		channel.onAlert(args);
+}
+
+channel.onAlert = function(args) {
+	var div = $('<div><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>'+args.text+'</p></div>');	
+	div.dialog({
+		modal: true,
+		buttons: {
+			Ok: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+}	
+
+channel.onRemove = function(args)
+{
+	if (args.item != undefined)
+		removeObject($("#"+args.item+"-"+args.folder), false);
+	else removeObject($("#"+args.folder), true);
+}
+
+channel.onDisconnect = function() {
+    console.log("Websocket disconnected, reconnecting...");
+}
+
+channel.quit = function(){
+    if (typeof sock !== 'undefined')
+        sock.close();
+    sock=null;
+}
+
+channel.broadcast = function(items)
+//Passed an array of items - see the spec for protocol
+{
+	console.log(items);
+  $.get("/save", {"box": boxName, "items":JSON.stringify(items)});	
+}
+
+channel.remove = function(id)
+{
+	var pipepos = id.indexOf("-");
+  var args = "";
+	if (pipepos != -1)
+	{
+		var itemname = id.substr(0,pipepos);
+		var foldername = id.substr(pipepos+1);
+    args = {"folder":foldername, "item":itemname};
+	}
+	else args = {"type":"Remove", "folder":foldername};
+  
+  $.get("/remove", args, function(result) {
+    console.log(result);
+  });
+}
+</script>
