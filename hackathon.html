@@ -23,22 +23,34 @@
         <button id="complete_node">Complete node</button>
         <div id="hackers">
             {% for hacker in user.hackers %}
-                <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.name }}</div>
+                <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }} 
+                    </br>
+                           Energy: <span id="energy"></span></br>
+                           Reliability: <span id="reliability">0</span></br>
+                           Focus: <span id="focus">0</span></br>
+                           Productivity: <span id="productivity">0</span></br>
+                           Work_Start: <span id="work_start">0</span></br>
+                           Active_node: <span id="active_node">0</span></br>
+                           State: <span id="state">0</span></br>
+                </div>
+                </br></br>
             {% endfor %}
         </div>
         <button class="action">Do Something</button>
 
-        <script>
-            var HACKERS = {{ hackers|safe }};
-        </script>
         <script src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/raphael-min.js"></script>
         <script type="text/javascript" src="/_ah/channel/jsapi"></script>
         <script src="/static/js/ui.js"></script>
         <script src="/static/js/graph.js"></script>
-        <!-- channel messaging -->
-        <script >
-            var TOKEN = "{{ token }}";
-        </script>
         <script src="/static/js/channel.js"></script>
+        <script src="/static/js/engine.js"></script>
+        <script >
+            var HACKERS = {{ hackers|safe }};
+            var TOKEN = "{{ token }}";
+            channel.init();
+            graph.init(graph.testgraph);
+            engine.start(graph.nodes, HACKERS);
+        </script>
     </body>
 </html>

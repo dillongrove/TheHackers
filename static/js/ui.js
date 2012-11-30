@@ -1,5 +1,25 @@
 var PROGRESS = 0;
-var HACKER_SELECTED = "";
+var HACKER_SELECTED = null;
+
+var ui = {};
+ui.nodeClicked = function(id) {
+    if (HACKER_SELECTED == null) return;
+    engine.assign_to_node(HACKER_SELECTED, id);
+}
+
+ui.updateVisualStats = function() {
+    $(".hacker").each(function() {
+        var hackerid = $(this).data("id");
+        var hacker = engine.hackers[hackerid];
+        $(this).children().each(function() {
+            var id = $(this).attr("id");
+            if (id == "state")                    
+                $(this).html(hacker['state']);
+            else
+                $(this).html(hacker['stats'][id]);
+        });
+    });
+}
 
 $("#complete_node").click(function() {
     PROGRESS += 10;

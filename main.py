@@ -105,14 +105,14 @@ class HackathonHandler(FBRequestHandler):
             self.redirect("/loadout")
             
         #Resolve hacker ids to actual hacker data
-        hacker_list = []
+        hacker_list = {}
         for hacker in match.hacker_list:
             hacker_instance = Hacker.get(hacker)
-            hacker_list += [{"name": hacker_instance.name,
-                             "id": str(hacker_instance.key().id()),
+            hacker_list[str(hacker_instance.key())] = {"first_name": hacker_instance.first_name,
+                             "last_name": hacker_instance.last_name,
                              "base": {"energy": hacker_instance.base_energy,
                                       "productivity": hacker_instance.base_productivity,
-                                      "teamwork": hacker_instance.base_teamwork}}]
+                                      "teamwork": hacker_instance.base_teamwork}}
             
         #Resolve hackers for this user
         self._current_user.hackers = Hacker.all().filter("user =", self._current_user.id).fetch(1000)
