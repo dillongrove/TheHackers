@@ -5,7 +5,7 @@
 	<title>The Hackers</title>
 	<link rel="stylesheet" href="static/css/reset.css">
 	<link rel="stylesheet" href="static/css/base.css">
-
+    <link rel="stylesheet" href="static/css/tipsy.css">
     <style>
         #hackers {
             position:absolute;
@@ -120,7 +120,7 @@
                                 <tbody>
                                     <tr>
                                         <th>
-                                            <div class="energy icon"></div>
+                                            <div class="energy icon" title="Energy: Keep your hackers energy up to make them work longer "></div>
                                         </th>
                                         <td>
                                             <div class="statbar energy"></div>
@@ -128,7 +128,7 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            <div class="productivity icon"></div>
+                                            <div class="productivity icon" title="Productivity: More productive hackers finish tasks quickly"></div>
                                         </th>
                                         <td>
                                             <div class="statbar productivity"></div>
@@ -137,7 +137,7 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            <div class="focus icon"></div>
+                                            <div class="focus icon" title="Focus: Continue working uninterrupted on one task to complete it quickly"></div>
                                         </th>
                                         <td>
                                             <div class="statbar focus"></div>
@@ -146,7 +146,7 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            <div class="teamwork icon"></div>
+                                            <div class="teamwork icon" title="Teamwork: Work with other hackers to finish the same task faster"></div>
                                         </th>
                                         <td>
                                             <div class="statbar teamwork"></div>
@@ -163,6 +163,7 @@
 	</div>
 
     <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/jquery.tipsy.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/raphael-min.js"></script>
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
