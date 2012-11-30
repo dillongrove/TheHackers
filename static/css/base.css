@@ -63,3 +63,25 @@ button:hover {
   background: -moz-linear-gradient(center bottom, #afafaf 0%, #838383 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#838383', endColorstr='#afafaf', GradientType=0);
 }
+#nav_bar {
+  background-color: #363636;
+  background-image: url("../images/titlebar.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
+}
+#logo {
+  background-image: url("../images/logo.png");
+  height: 80px;
+  width: 200px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  text-align: center;
+}
