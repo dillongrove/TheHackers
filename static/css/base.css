@@ -205,7 +205,6 @@ button:hover {
   background-image: url("../images/tables.png");
 }
 .monitor {
-  background-color: #ffffff;
   width: 80px;
   height: 44px;
 }
@@ -374,6 +373,35 @@ button:hover {
 }
 .section:last-child {
   border-bottom: none;
+}
+/* Monitor Screens */
+.monitor {
+  background-image: url("/static/images/monitor_screens.png");
+  background-repeat: no-repeat;
+}
+.monitor.sleep {
+  background-position: 0px 0px;
+}
+.monitor.business {
+  background-position: 0px -88px;
+}
+.monitor.business.sleep {
+  background-position: 0px 0px;
+}
+.monitor.programming {
+  background-position: 0px -132px;
+}
+.monitor.programming.sleep {
+  background-position: 0px 0px;
+}
+.monitor.design {
+  background-position: 0px -176px;
+}
+.monitor.design.sleep {
+  background-position: 0px 0px;
+}
+.monitor.idle {
+  background-position: 0px -44px;
 }
 /* Icons */
 .icon {
