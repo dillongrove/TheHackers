@@ -61,11 +61,12 @@ a:hover {
   left: 0px;
 }
 .stats_table {
+  padding-top: 6px;
   width: 100%;
 }
 .stats_table td {
-  padding-left: 3px;
-  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-bottom: 10px;
   width: 100%;
 }
 .right {
