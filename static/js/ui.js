@@ -4,8 +4,24 @@ var HACKER_SELECTED = null;
 var ui = {};
 ui.nodeClicked = function(id) {
     if (HACKER_SELECTED == null) return;
+    ui.playClick2(); 
     engine.assign_to_node(HACKER_SELECTED, id);
 }
+
+ui.playClick = function() {
+    document.getElementById("soundeffect").src = "/static/sound/click.wav";
+    document.getElementById("soundeffect").play();
+};
+
+ui.playClick2 = function() {
+    document.getElementById("soundeffect3").src = "/static/sound/click.wav";
+    document.getElementById("soundeffect3").play();
+};
+
+ui.playPop = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/pop.wav";
+    document.getElementById("soundeffect2").play();
+};
 
 ui.updateVisualStats = function() {
     $(".hacker").each(function() {
@@ -52,29 +68,26 @@ ui.init = function(user) {
     for (hackerid in USER_HACKERS)
         hacker_ids.push(hackerid);
 
-    //Add hacker ids to all monitors
-    console.log("Hacker ids");
-    console.log(hacker_ids);
-    $(".monitor").each(function(i, elem) {
-        $(this).data("hacker", hacker_ids[i]);
-    });
     
 }
 
-$(".hacker").click(function() {
-    HACKER_SELECTED = $(this).data('id');
+$(".monitor, .head_back, .seat").click(function() {
+    ui.playClick();
+    var id = $(this).attr("id");
+    var index = parseInt(id[id.length - 1]) - 1;
+    HACKER_SELECTED = USER_HACKERS[index]
     var hacker = engine.hackers[HACKER_SELECTED];
-    $(".hacker").removeClass('selected');
-    $(this).addClass('selected');
+    $(".head_back").removeClass('selected');
+    $("#head_back"+(index+1)).addClass('selected');
     $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
-    console.log("Selected "+HACKER_SELECTED);
 });
 
 $(document).keypress(function(event) {
+    ui.playClick();
     console.log(event.which);
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         event.preventDefault();
         var hacker_num = event.which -= 49;
         $("[data-id='" + USER_HACKERS[hacker_num] +"']").click();
-    }
+    }    
 });

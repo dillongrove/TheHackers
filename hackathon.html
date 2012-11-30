@@ -41,7 +41,9 @@
     </style>
 </head>
 <body>
-    
+    <audio id="soundeffect"></audio>
+    <audio id="soundeffect2"></audio>
+    <audio id="soundeffect3"></audio>
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
     {% if users.0.name == user.name %}
         <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
@@ -63,9 +65,6 @@
 			</div>
 		</div>
 		<div id="floor">
-			<div id="floor_highlight">
-
-			</div>
 			<div id="baseboard">
 
 			</div>
@@ -184,6 +183,7 @@
         graph.init(graph.testgraph);
         ui.init(HACKERS);
         engine.start(graph.nodes, HACKERS, USERS);
+        document.getElementById("soundeffect").play();
     </script>
 
 </body>
