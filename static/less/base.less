@@ -16,11 +16,24 @@
 @cl-white: #e6e6e6;
 @cl-design: #A0B3DB;
 @cl-programming: #69CD7C;
+
 @monitor-height: 44px;
 @monitor-width: 80px;
 @monitor-tile-x: 107px;
 @monitor-start-x: 156px;
 @monitor-start-y: 62px;
+
+@seat-width: 126px;
+@seat-height: 163px;
+@seat-start-x: 130px;
+@seat-start-y: 150px;
+@seat-tile-x: 116px;
+
+@head-back-width: 126px;
+@head-back-height: 163px;
+@head-back-start-x: 130px;
+@head-back-start-y: 150px;
+@head-back-tile-x: 116px;
 
 /* structure and global styling */
 body, html {
@@ -201,22 +214,6 @@ button {
     background-image: url("../images/tables.png");
 }
 
-.monitor {
-    width: @monitor-width;
-    height: @monitor-height;
-}
-
-.monitor_pos(@num){
-    position: absolute;
-    left: @monitor-start-x + ((@num)*@monitor-tile-x);
-    top: @monitor-start-y;
-}
-
-#monitor1 {.monitor_pos(0)}
-#monitor2 {.monitor_pos(1)}
-#monitor3 {.monitor_pos(2)}
-#monitor4 {.monitor_pos(3)}
-
 #target_window {
     position: relative;
     top: -340px;
@@ -355,9 +352,22 @@ button {
 
 /* Monitor Screens */
 .monitor {
+    width: @monitor-width;
+    height: @monitor-height;
     background-image: url("/static/images/monitor_screens.png");
     background-repeat: no-repeat;
 }
+
+.monitor_pos(@num){
+    position: absolute;
+    left: @monitor-start-x + ((@num)*@monitor-tile-x);
+    top: @monitor-start-y;
+}
+
+#monitor1 {.monitor_pos(0)}
+#monitor2 {.monitor_pos(1)}
+#monitor3 {.monitor_pos(2)}
+#monitor4 {.monitor_pos(3)}
 
 .monitor.sleep {
     background-position: 0px 0*@monitor-height;
@@ -391,6 +401,24 @@ button {
     background-position: 0px -1*@monitor-height;
 }
 
+/* Seats */
+.seat {
+    background-image: url("/static/images/seat.png");
+    background-repeat: no-repeat;
+    width: @seat-width;
+    height: @seat-height;
+}
+
+.seat_pos(@num){
+    position: absolute;
+    left: @seat-start-x + ((@num)*@seat-tile-x);
+    top: @seat-start-y;
+}
+
+#seat1 {.seat_pos(0)}
+#seat2 {.seat_pos(1)}
+#seat3 {.seat_pos(2)}
+#seat4 {.seat_pos(3)}
 
 /* Icons */
 

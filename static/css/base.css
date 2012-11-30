@@ -203,30 +203,6 @@ button:hover {
   background-repeat: no-repeat;
   background-image: url("../images/tables.png");
 }
-.monitor {
-  width: 80px;
-  height: 44px;
-}
-#monitor1 {
-  position: absolute;
-  left: 156px;
-  top: 62px;
-}
-#monitor2 {
-  position: absolute;
-  left: 263px;
-  top: 62px;
-}
-#monitor3 {
-  position: absolute;
-  left: 370px;
-  top: 62px;
-}
-#monitor4 {
-  position: absolute;
-  left: 477px;
-  top: 62px;
-}
 #target_window {
   position: relative;
   top: -340px;
@@ -390,8 +366,30 @@ button:hover {
 }
 /* Monitor Screens */
 .monitor {
+  width: 80px;
+  height: 44px;
   background-image: url("/static/images/monitor_screens.png");
   background-repeat: no-repeat;
+}
+#monitor1 {
+  position: absolute;
+  left: 156px;
+  top: 62px;
+}
+#monitor2 {
+  position: absolute;
+  left: 263px;
+  top: 62px;
+}
+#monitor3 {
+  position: absolute;
+  left: 370px;
+  top: 62px;
+}
+#monitor4 {
+  position: absolute;
+  left: 477px;
+  top: 62px;
 }
 .monitor.sleep {
   background-position: 0px 0px;
@@ -416,6 +414,33 @@ button:hover {
 }
 .monitor.idle {
   background-position: 0px -44px;
+}
+/* Seats */
+.seat {
+  background-image: url("/static/images/seat.png");
+  background-repeat: no-repeat;
+  width: 126px;
+  height: 163px;
+}
+#seat1 {
+  position: absolute;
+  left: 130px;
+  top: 150px;
+}
+#seat2 {
+  position: absolute;
+  left: 246px;
+  top: 150px;
+}
+#seat3 {
+  position: absolute;
+  left: 362px;
+  top: 150px;
+}
+#seat4 {
+  position: absolute;
+  left: 478px;
+  top: 150px;
 }
 /* Icons */
 .icon {
