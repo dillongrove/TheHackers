@@ -22,7 +22,7 @@
             var CURRENT_TEAM = [];
             {% for hacker in user.hackers %} // insert team members you already have
                 var html = insert_hacker({
-                    name: '{{ hacker.name }}',
+                    name: '{{ hacker.first_name }} {{ hacker.last_name }}',
                     clss: '{{ hacker.class }}',
                     energy: {{ hacker.base_energy }},
                     productivity: {{ hacker.base_productivity }},
@@ -66,7 +66,8 @@
                 // send to server
                 $.get('/recruit',
                     {
-                        name: parent.data('name'),
+                        first_name: parent.data('name').split(' ')[0],
+                        last_name: parent.data('name').split(' ')[1],
                         clss: [parent.data('clss')],
                         energy: parent.data('energy'),
                         productivity: parent.data('productivity'),
@@ -93,9 +94,9 @@
                         .data('productivity', args.productivity)
                         .data('teamwork', args.teamwork);
                 var table = $("<table></table>")
-                        .append("<tr><th>Energy</th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
+                        .append("<tr><th><div class='energy icon'></div></th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
                         .append("<tr><th>Productivity</th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
-                        .append("<tr><th>Teamwork</th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
+                        .append("<tr><th><div class='teamwork icon'></div></th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
                 output.append(table)
                         .append("<button class='recruit'>Add to team ></button>");
                 return output;

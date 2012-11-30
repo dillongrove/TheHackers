@@ -13,7 +13,7 @@
         <img src="https://graph.facebook.com/{{ user.id }}/picture?type=large" />
         <h2>Your team</h2>
         {% for hacker in user.hackers %}
-            {{ hacker.name }}<br/>
+            {{ hacker.first_name }} {{ hacker.last_name }}<br/>
         {% endfor %}
 
         <script src="/static/js/jquery-1.8.3.min.js"></script>
