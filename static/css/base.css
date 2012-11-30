@@ -4,6 +4,11 @@ html {
   font-family: 'Droid Sans', sans-serif;
   font-size: 12px;
   font-weight: 400;
+  background: #2a2a2a;
+  color: #e6e6e6;
+}
+a {
+  color: #e6e6e6;
 }
 #page {
   width: 760px;
@@ -31,14 +36,31 @@ html {
 .bar_outer .bar_inner {
   height: 100%;
   display: inline-block;
-  background: #000;
+  background: #e6e6e6;
 }
 .bar_outer .blank {
-  background: #FFF;
+  background: #2a2a2a;
 }
 .right {
   float: right;
 }
 .hidden {
   display: none;
+}
+button:hover {
+  cursor: pointer;
+}
+.icon {
+  width: 11px;
+  height: 16px;
+  background-repeat: no-repeat;
+}
+.energy.icon {
+  background-image: url('/static/images/icons/energy.png');
+}
+.teamwork.icon {
+  background-image: url('/static/images/icons/teamwork.png');
+}
+.productivity.icon {
+  background-image: url('/static/images/icons/productivity.png');
 }
