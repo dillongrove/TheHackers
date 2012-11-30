@@ -15,6 +15,8 @@ ui.updateVisualStats = function() {
             var id = $(this).attr("id");
             if (id == "state")                    
                 $(this).html(hacker['state']);
+            else if (id == "teamwork")
+                $(this).html(hacker['base']['teamwork']);
             else
                 $(this).html(hacker['stats'][id]);
         });
@@ -30,13 +32,14 @@ $("#complete_node").click(function() {
 
 $(".hacker").click(function() {
     if ($(this).data('id') === HACKER_SELECTED) { // if clicking again, deselect
-        HACKER_SELECTED = "";
+        HACKER_SELECTED = null;
         $(this).removeClass('selected');
     } else {
         HACKER_SELECTED = $(this).data('id');
         $(".hacker").removeClass('selected');
         $(this).addClass('selected');
     }
+    console.log("Selected "+HACKER_SELECTED);
 });
 
 $(".action").click(function() {

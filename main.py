@@ -110,6 +110,7 @@ class HackathonHandler(FBRequestHandler):
             hacker_instance = Hacker.get(hacker)
             hacker_list[str(hacker_instance.key())] = {"first_name": hacker_instance.first_name,
                              "last_name": hacker_instance.last_name,
+                             "talents": hacker_instance.talents,
                              "base": {"energy": hacker_instance.base_energy,
                                       "productivity": hacker_instance.base_productivity,
                                       "teamwork": hacker_instance.base_teamwork}}
@@ -148,11 +149,12 @@ class API_CreateHackerHandler(FBRequestHandler):
                            last_name = self.request.get("last_name"),
                            user = self._current_user.id, 
                            catchphrase = self.request.get("catchphrase"),
-                           talents = [self.request.get("class")],
                            imageset = self.request.get("image"),
                            base_energy = int(self.request.get("energy")),
                            base_productivity = int(self.request.get("productivity")),
                            base_teamwork = int(self.request.get("teamwork")))
+        if self.request.get("clss"):
+            newhacker.talents = [self.request.get("clss")]
         newhacker.put()
         self.response.out.write(json.dumps({"success": "new hacker created"}))
 

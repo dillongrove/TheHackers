@@ -1,8 +1,9 @@
-var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C"};
-var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920"};
-var ARC_RAD = 23;
-var CIRCLE_RAD = 30;
-var VERT_CENTER = 310;
+var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117"};
+var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317"};
+var ARC_RAD = 13;
+var CIRCLE_RAD = 18;
+var CIRCLE_COLLAPSED = 5;
+var VERT_CENTER = 128;
 
 var graph = {"paper": null, "nodes": null};
 
@@ -14,13 +15,14 @@ graph.testgraph = [{"health": 3000, "wave": 0, "out": [2], "class": "design"},
                  {"health": 3000, "wave": 2, "out": [7], "class": "design"},
                  {"health": 3000, "wave": 2, "out": [8], "class": "design"},
                  {"health": 3000, "wave": 3, "out": [], "class": "design"},
-                 {"health": 3000, "wave": 3, "out": [], "class": "design"},
+                 {"health": 3000, "wave": 3, "out": [9], "class": "design"},
+                 {"health": 3000, "wave": 4, "out": [], "class": "mvp"},
                  ];
 
 
                  
 graph.init = function(graph_json) {
-    graph.paper = Raphael(200, 100, 720, 400);
+    graph.paper = Raphael($("#screen_inner").get(0), 576, 256);
     
     //Used to declare arcs
     graph.paper.customAttributes.arc = function (xloc, yloc, value, total, R) {
@@ -55,8 +57,7 @@ graph.makeNode = function(x, y, type) {
     //Styling
     node.attr({"fill": FILLS[type],
                 "stroke": "#F8F8F8",
-                "stroke-width": 6});
-    node.glow({'width': 1, 'offsetx': 1, 'offsety': 1});
+                "stroke-width": 4});
     
     return node;
 }
@@ -71,7 +72,7 @@ graph.buildNode = function(id, amount) {
 graph.makeTimer = function(x, y, type, health) {
     var timer = graph.paper.path().attr({
         "stroke": TIME_FILLS[type],
-        "stroke-width": 8,
+        "stroke-width": 6,
         arc: [x, y, 0, 100, ARC_RAD]
     }).data({"cx": x, "cy": y}).toFront();
     timer.data({"completion": 0, "health": health});
@@ -86,15 +87,27 @@ graph.updateNodes = function() {
 //Does animation stuff
 graph.updateNode = function(id) {
     var timer = nodes[id][1];
+    if (timer.data("completed")) return
+    
     var amount = timer.data("completion");   
     if (amount >= timer.data("health")) {
+        timer.data("completed", true);
         timer.animate({
-            "stroke-width": 27,
-            arc: [timer.data("cx"), timer.data("cy"), amount, timer.data("health"), ARC_RAD/1.8]
-        }, 500, "<>");
+            "stroke-width": 18,
+            arc: [timer.data("cx"), timer.data("cy"), amount, timer.data("health"), ARC_RAD/1.5]
+        }, 150, "<>");
         var node = nodes[id][0];
         
-        window.setTimeout(function () {node.animate({"r": CIRCLE_RAD+5, "stroke-width": 0}, 500, "bounce");}, 500);
+        window.setTimeout(function () {node.animate({"r": CIRCLE_RAD+3, "stroke-width": 0}, 150, "bounce");}, 150);
+        
+        window.setTimeout(function () { 
+            node.animate({"r": CIRCLE_COLLAPSED}, 150, "linear");
+            timer.animate({
+                "stroke-width": 7,
+                arc: [timer.data("cx"), timer.data("cy"), amount, timer.data("health"), CIRCLE_COLLAPSED/1.7]
+            }, 150, "<>");
+            nodes[id][2].remove();
+        }, 300);
         
         engine.node_completed(id);
     }
@@ -136,14 +149,15 @@ graph.generate = function(node_data) {
     for (x in node_data)
     {
         var node = node_data[x];
-        var posx = 50 + 100 * node['wave'];
-        var posy = VERT_CENTER - (50 * wavelengths[node['wave']]) + 100 * waves_occupied[node['wave']];
+        var posx = 50 + 60 * node['wave'];
+        var posy = VERT_CENTER - (20 * wavelengths[node['wave']]) + 65 * waves_occupied[node['wave']];
         
         var nodeobj = graph.makeNode(posx, posy, node['class']);
         nodeobj.data("id", x);
         nodeobj.click(function () {
            ui.nodeClicked(this.data("id"));
         });
+        var glowobj = nodeobj.glow({'width': 1, 'offsetx': 1, 'offsety': 1, 'fill': true});
         
         var timerobj = graph.makeTimer(posx, posy, node['class'], node['health']);
         timerobj.data("id", x);
@@ -151,8 +165,12 @@ graph.generate = function(node_data) {
            ui.nodeClicked(this.data("id"));
         });
         
+        //MVP Only - display text
+        if (node['class'] == "mvp")
+             graph.paper.text(posx, posy, "MVP")
+        
         waves_occupied[node['wave']]++;
-        nodes[x] = [nodeobj, timerobj]; 
+        nodes[x] = [nodeobj, timerobj, glowobj]; 
         timerobj.data("completion", 2800);
     }
     

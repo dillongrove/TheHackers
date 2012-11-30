@@ -57,20 +57,27 @@ engine.update_hackers = function() {
             }
         }
         
-        //Update productivity
-        hacker['stats']['productivity'] = hacker['base']['productivity'] * (100 + hacker['stats']['energy'] + hacker['stats']['focus']) / 200;
+        
         
         //Update focus
         if (hacker['stats']['active_node'] != null) {
             var work_time = getTime() - hacker['stats']['work_start']; //Seconds since start
             hacker['stats']['focus'] = 100*(1.0 - Math.pow(16, -work_time/60.0)); //Gets damn close to 100% by 60 seconds of work.
         
+            //Update productivity
+            hacker['stats']['productivity'] = hacker['base']['productivity'] * (100 + hacker['stats']['energy'] + hacker['stats']['focus']) / 200;
+            
+            //Performance hit if not affinity
+            if (hacker['talents'][0] != graph.node_data[hacker['stats']['active_node']]['class'])
+                hacker['stats']['productivity'] *= 0.5;
+                
             //Update their active node
             graph.buildNode(hacker['stats']['active_node'], hacker['stats']['productivity']);
         }
         else {
             hacker['stats']['focus'] = 0;
             hacker['stats']['work_start'] = null;
+            hacker['stats']['productivity'] = 0;
         }
         
     }
