@@ -127,7 +127,9 @@ engine.node_completed = function(node_id) {
         //Remove used dependencies
         var children = graph.node_data[node_id]['out'];
         for (c in children) {
-            var depIndex = engine.unused_dependencies[children[c]].indexOf(node_id);
+            var depIndex = engine.unused_dependencies[children[c]].indexOf(""+node_id);
+            if (depIndex == -1)
+                continue;
             engine.unused_dependencies[children[c]].splice(depIndex, 1);
         }
         
@@ -138,7 +140,7 @@ engine.node_completed = function(node_id) {
         var progress_index = engine.users.indexOf(USER);
         console.log(progress_index);
         engine.progress[progress_index] = Math.max(engine.progress[progress_index], graph.node_data[node_id]['wave']/graph.max_wave * 100);
-        $.get('/hackathon/node_done/' + engine.progress[progress_index], {}, function(data) {
+        $.get('/hackathon/node_done/' + Math.floor(engine.progress[progress_index]), {}, function(data) {
             console.log(data);
         });
     }

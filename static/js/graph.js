@@ -183,13 +183,21 @@ graph.generate = function(node_data) {
         });
         
         var textobj = graph.paper.text(posx+20, posy-20, " ");
+        textobj.data("id", x);
         
         //MVP Only - display text
+        var innerText = null;
         if (node['class'] == "mvp")
-             graph.paper.text(posx, posy, "MVP")
+             innerText = graph.paper.text(posx, posy, "MVP")
         else if (node['class'] == "finish")
-             graph.paper.text(posx, posy, "END")
+             innerText = graph.paper.text(posx, posy, "END")
         
+        if (innerText) {
+            innerText.data("id", x);
+            innerText.click(function() {
+                ui.nodeClicked(this.data("id"));
+            });
+        }
         
         waves_occupied[node['wave']]++;
         nodes[x] = [nodeobj, timerobj, glowobj, textobj]; 
