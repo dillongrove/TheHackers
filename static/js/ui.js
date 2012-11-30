@@ -13,7 +13,7 @@ ui.updateVisualStats = function() {
         var hacker = engine.hackers[hackerid];
         $(this).children().each(function() {
             var id = $(this).attr("id");
-            if (id == "state")                    
+            if (id == "state")
                 $(this).html(hacker['state']);
             else if (id == "teamwork")
                 $(this).html(hacker['base']['teamwork']);
@@ -22,6 +22,15 @@ ui.updateVisualStats = function() {
             else
                 $(this).html(hacker['stats'][id]);
         });
+        if (hackerid === HACKER_SELECTED) {
+            $("#current_task").html(hacker['state'].charAt(0).toUpperCase() + hacker['state'].slice(1));
+            $(".energy.statbar").html(hacker['stats']['energy']);
+            $(".productivity.statbar").html(hacker['stats']['productivity']);
+            $(".teamwork.statbar").html(hacker['stats']['teamwork']);
+            $(".statbar").each(function(index) {
+                make_stat_bar($(this), 100);
+            });
+        }
     });
 }
 
@@ -38,7 +47,7 @@ ui.init = function(user) {
     hacker_ids = [];
     for (hackerid in HACKERS)
         hacker_ids.push(hackerid);
-        
+
     //Add hacker ids to all monitors
     $(".monitor").each(function(i, elem) {
         $(this).data("hacker", hacker_ids[i]);
@@ -58,8 +67,10 @@ $(".hacker").click(function() {
         $(this).removeClass('selected');
     } else {
         HACKER_SELECTED = $(this).data('id');
+        var hacker = engine.hackers[HACKER_SELECTED];
         $(".hacker").removeClass('selected');
         $(this).addClass('selected');
+        $("#selected_char_pic").attr('src', hacker['imgset']);
     }
     console.log("Selected "+HACKER_SELECTED);
 });
@@ -67,4 +78,3 @@ $(".hacker").click(function() {
 $(".action").click(function() {
     // Set hacker start_time to current time
 })
-

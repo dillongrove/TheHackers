@@ -13,20 +13,20 @@
             width: 400px;
             z-index:9001;
         }
-        
+
         circle {
             cursor:pointer;
         }
-        
+
         path:not([stroke="#aaaaaa"]) {
             cursor:pointer;
-        }       
-        
+        }
+
         #screen_inner text {
             cursor:pointer;
         }
-            
-        
+
+
     </style>
 </head>
 <body>
@@ -43,10 +43,10 @@
     {{ project }}<br/>
     {{ users }}<br/>
     {{ hackers }}<br/>
-    
+
     <div id="hackers">
         {% for hacker in user.hackers %}
-            <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }} 
+            <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }}
                 </br>
                        Energy: <span id="energy"></span></br>
                        Teamwork: <span id="teamwork">0</span></br>
@@ -72,20 +72,20 @@
 			<div id="wall_interface">
 				<div id="screen_outer">
 					<div id="screen_inner">
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="floor">
 			<div id="floor_highlight">
-				
+
 			</div>
 			<div id="baseboard">
-				
+
 			</div>
 			<div id="carpet">
-				
+
 			</div>
 			<div id="floor_interface">
 				<div id="monitor1" class="monitor"></div>
@@ -95,7 +95,6 @@
 
 				<div id="target_window">
 					<div id="top_bar">
-						<span class="char_name">Jim Smith</span>
 						<div class="close">
 							x
 						</div>
@@ -109,18 +108,14 @@
 							<span id="current_task">Idle</span>
 						</div>
 						<div class="selected_char_stats section">
-                            <table>
+                            <table class='stats_table'>
                                 <tbody>
                                     <tr>
                                         <th>
                                             <div class="energy icon"></div>
                                         </th>
                                         <td>
-                                            <div class="statbar energy">
-                                                <div class="bar_outer">
-                                                    <div class="bar_inner" style="width:52%"></div>
-                                                </div>
-                                            </div>
+                                            <div class="statbar energy"></div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -128,12 +123,7 @@
                                             <div class="productivity icon"></div>
                                         </th>
                                         <td>
-                                            <div class="statbar productivity">
-                                                <div class="bar_outer">
-                                                    <div class="bar_inner" style="width:54%">
-                                                        
-                                                    </div>
-                                                </div>
+                                            <div class="statbar productivity"></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -142,15 +132,11 @@
                                             <div class="teamwork icon"></div>
                                         </th>
                                         <td>
-                                            <div class="statbar teamwork">
-                                                <div class="bar_outer">
-                                                    <div class="bar_inner" style="width:56%"></div>
-                                                </div>
-                                            </div>
+                                            <div class="statbar teamwork"></div>
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>                  
+                            </table>
                         </div>
 						<div class="selected_char_abilities section"></div>
 					</div>
@@ -162,6 +148,7 @@
     <script src="/static/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/static/js/raphael-min.js"></script>
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script src="/static/js/util.js"></script>
     <script src="/static/js/ui.js"></script>
     <script src="/static/js/graph.js"></script>
     <script src="/static/js/channel.js"></script>
@@ -174,6 +161,6 @@
         ui.init(HACKERS);
         engine.start(graph.nodes, HACKERS);
     </script>
-    
+
 </body>
 </html>
