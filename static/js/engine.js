@@ -13,6 +13,8 @@ var STATE_ACTIVE = "active";
 //Comparison tools
 var ENERGY_EXHAUSTED = 0;
 
+var FOOD_ENERGY_GAIN = {"coffee": 12, "pizza": 6, "soda": 3};
+
 //Increases/drops per tick
 var ENERGY_ACTIVE_DRAIN = 0.3;
 var ENERGY_PARASITIC_DRAIN = ENERGY_ACTIVE_DRAIN / 10.0;
@@ -74,6 +76,14 @@ engine.update_hackers = function() {
         
     }
 };
+
+engine.feed_hacker = function(hacker_id, food) {
+    console.log("Fed hacker "+hacker_id);
+    var energy_gain = FOOD_ENERGY_GAIN[food];
+    engine.hackers[hacker_id]['stats']['energy'] = 
+        Math.min(engine.hackers[hacker_id]['base']['energy'], 
+                engine.hackers[hacker_id]['stats']['energy'] + energy_gain);
+};  
 
 engine.assign_to_node = function(hacker_id, node_id) {
     console.log("Assigning "+hacker_id+" to "+node_id);

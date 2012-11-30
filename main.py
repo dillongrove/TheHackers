@@ -277,6 +277,29 @@ class API_EatFoodHandler(FBRequestHandler):
             broadcast(match, json.dumps({"food": match.food_stockpile}))
         else:
             self.response.out.write(json.dumps({"error": "this food not available"}))
+
+class API_AddFoodHandler(FBRequestHandler):
+    def get(self):
+        self._current_user = self.require_login()
+        if not self._current_user:
+            self.response.out.write(json.dumps({"error": "please log in"}))
+            return
+
+        match = getCurrentMatchByUser(self._current_user.id)
+        if not match:
+            self.response.out.write(json.dumps({"error": "couldn't find current match"}))
+            return
+            
+        in_stock = match.food_stockpile 
+        MAX_STOCK = [3, 4, 2]
+        
+        match.food_stockpile = [random.randint(in_stock[0], MAX_STOCK[0]),
+                                random.randint(in_stock[1], MAX_STOCK[1]),
+                                random.randint(in_stock[2], MAX_STOCK[2])]
+        match.put()
+        
+        broadcast(match, json.dumps({"food": match.food_stockpile}))
+        self.response.out.write(json.dumps({"success": "food added"}))
         
 
 
@@ -306,7 +329,8 @@ app = webapp2.WSGIApplication([
     ('/hacker/(\w+)/levelup/(\w+)', API_LevelupHandler),
     ('/test/populateDatastore', API_PopulateDatastoreHandler),
     ('/hackathon/eat/(\w+)', API_EatFoodHandler),
-    ('/test/channelTest', ChannelTestHandler)
+    ('/hackathon/addFood', API_AddFoodHandler),
+    ('/test/channelTest', ChannelTestHandler),
     ('/test/bork', DBCleanHandler)
 ], debug=True)
 

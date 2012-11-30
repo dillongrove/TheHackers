@@ -23,6 +23,27 @@ ui.playPop = function() {
     document.getElementById("soundeffect2").play();
 };
 
+ui.playSlurp = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/slurp.wav";
+    document.getElementById("soundeffect2").play();
+};
+
+ui.playBurp = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/burp.wav";
+    document.getElementById("soundeffect2").play();
+};
+
+ui.playNom = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/nom.wav";
+    document.getElementById("soundeffect2").play();
+};
+
+ui.playSodaCan = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/sodacan.wav";
+    document.getElementById("soundeffect2").play();
+};
+
+
 ui.playMusic = function() {
     //TODO: Implement
 };
@@ -65,6 +86,29 @@ ui.updateMonitors = function() {
     });
 }
 
+ui.setFoods = function(amount) {
+    var soda = $(".food.soda").hide();
+    var coffee = $(".food.coffee").hide();
+    var pizza = $(".food.pizza").hide();
+    
+    pizza.each(function(i) {
+        if (i < amount[0])
+            $(this).show();
+    });
+    
+    soda.each(function(i) {
+        if (i < amount[1])
+            $(this).show();
+    });
+    
+    coffee.each(function(i) {
+        if (i < amount[2])
+            $(this).show();
+    });
+    
+    
+};
+
 ui.init = function(user) {
     hacker_ids = [];
     for (hackerid in USER_HACKERS) {
@@ -75,6 +119,41 @@ ui.init = function(user) {
 
     //Tooltips
     $(".stats_table .icon").tipsy({'gravity':'sw'});
+    
+    //Foods
+    $(".food").hide().click(function() {
+        if (HACKER_SELECTED == null)
+            return;
+    
+    
+        var foodtype = $(this)[0].classList[1];
+        
+        $.get("/hackathon/eat/"+foodtype, function(result) {
+            console.log(result);
+            var result = $.parseJSON(result);
+            
+            if (result['success'] != null) //Give active hacker energy
+            {
+                engine.feed_hacker(HACKER_SELECTED, result['success']);
+                
+                //TODO: Sound effects
+                if (result['success'] == "pizza")
+                    ui.playNom();
+                else if (result['success'] == "coffee")
+                    ui.playSlurp();
+                else //Soda
+                    ui.playSodaCan();
+                    
+                if (Math.random() < 0.3) // 5% chance to burp later
+                {
+                    console.log("Incoming belch");
+                    setTimeout(ui.playBurp, 2000);
+                }
+            }
+                
+        });
+    });
+    ui.foods = {"soda": 0, "coffee": 0, "pizza": 0};
     
     ui.ambiance();
     ui.playMusic();
@@ -129,8 +208,9 @@ $(".monitor, .head_back, .seat").click(function() {
 });
 
 $(document).keypress(function(event) {
-    ui.playClick();
+    
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
+        ui.playClick();
         event.preventDefault();
         var hacker_num = event.which -= 49;
         ui.select_character(hacker_num);
