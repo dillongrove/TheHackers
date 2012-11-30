@@ -877,9 +877,13 @@ body {
   background: linear-gradient(to right, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#002a2a2a', endColorstr='#002a2a2a', GradientType=1);
 }
+#characters img {
+  height: 200px;
+  max-width: 150px;
+}
 #login {
-  margin-top: 30px;
-  font-size: 24px;
+  margin-top: 20px;
+  font-size: 30px;
 }
 #nav_bar {
   background-color: #363636;
