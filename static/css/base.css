@@ -575,6 +575,22 @@ button:hover {
   right: 130px;
   top: 72px;
 }
+#soda-1 {
+  right: 160px;
+  top: 38px;
+}
+#soda-2 {
+  right: 180px;
+  top: 12px;
+}
+#soda-3 {
+  right: 100px;
+  top: 58px;
+}
+#soda-4 {
+  right: 100px;
+  top: 58px;
+}
 /* Icons */
 .icon {
   width: 11px;
@@ -586,6 +602,9 @@ button:hover {
 }
 .teamwork.icon {
   background-image: url('/static/images/icons/teamwork.png');
+}
+.focus.icon {
+  background-image: url('/static/images/icons/focus.png');
 }
 .productivity.icon {
   background-image: url('/static/images/icons/productivity.png');
