@@ -5,8 +5,8 @@ class Channel(db.Model):
 
 class Hacker(db.Model):
     """ Individual hacker unit """
-    firstname = db.StringProperty(required=True)
-    lastname = db.StringProperty(required=True)
+    first_name = db.StringProperty(required=True)
+    last_name = db.StringProperty(required=True)
     catchphrase = db.StringProperty()
     user = db.StringProperty() #Facebook id of user
     talents = db.ListProperty(str) #List of acquired talents
