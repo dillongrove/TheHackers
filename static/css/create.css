@@ -216,7 +216,6 @@ button:hover {
   top: 62px;
 }
 #target_window {
-  display: none;
   position: relative;
   top: -340px;
   height: 600px;
@@ -323,7 +322,7 @@ button:hover {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ccc;
   padding: 6px;
-  line-height: 22px;
+  line-height: 20px;
 }
 .section:first-child {
   border-top: none;
