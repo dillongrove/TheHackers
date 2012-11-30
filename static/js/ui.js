@@ -27,9 +27,10 @@ ui.updateVisualStats = function() {
             $(".energy.statbar").html(hacker['stats']['energy']);
             $(".productivity.statbar").html(hacker['stats']['productivity']);
             $(".teamwork.statbar").html(hacker['stats']['teamwork']);
-            $(".statbar").each(function(index) {
-                make_stat_bar($(this), 100);
-            });
+
+            make_stat_bar($(".energy.statbar"), hacker['base']['energy']);
+            make_stat_bar($(".productivity.statbar"), 1.5*hacker['base']['productivity']);
+            make_stat_bar($(".teamwork.statbar"), 100);
         }
     });
 }
