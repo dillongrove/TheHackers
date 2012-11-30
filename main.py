@@ -249,7 +249,6 @@ class API_PopulateDatastoreHandler(FBRequestHandler):
         for proj in projs:
             proj.delete()
             
-            
         Project(name="Sendery", graph_json = "asdf", mvp_effect = "lasers").put()
         
         self.response.out.write("done")

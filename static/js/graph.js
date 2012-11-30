@@ -195,7 +195,7 @@ graph.generate = function(node_data) {
             if (graph.dependencies[outnodes[n]] === undefined)
                 graph.dependencies[outnodes[n]] = [];
             graph.dependencies[outnodes[n]].push(x);
-            console.log(x + " -> "+ outnodes[n]);
+            //console.log(x + " -> "+ outnodes[n]);
         }
     }
     
