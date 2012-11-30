@@ -560,6 +560,90 @@ button:hover {
   /* Opera */
 
 }
+/* Opponent Heads */
+/* Head Backs */
+#monitor_backs {
+  position: absolute;
+  z-index: 3;
+  top: 0px;
+  left: 280px;
+}
+.opponent_head {
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.opponent_head img {
+  position: relative;
+}
+#opponent_head1 {
+  position: absolute;
+  left: 286px;
+  top: -40px;
+}
+#opponent_head1 img {
+  animation: bob 3s 0s infinite;
+  -moz-animation: bob 3s 0s infinite;
+  /* Firefox */
+
+  -webkit-animation: bob 3s 0s infinite;
+  /* Safari and Chrome */
+
+  -o-animation: bob 3s 0s infinite;
+  /* Opera */
+
+}
+#opponent_head2 {
+  position: absolute;
+  left: 370px;
+  top: -40px;
+}
+#opponent_head2 img {
+  animation: bob 3s .4s infinite;
+  -moz-animation: bob 3s .4s infinite;
+  /* Firefox */
+
+  -webkit-animation: bob 3s .4s infinite;
+  /* Safari and Chrome */
+
+  -o-animation: bob 3s .4s infinite;
+  /* Opera */
+
+}
+#opponent_head3 {
+  position: absolute;
+  left: 454px;
+  top: -40px;
+}
+#opponent_head3 img {
+  animation: bob 3s 1.1s infinite;
+  -moz-animation: bob 3s 1.1s infinite;
+  /* Firefox */
+
+  -webkit-animation: bob 3s 1.1s infinite;
+  /* Safari and Chrome */
+
+  -o-animation: bob 3s 1.1s infinite;
+  /* Opera */
+
+}
+#opponent_head4 {
+  position: absolute;
+  left: 538px;
+  top: -40px;
+}
+#opponent_head4 img {
+  animation: bob 3s 5s infinite;
+  -moz-animation: bob 3s .5s infinite;
+  /* Firefox */
+
+  -webkit-animation: bob 3s .5s infinite;
+  /* Safari and Chrome */
+
+  -o-animation: bob 3s .5s infinite;
+  /* Opera */
+
+}
 /* Food */
 .food:hover {
   cursor: pointer;
@@ -604,6 +688,11 @@ button:hover {
 #soda-4 {
   right: 160px;
   top: 38px;
+}
+#numbers {
+  position: absolute;
+  top: 180px;
+  left: 280px;
 }
 /* Icons */
 .icon {

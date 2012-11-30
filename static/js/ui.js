@@ -98,52 +98,59 @@ ui.setFoods = function(amount) {
     var soda = $(".food.soda").hide();
     var coffee = $(".food.coffee").hide();
     var pizza = $(".food.pizza").hide();
-    
+
     pizza.each(function(i) {
         if (i < amount[0])
             $(this).show();
     });
-    
+
     soda.each(function(i) {
         if (i < amount[1])
             $(this).show();
     });
-    
+
     coffee.each(function(i) {
         if (i < amount[2])
             $(this).show();
     });
-    
-    
+
+
 };
 
 ui.init = function(user) {
     hacker_ids = [];
-    for (hackerid in USER_HACKERS) {
-        hacker_ids.push(hackerid);
-        var num = parseInt(hackerid) + 1;
-        $("#head_back" + (num) + " img").attr('src', "/static/images/hackers/" + HACKERS[USER_HACKERS[hackerid]]['imgset'] + "back.png");
+    current_enemy = 1;
+    for (hackerid in HACKERS) {
+        console.log(hackerid);
+        if (USER_HACKERS.indexOf(hackerid) !== -1) {
+            hacker_ids.push(hackerid);
+            var num = USER_HACKERS.indexOf(hackerid) + 1;
+            $("#head_back" + num + " img").attr('src', "/static/images/hackers/" + HACKERS[hackerid]['imgset'] + "back.png");
+            console.log("friendly " + HACKERS[hackerid]['imgset']);
+        } else {
+            $("#opponent_head" + current_enemy + " img").attr('src', "/static/images/hackers/" + HACKERS[hackerid]['imgset'] + "frontal.png");
+            console.log("frenemy " + HACKERS[hackerid]['imgset']);
+            current_enemy += 1;
+        }
     }
 
     //Tooltips
     $(".stats_table .icon").tipsy({'gravity':'sw'});
-    
+
     //Foods
     $(".food").hide().click(function() {
         if (HACKER_SELECTED == null)
             return;
-    
-    
+
         var foodtype = $(this)[0].classList[1];
-        
-        $.get("/hackathon/eat/"+foodtype, function(result) {
-            console.log(result);
-            var result = $.parseJSON(result);
-            
-            if (result['success'] != null) //Give active hacker energy
-            {
+
+        $.get("/hackathon/eat/"+foodtype, function(res) {
+            console.log(res);
+            var result = $.parseJSON(res);
+
+            if (result['success'] != null) { //Give active hacker energy
                 engine.feed_hacker(HACKER_SELECTED, result['success']);
-                
+
                 //TODO: Sound effects
                 if (result['success'] == "pizza")
                     ui.playNom();
@@ -151,18 +158,18 @@ ui.init = function(user) {
                     ui.playSlurp();
                 else //Soda
                     ui.playSodaCan();
-                    
+
                 if (Math.random() < 0.3) // 5% chance to burp later
                 {
                     console.log("Incoming belch");
                     setTimeout(ui.playBurp, 2000);
                 }
             }
-                
+
         });
     });
     ui.foods = {"soda": 0, "coffee": 0, "pizza": 0};
-    
+
     ui.ambiance();
     ui.playMusic();
 }
@@ -216,7 +223,7 @@ $(".monitor, .head_back, .seat").click(function() {
 });
 
 $(document).keypress(function(event) {
-    
+
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         ui.playClick();
         event.preventDefault();
