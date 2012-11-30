@@ -59,12 +59,11 @@
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce7d7d', endColorstr='#ce4242',GradientType=0 );
         }
         #versus {
+            text-align: center;
             position: relative;
-            top: 100px;
-            left: 50%;
-            z-index: 200;
-            font-size: 2em;
-            margin-left: -85px;
+            top: -28px;
+            font-size: 20px;
+            margin-left: 154px;
         }
         
     </style>
@@ -76,18 +75,18 @@
     <audio id="ambiance"></audio>
     <audio id="music"></audio>
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
-    
-    {% if users.0.name == user.name %}
-        <h1 id="versus">{{ users.0.name }} vs {{ users.1.name }}</h1>
-    {% else %}
-        <h1 id="versus">{{ users.1.name }} vs {{ users.0.name }}</h1>
-    {% endif %}
+
 	<div id="nav_bar">
 		<div id="logo"></div>
 	</div>
 	<div id="backdrop">
 		<div id="wall">
 			<div id="wall_interface">
+                    {% if users.0.name == user.name %}
+                        <h1 id="versus">{{ users.0.name }} vs {{ users.1.name }}</h1>
+                    {% else %}
+                        <h1 id="versus">{{ users.1.name }} vs {{ users.0.name }}</h1>
+                    {% endif %}
                 <img id="mural_left" src="static/images/mural_left.png" alt=""/>\
                 <img id="mural_right" src="static/images/mural_right.png" alt=""/>
 				<div id="screen_outer">
