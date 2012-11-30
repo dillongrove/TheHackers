@@ -15,6 +15,9 @@ html {
   height: 100%;
   min-height: 800px;
 }
+a {
+  color: #e6e6e6;
+}
 #page {
   width: 760px;
   margin: auto;
@@ -194,4 +197,18 @@ button:hover {
   -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+}
+.icon {
+  width: 11px;
+  height: 16px;
+  background-repeat: no-repeat;
+}
+.energy.icon {
+  background-image: url('/static/images/icons/energy.png');
+}
+.teamwork.icon {
+  background-image: url('/static/images/icons/teamwork.png');
+}
+.productivity.icon {
+  background-image: url('/static/images/icons/productivity.png');
 }

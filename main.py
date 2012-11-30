@@ -144,8 +144,8 @@ class API_CreateHackerHandler(FBRequestHandler):
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
          
-        newhacker = Hacker(firstname = self.request.get("firstname"),
-                           lastname = self.request.get("lastname"),
+        newhacker = Hacker(first_name = self.request.get("first_name"),
+                           last_name = self.request.get("last_name"),
                            user = self._current_user.id, 
                            catchphrase = self.request.get("catchphrase"),
                            talents = [self.request.get("class")],
