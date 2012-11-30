@@ -44,7 +44,7 @@ def initChannel(userid):
     chan = Channel.get_by_key_name(userid)
     if not chan:
         chan = Channel(key_name = userid)
-    chan.token = channel.create_channel(userid)
+    chan.token = channel.create_channel(userid, duration_minutes=5)
     chan.put()
     return chan.token
 
@@ -256,20 +256,28 @@ class API_PopulateDatastoreHandler(FBRequestHandler):
 
         self.response.out.write("done")
 
-class API_UserRequestHandler(FBRequestHandler):
-    #TODO: Finish
-    def get(self, user):
+class API_EatFoodHandler(FBRequestHandler):
+    def get(self, food):
         self._current_user = self.require_login()
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
 
-        message(user, msg)
-
-        self.response.out.write(json.dumps({"success": "message sent"}))
-
-
-
+        match = getCurrentMatchByUser(self._current_user.id)
+        if not match:
+            self.response.out.write(json.dumps({"error": "couldn't find current match"}))
+            return
+        
+        foodIndex = ["pizza", "soda", "coffee"].index(food)
+        
+        if (match.food_stockpile[foodIndex] > 0):
+            match.food_stockpile[foodIndex] -= 1
+            match.put()
+            self.response.out.write(json.dumps({"success": food}))
+            broadcast(match, json.dumps({"food": match.food_stockpile}))
+        else:
+            self.response.out.write(json.dumps({"error": "this food not available"}))
+        
 
 
 class ChannelTestHandler(webapp2.RequestHandler):
@@ -278,6 +286,15 @@ class ChannelTestHandler(webapp2.RequestHandler):
             channel.send_message(chan.key().name(),"hi")
             self.response.out.write(str(chan.key().name())+"<br>")
 
+class DBCleanHandler(webapp2.RequestHandler):
+    def get(self):
+        for h in Hacker.all().fetch(1000):
+            h.delete()
+        for m in Match.all().fetch(1000):
+            m.delete()
+        self.response.out.write("Datastore cleared of matches & hackers");
+
+            
 app = webapp2.WSGIApplication([
     ('/', HomepageHandler),
     ('/create', CreationHandler),
@@ -288,7 +305,9 @@ app = webapp2.WSGIApplication([
     ('/hackathon/find', API_LobbyHandler),
     ('/hacker/(\w+)/levelup/(\w+)', API_LevelupHandler),
     ('/test/populateDatastore', API_PopulateDatastoreHandler),
+    ('/hackathon/eat/(\w+)', API_EatFoodHandler),
     ('/test/channelTest', ChannelTestHandler)
+    ('/test/bork', DBCleanHandler)
 ], debug=True)
 
 def main():

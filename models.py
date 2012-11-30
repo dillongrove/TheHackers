@@ -27,6 +27,7 @@ class Match(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     outcome = db.ListProperty(int) # Index of stage/wave position
     hacker_list = db.ListProperty(str) #List of all participating hackers
+    food_stockpile = db.Listproperty(int, default = [0,0,0]) #List of all foods, ["pizza", "soda", "coffee"]
 
 class Project(db.Model):
     """ Contains all information  pertaining to a project graph """

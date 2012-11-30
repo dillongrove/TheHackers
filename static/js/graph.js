@@ -7,23 +7,23 @@ var VERT_CENTER = 128;
 
 var graph = {"paper": null, "nodes": null};
 
-graph.testgraph = [{"health": 3000, "wave": 0, "out": [2], "class": "design"},
-                 {"health": 3000, "wave": 0, "out": [2, 3], "class": "programming"},
-                 {"health": 3000, "wave": 1, "out": [4, 5, 6], "class": "design"},
-                 {"health": 3000, "wave": 1, "out": [], "class": "design"},
-                 {"health": 3000, "wave": 2, "out": [], "class": "programming"},
-                 {"health": 3000, "wave": 2, "out": [7], "class": "design"},
-                 {"health": 3000, "wave": 2, "out": [8], "class": "business"},
-                 {"health": 3000, "wave": 3, "out": [], "class": "design"},
-                 {"health": 3000, "wave": 3, "out": [9], "class": "business"},
-                 {"health": 3000, "wave": 4, "out": [10, 11], "class": "mvp"},
-                 {"health": 3000, "wave": 5, "out": [12], "class": "design"},
-                 {"health": 3000, "wave": 5, "out": [13], "class": "programming"},
-                 {"health": 3000, "wave": 6, "out": [14, 15], "class": "programming"},
-                 {"health": 3000, "wave": 6, "out": [15], "class": "design"},
-                 {"health": 3000, "wave": 7, "out": [], "class": "business"},
-                 {"health": 3000, "wave": 7, "out": [16], "class": "business"},
-                 {"health": 3000, "wave": 8, "out": [], "class": "finish"},
+graph.testgraph = [{"health": 2000, "wave": 0, "out": [2], "class": "design"},
+                 {"health": 2000, "wave": 0, "out": [2, 3], "class": "programming"},
+                 {"health": 2000, "wave": 1, "out": [4, 5, 6], "class": "design"},
+                 {"health": 2000, "wave": 1, "out": [], "class": "design"},
+                 {"health": 2000, "wave": 2, "out": [], "class": "programming"},
+                 {"health": 2000, "wave": 2, "out": [7], "class": "design"},
+                 {"health": 2000, "wave": 2, "out": [8], "class": "business"},
+                 {"health": 2000, "wave": 3, "out": [], "class": "design"},
+                 {"health": 2000, "wave": 3, "out": [9], "class": "business"},
+                 {"health": 2000, "wave": 4, "out": [10, 11], "class": "mvp"},
+                 {"health": 2000, "wave": 5, "out": [12], "class": "design"},
+                 {"health": 2000, "wave": 5, "out": [13], "class": "programming"},
+                 {"health": 2000, "wave": 6, "out": [14, 15], "class": "programming"},
+                 {"health": 2000, "wave": 6, "out": [15], "class": "design"},
+                 {"health": 2000, "wave": 7, "out": [], "class": "business"},
+                 {"health": 2000, "wave": 7, "out": [16], "class": "business"},
+                 {"health": 2000, "wave": 8, "out": [], "class": "finish"},
                  ];
 
 
@@ -243,9 +243,6 @@ graph.generate = function(node_data) {
             glowobj.hide();
             textobj.hide();
         }
-        
-        //TODO: For demo. Remove this
-        timerobj.data("completion", 2800);
     }
     
     //Generate dependencies

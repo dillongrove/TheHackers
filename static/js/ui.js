@@ -40,7 +40,6 @@ ui.updateVisualStats = function() {
     for (hacker_index in USER_HACKERS) {
 
         var hacker = engine.hackers[USER_HACKERS[hacker_index]];
-        console.log(hacker);
         if (USER_HACKERS[hacker_index] === HACKER_SELECTED) {
             $("#current_task").html(hacker['state'].charAt(0).toUpperCase() + hacker['state'].slice(1));
             $(".energy.statbar").html(hacker['stats']['energy']);
@@ -83,13 +82,13 @@ ui.init = function(user) {
 
 ui.select_character = function(index) {
     var target_window = $("#target_window");
-    var hacker = engine.hackers[HACKER_SELECTED];
 
     // no previous hacker selected
     if (HACKER_SELECTED == null){
         $(".head_back").removeClass('selected');
         $("#head_back"+(index+1)).addClass('selected');
         HACKER_SELECTED = USER_HACKERS[index];
+        var hacker = engine.hackers[HACKER_SELECTED];
         $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
         target_window.fadeIn(300);
     }
@@ -97,6 +96,7 @@ ui.select_character = function(index) {
         $(".head_back").removeClass('selected');
         $("#head_back"+(index+1)).addClass('selected');
         HACKER_SELECTED = USER_HACKERS[index];
+        var hacker = engine.hackers[HACKER_SELECTED];
         // fade the targeting window to left
         $(".selected_char_pic").addClass("selected_char_pic_out");
         target_window.fadeOut(200, function(){
@@ -125,7 +125,6 @@ $(".monitor, .head_back, .seat").click(function() {
 
 $(document).keypress(function(event) {
     ui.playClick();
-    console.log(event.which);
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         event.preventDefault();
         var hacker_num = event.which -= 49;

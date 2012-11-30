@@ -11,12 +11,12 @@ var STATE_SLEEP = "sleep";
 var STATE_ACTIVE = "active";
 
 //Comparison tools
-var ENERGY_EXHAUSTED = 5;
+var ENERGY_EXHAUSTED = 0;
 
 //Increases/drops per tick
-var ENERGY_ACTIVE_DRAIN = 1;
+var ENERGY_ACTIVE_DRAIN = 0.3;
 var ENERGY_PARASITIC_DRAIN = ENERGY_ACTIVE_DRAIN / 10.0;
-var ENERGY_SLEEP_GAIN = 2*ENERGY_ACTIVE_DRAIN;
+var ENERGY_SLEEP_GAIN = 1.5*ENERGY_ACTIVE_DRAIN;
 
 
 var engine = {
