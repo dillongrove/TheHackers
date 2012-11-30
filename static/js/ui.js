@@ -23,6 +23,10 @@ ui.playPop = function() {
     document.getElementById("soundeffect2").play();
 };
 
+ui.playMusic = function() {
+    //TODO: Implement
+};
+
 ui.ambiance = function() {
     var snds = ['keyboard.wav'];
     var randsnd = snds[Math.floor(Math.random()*snds.length)];
@@ -81,14 +85,13 @@ ui.init = function(user) {
     }
 
     ui.ambiance();
-    ui.playmusic();
+    ui.playMusic();
 }
 
 ui.select_character = function(index) {
     $(".head_back").removeClass('selected');
     $("#head_back"+(index+1)).addClass('selected');
     HACKER_SELECTED = USER_HACKERS[index];
-    console.log(engine);
     var hacker = engine.hackers[HACKER_SELECTED];
     $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
     
