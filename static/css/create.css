@@ -200,6 +200,19 @@ button:hover {
   -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+  border: 2px solid #ffffff;
+}
+.selected_char_wrapper {
+  height: 200px;
+  overflow: hidden;
+}
+.selected_char_pic {
+  position: relative;
+  left: -60px;
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg);
 }
 .icon {
   width: 11px;
