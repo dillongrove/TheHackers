@@ -557,6 +557,9 @@ button:hover {
 .teamwork.icon {
   background-image: url('/static/images/icons/teamwork.png');
 }
+.focus.icon {
+  background-image: url('/static/images/icons/focus.png');
+}
 .productivity.icon {
   background-image: url('/static/images/icons/productivity.png');
 }
