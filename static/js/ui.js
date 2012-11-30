@@ -49,8 +49,11 @@ ui.updateMonitors = function() {
 
 ui.init = function(user) {
     hacker_ids = [];
-    for (hackerid in USER_HACKERS)
+    for (hackerid in USER_HACKERS) {
         hacker_ids.push(hackerid);
+        var num = parseInt(hackerid) + 1;
+        $("#head_back" + (num) + " img").attr('src', "/static/images/hackers/" + HACKERS[USER_HACKERS[hackerid]]['imgset'] + "back.png");
+    }
 
     //Add hacker ids to all monitors
     console.log("Hacker ids");
@@ -70,7 +73,6 @@ $(".hacker").click(function() {
 });
 
 $(document).keypress(function(event) {
-    console.log(event.which);
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         event.preventDefault();
         var hacker_num = event.which -= 49;
