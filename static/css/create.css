@@ -58,6 +58,9 @@ button:hover {
 .teamwork.icon {
   background-image: url('/static/images/icons/teamwork.png');
 }
+.productivity.icon {
+  background-image: url('/static/images/icons/productivity.png');
+}
 .hacker {
   width: 245px;
   margin: 0px 3px 22px 3px;
@@ -73,11 +76,6 @@ button:hover {
 }
 .hacker table {
   width: 100%;
-}
-.hacker table th {
-  width: 10%;
-  white-space: nowrap;
-  text-align: right;
 }
 .hacker table td {
   width: 100%;
