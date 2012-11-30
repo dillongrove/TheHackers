@@ -131,12 +131,15 @@ graph.generate = function(node_data) {
     //                  {"health": x, "reqs": [1, 2, 3], "out": [1, 2, 3]}
     var wavelengths = [];
     graph.node_data = node_data;
+    graph.max_wave = 0;
     for (x in node_data)
     {
         if (wavelengths[node_data[x]['wave']] == undefined)
             wavelengths[node_data[x]['wave']] = 1;
         else
             wavelengths[node_data[x]['wave']] += 1;
+            
+        graph.max_wave = Math.max(node_data[x]['wave'], graph.max_wave);
     }
     
     //Generate nodes
@@ -153,7 +156,7 @@ graph.generate = function(node_data) {
         var posy = VERT_CENTER - (20 * wavelengths[node['wave']]) + 65 * waves_occupied[node['wave']];
         
         var nodeobj = graph.makeNode(posx, posy, node['class']);
-        nodeobj.data("id", x);
+        nodeobj.data({"id": x, "activity": 0});
         nodeobj.click(function () {
            ui.nodeClicked(this.data("id"));
         });
@@ -165,12 +168,17 @@ graph.generate = function(node_data) {
            ui.nodeClicked(this.data("id"));
         });
         
+        var textobj = graph.paper.text(posx+20, posy-20, " ");
+        
         //MVP Only - display text
         if (node['class'] == "mvp")
              graph.paper.text(posx, posy, "MVP")
         
+        
         waves_occupied[node['wave']]++;
-        nodes[x] = [nodeobj, timerobj, glowobj]; 
+        nodes[x] = [nodeobj, timerobj, glowobj, textobj]; 
+        
+        //TODO: For demo. Remove this
         timerobj.data("completion", 2800);
     }
     

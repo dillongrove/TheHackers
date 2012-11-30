@@ -45,13 +45,6 @@ ui.init = function(user) {
     });
 }
 
-$("#complete_node").click(function() {
-    PROGRESS += 10;
-    $.get('/hackathon/node_done/' + PROGRESS, {}, function(data) {
-        console.log(data);
-    });
-});
-
 $(".hacker").click(function() {
     if ($(this).data('id') === HACKER_SELECTED) { // if clicking again, deselect
         HACKER_SELECTED = null;
