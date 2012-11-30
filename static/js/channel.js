@@ -29,6 +29,9 @@ channel.onMessage = function(msg) {
     if (args.success === "match found") {
         window.location = "/hackathon";
     }
+    else if (args.food) {
+        ui.setFoods(args.food);
+    }
     else if (args.progress) {
         var enemy = Math.abs(1 - USERS.indexOf(USER));
         $("#enemy_progress_bar").html(args.progress[enemy]);

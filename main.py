@@ -59,12 +59,18 @@ def getCurrentMatchByUser(current_user_id):
 # -------------- Template pages -----------------
 
 class HomepageHandler(webapp2.RequestHandler):
+    def post(self):
+        self.get()
+        
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'homepage.html')
         self.response.out.write(template.render(path, {}))
 
 class CreationHandler(FBRequestHandler):
     """ Handles initial generation of hackers for user selection """
+    def post(self):
+        self.get()
+    
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
@@ -77,6 +83,9 @@ class CreationHandler(FBRequestHandler):
         self.response.out.write(template.render(path, {"user": self._current_user}))
 
 class LoadoutHandler(FBRequestHandler):
+    def post(self):
+        self.get()
+
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
@@ -94,6 +103,9 @@ class LoadoutHandler(FBRequestHandler):
         self.response.out.write(template.render(path, {"user": self._current_user, "token": token}))
 
 class HackathonHandler(FBRequestHandler):
+    def post(self):
+        self.get()
+        
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
