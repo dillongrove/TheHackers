@@ -1,4 +1,4 @@
-var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117", "finish": "#EAC117", "business": "#C65D57"};
+var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117", "finish": "#EAC117", "business": "#CF6465"};
 var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317", "finish": "#C7A317", "business": "#A02422"};
 var ARC_RAD = 13;
 var CIRCLE_RAD = 18;
@@ -19,9 +19,11 @@ graph.testgraph = [{"health": 3000, "wave": 0, "out": [2], "class": "design"},
                  {"health": 3000, "wave": 4, "out": [10, 11], "class": "mvp"},
                  {"health": 3000, "wave": 5, "out": [12], "class": "design"},
                  {"health": 3000, "wave": 5, "out": [13], "class": "programming"},
-                 {"health": 3000, "wave": 6, "out": [14], "class": "programming"},
-                 {"health": 3000, "wave": 6, "out": [14], "class": "design"},
-                 {"health": 3000, "wave": 7, "out": [], "class": "finish"},
+                 {"health": 3000, "wave": 6, "out": [14, 15], "class": "programming"},
+                 {"health": 3000, "wave": 6, "out": [15], "class": "design"},
+                 {"health": 3000, "wave": 7, "out": [], "class": "business"},
+                 {"health": 3000, "wave": 7, "out": [16], "class": "business"},
+                 {"health": 3000, "wave": 8, "out": [], "class": "finish"},
                  ];
 
 
@@ -54,6 +56,10 @@ graph.init = function(graph_json) {
     };
     
     graph.generate(graph_json);
+    
+    for (x in graph.node_data)
+        if (graph.node_data[x]["wave"] == 0)
+            graph.revealNode(x);
 };
 
 graph.makeNode = function(x, y, type) {
@@ -64,6 +70,12 @@ graph.makeNode = function(x, y, type) {
                 "stroke": "#F8F8F8",
                 "stroke-width": 4});
     
+    node.mouseover(function() {
+        node.attr("stroke", node.attr("fill"));
+    }).mouseout(function() {
+        node.attr("stroke", "#F8F8F8");
+    });
+    
     return node;
 }
    
@@ -72,6 +84,23 @@ graph.makeNode = function(x, y, type) {
 graph.buildNode = function(id, amount) {
    var node = graph.nodes[id][1];
    node.data('completion', node.data('completion') + amount);
+}
+    
+graph.revealNode = function(id) {
+    console.log("Revealing node "+id);
+    var node = graph.nodes[id];
+    node[0].show();
+    node[1].show();
+    node[2].show();
+    node[3].show();
+    
+    //Generate edges
+    for (y in graph.dependencies[id])
+    {   
+        console.log("Marking edge from "+id+" to "+graph.dependencies[id][y]);
+        var fromNode = graph.nodes[graph.dependencies[id][y]][0];
+        graph.makeEdge(fromNode, node[0]);
+    }
 }
     
 graph.makeTimer = function(x, y, type, health) {
@@ -181,6 +210,12 @@ graph.generate = function(node_data) {
         timerobj.click(function () {
            ui.nodeClicked(this.data("id"));
         });
+        timerobj.mouseover(function() {
+            var nodeobj = graph.nodes[this.data("id")][0];
+            nodeobj.attr("stroke", nodeobj.attr("fill"));
+        }).mouseout(function() {
+            graph.nodes[this.data("id")][0].attr("stroke", "#F8F8F8");
+        });
         
         var textobj = graph.paper.text(posx+20, posy-20, " ");
         textobj.data("id", x);
@@ -201,20 +236,16 @@ graph.generate = function(node_data) {
         
         waves_occupied[node['wave']]++;
         nodes[x] = [nodeobj, timerobj, glowobj, textobj]; 
+        if (node['class'] != "mvp" && node['class'] != "finish")
+        {
+            nodeobj.hide();
+            timerobj.hide();
+            glowobj.hide();
+            textobj.hide();
+        }
         
         //TODO: For demo. Remove this
         timerobj.data("completion", 2800);
-    }
-    
-    //Generate edges
-    for (x in node_data) 
-    {
-        var fromNode = nodes[x][0];
-        for (y in node_data[x]['out'])
-        {
-            var toNode = nodes[node_data[x]['out'][y]][0];
-            graph.makeEdge(fromNode, toNode);
-        }
     }
     
     //Generate dependencies

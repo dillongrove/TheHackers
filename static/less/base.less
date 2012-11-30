@@ -231,6 +231,7 @@ button {
     .drop-shadow(0, 0, 24px, .8);
     border: 2px solid #ffffff;
     color: #999;
+    display: none;
 
     #top_bar {
         height: 26px;
@@ -300,10 +301,10 @@ button {
     left: -80px;
 
     .rotation(30deg);
-    animation: rotate_in 1s;
-    -moz-animation: rotate_in 1s; /* Firefox */
-    -webkit-animation: rotate_in 1s; /* Safari and Chrome */
-    -o-animation: rotate_in 1s; /* Opera */
+    animation: rotate_in .3s;
+    -moz-animation: rotate_in .3s; /* Firefox */
+    -webkit-animation: rotate_in .3s; /* Safari and Chrome */
+    -o-animation: rotate_in .3s; /* Opera */
 }
 
 .selected_char_pic_out {
@@ -311,10 +312,10 @@ button {
     left: -160px;
 
     .rotation(0deg);
-    animation: rotate_out .5s;
-    -moz-animation: rotate_out .5s; /* Firefox */
-    -webkit-animation: rotate_out .5s; /* Safari and Chrome */
-    -o-animation: rotate_out .5s; /* Opera */
+    animation: rotate_out .3s;
+    -moz-animation: rotate_out .3s; /* Firefox */
+    -webkit-animation: rotate_out .3s; /* Safari and Chrome */
+    -o-animation: rotate_out .3s; /* Opera */
 }
 
 .selected_char_name_wrapper {
