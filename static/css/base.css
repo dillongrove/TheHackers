@@ -141,6 +141,18 @@ button:hover {
   min-height: 400px;
   position: relative;
 }
+#mural_left {
+  position: absolute;
+  left: -460px;
+  top: 24px;
+  z-index: 2;
+}
+#mural_right {
+  position: absolute;
+  left: 780px;
+  top: 24px;
+  z-index: 2;
+}
 #floor {
   position: absolute;
   top: 50%;
@@ -179,6 +191,7 @@ button:hover {
   margin-top: -2.4%;
 }
 #baseboard {
+  z-index: 0;
   height: 20px;
   background-color: #b0b0b0;
   border-top: 2px solid #cecece;
@@ -228,7 +241,7 @@ button:hover {
 }
 #target_window {
   position: absolute;
-  top: -340px;
+  top: -300px;
   width: 150px;
   background-color: #ededed;
   -webkit-border-radius: 5px;
@@ -243,6 +256,7 @@ button:hover {
   border: 2px solid #ffffff;
   color: #999;
   display: none;
+  z-index: 9999;
 }
 #target_window #top_bar {
   height: 26px;
