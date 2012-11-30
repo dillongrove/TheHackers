@@ -38,13 +38,14 @@ a { color: @cl-white; }
     -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+    background: @cl-black;
+    position: relative;
     .bar_inner {
         height: 100%;
         display: inline-block;
         background: @cl-white; // color of the bar
-    }
-    .blank {
-        background: @cl-black;
+        position: absolute;
+        left: 0px;
     }
 }
 

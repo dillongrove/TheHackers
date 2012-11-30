@@ -39,12 +39,19 @@
                 }
                 // generate a list of hackers & display to user
                 for (var i = 0; i < HACKER_CHOICES; i++) {
-                    var name = generate_name();
+                    var result = generate_gender_specific();
+                    var name = result.name;
+                    var img = result.img;
                     var clss = generate_class();
-                    var img = generate_image();
                     var energy = generate_normal_int(1, 100);
                     var productivity = generate_normal_int(1, 100);
                     var teamwork = generate_normal_int(1, 100);
+
+                    if (energy + productivity + teamwork < 150) {
+                        
+                    } else {
+
+                    }
                     var html = insert_hacker({
                         name: name,
                         clss: clss,
