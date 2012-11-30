@@ -196,7 +196,6 @@ button {
 }
 
 .monitor {
-    background-color: #ffffff;
     width: @monitor-width;
     height: @monitor-height;
 }
@@ -313,6 +312,45 @@ button {
 .section:last-child {
     border-bottom: none;
 }
+
+/* Monitor Screens */
+.monitor {
+    background-image: url("/static/images/monitor_screens.png");
+    background-repeat: no-repeat;
+}
+
+.monitor.sleep {
+    background-position: 0px 0*@monitor-height;
+}
+
+.monitor.business {
+    background-position: 0px -2*@monitor-height;
+}
+
+.monitor.business.sleep {
+    background-position: 0px 0*@monitor-height;
+}
+
+.monitor.programming {
+    background-position: 0px -3*@monitor-height;
+}
+
+.monitor.programming.sleep {
+    background-position: 0px 0*@monitor-height;
+}
+
+.monitor.design {
+    background-position: 0px -4*@monitor-height;
+}
+
+.monitor.design.sleep {
+    background-position: 0px 0*@monitor-height;
+}
+
+.monitor.idle {
+    background-position: 0px -1*@monitor-height;
+}
+
 
 /* Icons */
 
