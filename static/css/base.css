@@ -38,11 +38,26 @@ a:hover {
 .programming {
   color: #69cd7c;
 }
+.business {
+  color: #cf6465;
+}
 .design_bg {
-  background-color: #a0b3db;
+  background-color: #a0b3db !important;
 }
 .programming_bg {
-  background-color: #69cd7c;
+  background-color: #69cd7c !important;
+}
+.business_bg {
+  background-color: #cf6465 !important;
+}
+.design_bg_lt {
+  background-color: #d7dff0 !important;
+}
+.programming_bg_lt {
+  background-color: #b5e7bf !important;
+}
+.business_bg_lt {
+  background-color: #edc5c6 !important;
 }
 .bar_outer {
   height: 15px;
@@ -96,7 +111,8 @@ button:hover {
   z-index: 9999;
 }
 #logo {
-  /*position: relative;
+  /*
+    position: relative;
     top: -30px;
     background-image: url("../images/logo_new.png");
     height: 149px;
@@ -239,12 +255,12 @@ button:hover {
   border-top-right-radius: 5px;
   border-top: 1px solid #eee;
 }
-#target_window #top_bar .char_name {
+#target_window #top_bar #selected_class {
   text-transform: uppercase;
   line-height: 28px;
   margin-left: 10px;
-  color: #666;
-  font-size: 11px;
+  color: #444;
+  font-size: 12px;
 }
 #target_window #top_bar .close {
   float: right;
@@ -544,6 +560,51 @@ button:hover {
   -o-animation: bob 3s .7s infinite;
   /* Opera */
 
+}
+/* Food */
+.food:hover {
+  cursor: pointer;
+}
+.food.pizza,
+.food.coffee,
+.food.soda {
+  position: absolute;
+}
+#pizza-1 {
+  right: 86px;
+  top: 90px;
+}
+#pizza-2 {
+  right: 60px;
+  top: 120px;
+}
+#pizza-3 {
+  right: 50px;
+  top: 100px;
+}
+#coffee-1 {
+  right: 100px;
+  top: 58px;
+}
+#coffee-2 {
+  right: 130px;
+  top: 72px;
+}
+#soda-1 {
+  right: 160px;
+  top: 38px;
+}
+#soda-2 {
+  right: 180px;
+  top: 12px;
+}
+#soda-3 {
+  right: 100px;
+  top: 58px;
+}
+#soda-4 {
+  right: 100px;
+  top: 58px;
 }
 /* Icons */
 .icon {
