@@ -44,6 +44,8 @@
     <audio id="soundeffect"></audio>
     <audio id="soundeffect2"></audio>
     <audio id="soundeffect3"></audio>
+    <audio id="ambiance"></audio>
+    <audio id="music"></audio>
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
     {% if users.0.name == user.name %}
         <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
@@ -181,8 +183,8 @@
         var TOKEN = "{{ token }}";
         channel.init();
         graph.init(graph.testgraph);
-        ui.init(HACKERS);
         engine.start(graph.nodes, HACKERS, USERS);
+        ui.init(HACKERS);
         document.getElementById("soundeffect").play();
     </script>
 

@@ -23,6 +23,15 @@ ui.playPop = function() {
     document.getElementById("soundeffect2").play();
 };
 
+ui.ambiance = function() {
+    var snds = ['keyboard.wav'];
+    var randsnd = snds[Math.floor(Math.random()*snds.length)];
+    document.getElementById("ambiance").src = "/static/sound/" + randsnd;
+    document.getElementById("ambiance").play();
+    
+    window.setTimeout(ui.ambiance, 5000+(Math.random() * 10000));
+}
+
 ui.updateVisualStats = function() {
     $(".hacker").each(function() {
         var hackerid = $(this).data("id");
@@ -71,6 +80,17 @@ ui.init = function(user) {
         $("#head_back" + (num) + " img").attr('src', "/static/images/hackers/" + HACKERS[USER_HACKERS[hackerid]]['imgset'] + "back.png");
     }
 
+    ui.ambiance();
+    ui.playmusic();
+}
+
+ui.select_character = function(index) {
+    $(".head_back").removeClass('selected');
+    $("#head_back"+(index+1)).addClass('selected');
+    HACKER_SELECTED = USER_HACKERS[index];
+    console.log(engine);
+    var hacker = engine.hackers[HACKER_SELECTED];
+    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
     
 }
 
@@ -78,11 +98,7 @@ $(".monitor, .head_back, .seat").click(function() {
     ui.playClick();
     var id = $(this).attr("id");
     var index = parseInt(id[id.length - 1]) - 1;
-    HACKER_SELECTED = USER_HACKERS[index]
-    var hacker = engine.hackers[HACKER_SELECTED];
-    $(".head_back").removeClass('selected');
-    $("#head_back"+(index+1)).addClass('selected');
-    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
+    ui.select_character(index);
 });
 
 $(document).keypress(function(event) {
@@ -91,6 +107,6 @@ $(document).keypress(function(event) {
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         event.preventDefault();
         var hacker_num = event.which -= 49;
-        $("[data-id='" + USER_HACKERS[hacker_num] +"']").click();
+        ui.select_character(hacker_num);
     }    
 });
