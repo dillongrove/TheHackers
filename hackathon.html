@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>The Hackers</title>
-	<link rel="stylesheet" href="/static/css/reset.css">
-	<link rel="stylesheet" href="/static/css/base.css">
+	<link rel="stylesheet" href="static/css/reset.css">
+	<link rel="stylesheet" href="static/css/base.css">
     <style>
         #hackers {
             position:absolute;
@@ -30,6 +30,8 @@
     </style>
 </head>
 <body>
+
+
 
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
     {% if users.0.name == user.name %}
@@ -86,10 +88,30 @@
 				
 			</div>
 			<div id="floor_interface">
+				<div id="monitor1" class="monitor"></div>
+				<div id="monitor2" class="monitor"></div>
+				<div id="monitor3" class="monitor"></div>
+				<div id="monitor4" class="monitor"></div>
+
 				<div id="target_window">
-					
+					<div id="top_bar">
+						<span class="char_name">Jim Smith</span>
+						<div class="close">
+							x
+						</div>
+					</div>
+					<div>
+						<div class="selected_char_pic_wrapper section">
+							<img src="static/images/hackers/guy2front.png" class="selected_char_pic"></img>
+						</div>
+						<div class="selected_char_current_task section">
+							<span>Currently:</span><br>
+							<span id="current_task">Idle</span>
+						</div>
+						<div class="selected_char_stats section"></div>
+						<div class="selected_char_abilities section"></div>
+					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>

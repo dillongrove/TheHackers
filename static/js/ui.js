@@ -25,6 +25,10 @@ ui.updateVisualStats = function() {
     });
 }
 
+ui.updateMonitors = function() {
+
+}
+
 $("#complete_node").click(function() {
     PROGRESS += 10;
     $.get('/hackathon/node_done/' + PROGRESS, {}, function(data) {
