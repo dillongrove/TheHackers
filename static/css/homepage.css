@@ -223,6 +223,7 @@ button:hover {
   top: 62px;
 }
 #target_window {
+  display: none;
   position: relative;
   top: -340px;
   height: 600px;
@@ -329,7 +330,7 @@ button:hover {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ccc;
   padding: 6px;
-  line-height: 20px;
+  line-height: 22px;
 }
 .section:first-child {
   border-top: none;
@@ -416,4 +417,19 @@ button:hover {
     transform: rotate(30deg);
     left: -80px;
   }
+}
+body {
+  font-size: 16px;
+}
+#page {
+  text-align: center;
+}
+#characters {
+  padding: 10px 0px;
+  background: -webkit-radial-gradient(circle, #505050, #2a2a2a);
+  background: -moz-radial-gradient(circle, #505050, #2a2a2a);
+  background: -ms-radial-gradient(circle, #505050, #2a2a2a);
+}
+#login {
+  font-size: 20px;
 }

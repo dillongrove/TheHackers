@@ -22,6 +22,11 @@ html {
 }
 a {
   color: #e6e6e6;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 #page {
   width: 760px;
@@ -47,8 +52,10 @@ a {
   box-sizing: border-box;
   background: #2a2a2a;
   position: relative;
+  border-radius: 6px;
 }
 .bar_outer .bar_inner {
+  border-radius: 6px;
   height: 100%;
   display: inline-block;
   background: #e6e6e6;
