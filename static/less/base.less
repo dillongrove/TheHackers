@@ -215,6 +215,7 @@ button {
 }
 
 #target_window {
+    display: none;
     position: absolute;
     top: -340px;
     width: 150px;
@@ -501,6 +502,7 @@ button {
 }
 .energy.icon { background-image: url('/static/images/icons/energy.png'); }
 .teamwork.icon { background-image: url('/static/images/icons/teamwork.png'); }
+.focus.icon { background-image: url('/static/images/icons/focus.png'); }
 .productivity.icon { background-image: url('/static/images/icons/productivity.png'); }
 
 /* Animations */
@@ -555,7 +557,7 @@ button {
 @keyframes rotate_out {
     from {
         .rotation(30deg);
-        left: -80px;   
+        left: -80px;
     }
     to {
         .rotation(0deg);
@@ -566,18 +568,18 @@ button {
 @-moz-keyframes rotate_out {
     from {
         .rotation(30deg);
-        left: -80px;   
+        left: -80px;
     }
     to {
         .rotation(0deg);
-        left: -160px;   
+        left: -160px;
     }
 }
 
 @-webkit-keyframes rotate_out {
     from {
         .rotation(30deg);
-        left: -80px;   
+        left: -80px;
     }
     to {
         .rotation(0deg);
@@ -588,7 +590,7 @@ button {
 @-o-keyframes rotate_out {
     from {
         .rotation(30deg);
-        left: -80px;   
+        left: -80px;
     }
     to {
         .rotation(0deg);
@@ -599,7 +601,7 @@ button {
 /* HEAD BOB */
 @-webkit-keyframes bob {
     0% {
-        top: 0px  
+        top: 0px
     }
     40% {
         top: -4px;
