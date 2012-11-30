@@ -36,6 +36,12 @@
 @head-back-start-y: 90px;
 @head-back-tile-x: 116px;
 
+@opp-head-width: 100px;
+@opp-head-height: 100px;
+@opp-head-start-x: 286px;
+@opp-head-start-y: -30px;
+@opp-head-tile-x: 84px;
+
 /* structure and global styling */
 body, html {
     font-family: 'Droid Sans', sans-serif;
@@ -504,6 +510,69 @@ button {
 }
 
 #head_back4 img {
+    animation: bob 3s .7s infinite;
+    -moz-animation: bob 3s .7s infinite; /* Firefox */
+    -webkit-animation: bob 3s .7s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .7s infinite; /* Opera */
+}
+
+/* Opponent Heads */
+
+/* Head Backs */
+.opponent_head {
+    background-repeat: no-repeat;
+    width: @opp-head-width;
+    height: @opp-head-height;
+}
+
+.opponent_head img {
+    position: relative;
+}
+
+.opp_head_pos(@num){
+    position: absolute;
+    left: @opp-head-start-x + ((@num)*@opp-head-tile-x);
+    top: @opp-head-start-y;
+}
+
+#opponent_head1 {
+    .opp_head_pos(0);
+}
+
+#opponent_head1 img {
+    animation: bob 3s 1s infinite;
+    -moz-animation: bob 3s 1s infinite; /* Firefox */
+    -webkit-animation: bob 3s 1s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 1s infinite; /* Opera */
+}
+
+#opponent_head2 {
+    .opp_head_pos(1);
+}
+
+#opponent_head2 img {
+    animation: bob 3s .2s infinite;
+    -moz-animation: bob 3s .2s infinite; /* Firefox */
+    -webkit-animation: bob 3s .2s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .2s infinite; /* Opera */
+}
+
+#opponent_head3 {
+    .opp_head_pos(2);
+}
+
+#opponent_head3 img {
+    animation: bob 3s 1.4s infinite;
+    -moz-animation: bob 3s 1.4s infinite; /* Firefox */
+    -webkit-animation: bob 3s 1.4s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 1.4s infinite; /* Opera */
+}
+
+#opponent_head4 {
+    .opp_head_pos(3);
+}
+
+#opponent_head4 img {
     animation: bob 3s .7s infinite;
     -moz-animation: bob 3s .7s infinite; /* Firefox */
     -webkit-animation: bob 3s .7s infinite; /* Safari and Chrome */
