@@ -84,6 +84,9 @@ ui.init = function(user) {
         $("#head_back" + (num) + " img").attr('src', "/static/images/hackers/" + HACKERS[USER_HACKERS[hackerid]]['imgset'] + "back.png");
     }
 
+    //Tooltips
+    $(".stats_table .icon").tipsy({'gravity':'sw'});
+    
     ui.ambiance();
     ui.playMusic();
 }
