@@ -24,6 +24,7 @@
                 var html = insert_hacker({
                     name: '{{ hacker.first_name }} {{ hacker.last_name }}',
                     clss: '{{ hacker.class }}',
+                    img: '{{ hacker.imageset }}',
                     energy: {{ hacker.base_energy }},
                     productivity: {{ hacker.base_productivity }},
                     teamwork: {{ hacker.base_teamwork }}
@@ -40,12 +41,14 @@
                 for (var i = 0; i < HACKER_CHOICES; i++) {
                     var name = generate_name();
                     var clss = generate_class();
+                    var img = generate_image();
                     var energy = generate_normal_int(1, 100);
                     var productivity = generate_normal_int(1, 100);
                     var teamwork = generate_normal_int(1, 100);
                     var html = insert_hacker({
                         name: name,
                         clss: clss,
+                        img: img,
                         energy: energy,
                         productivity: productivity,
                         teamwork: teamwork
@@ -69,6 +72,7 @@
                         first_name: parent.data('name').split(' ')[0],
                         last_name: parent.data('name').split(' ')[1],
                         clss: [parent.data('clss')],
+                        image: parent.data('img'),
                         energy: parent.data('energy'),
                         productivity: parent.data('productivity'),
                         teamwork: parent.data('teamwork')
@@ -87,9 +91,10 @@
                 var output = $("<div class='hacker element'></div>")
                         .append("<div class='name'>" + args.name + "</div>")
                         .append("<div class='class'>" + args.clss + "</div>")
-                        .append("<img src='/static/images/hackers/zuckfront.png' />")
+                        .append("<img src='/static/images/hackers/" + args.img + "front.png' />")
                         .data('name', args.name)
                         .data('clss', args.clss)
+                        .data('img', args.img)
                         .data('energy', args.energy)
                         .data('productivity', args.productivity)
                         .data('teamwork', args.teamwork);
