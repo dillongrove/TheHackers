@@ -96,6 +96,13 @@ button:hover {
   z-index: 9999;
 }
 #logo {
+  /*position: relative;
+    top: -30px;
+    background-image: url("../images/logo_new.png");
+    height: 149px;
+    width: 119px;
+    */
+
   background-image: url("../images/logo.png");
   height: 80px;
   width: 200px;
