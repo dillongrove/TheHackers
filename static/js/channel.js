@@ -29,16 +29,17 @@ channel.onMessage = function(msg) {
     if (args.success === "match found") {
         window.location = "/hackathon";
     }
-    else if (args.food != null) {
-        console.log(args.food);
-        ui.setFoods(args.food);
-    }
-    else if (args.progress[0] == 100 || args.progress[1] == 100)
-    {
-        if (args.progress[USERS.indexOf(USER)] == 100)
-            alert("You won!");
-        else alert("You lost!");
-        window.location.href = "/loadout";
+    else if (args.progress) {
+        var enemy = Math.abs(1 - USERS.indexOf(USER));
+        $("#enemy_progress_bar").html(args.progress[enemy]);
+        make_stat_bar($("#enemy_progress_bar"), 100);
+
+        if (args.progress[0] == 100 || args.progress[1] == 100) {
+            if (args.progress[USERS.indexOf(USER)] == 100)
+                alert("You won!");
+            else alert("You lost!");
+            window.location.href = "/loadout";
+        }
     }
 }
 
