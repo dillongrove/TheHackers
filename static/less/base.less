@@ -39,7 +39,7 @@
 @opp-head-width: 100px;
 @opp-head-height: 100px;
 @opp-head-start-x: 286px;
-@opp-head-start-y: -30px;
+@opp-head-start-y: -40px;
 @opp-head-tile-x: 84px;
 
 /* structure and global styling */
@@ -519,6 +519,13 @@ button {
 /* Opponent Heads */
 
 /* Head Backs */
+#monitor_backs {
+    position: absolute;
+    z-index: 3;
+    top: 0px;
+    left: 280px;
+}
+
 .opponent_head {
     background-repeat: no-repeat;
     width: @opp-head-width;
@@ -540,10 +547,10 @@ button {
 }
 
 #opponent_head1 img {
-    animation: bob 3s 1s infinite;
-    -moz-animation: bob 3s 1s infinite; /* Firefox */
-    -webkit-animation: bob 3s 1s infinite; /* Safari and Chrome */
-    -o-animation: bob 3s 1s infinite; /* Opera */
+    animation: bob 3s 0s infinite;
+    -moz-animation: bob 3s 0s infinite; /* Firefox */
+    -webkit-animation: bob 3s 0s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 0s infinite; /* Opera */
 }
 
 #opponent_head2 {
@@ -551,10 +558,10 @@ button {
 }
 
 #opponent_head2 img {
-    animation: bob 3s .2s infinite;
-    -moz-animation: bob 3s .2s infinite; /* Firefox */
-    -webkit-animation: bob 3s .2s infinite; /* Safari and Chrome */
-    -o-animation: bob 3s .2s infinite; /* Opera */
+    animation: bob 3s .4s infinite;
+    -moz-animation: bob 3s .4s infinite; /* Firefox */
+    -webkit-animation: bob 3s .4s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .4s infinite; /* Opera */
 }
 
 #opponent_head3 {
@@ -562,10 +569,10 @@ button {
 }
 
 #opponent_head3 img {
-    animation: bob 3s 1.4s infinite;
-    -moz-animation: bob 3s 1.4s infinite; /* Firefox */
-    -webkit-animation: bob 3s 1.4s infinite; /* Safari and Chrome */
-    -o-animation: bob 3s 1.4s infinite; /* Opera */
+    animation: bob 3s 1.1s infinite;
+    -moz-animation: bob 3s 1.1s infinite; /* Firefox */
+    -webkit-animation: bob 3s 1.1s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 1.1s infinite; /* Opera */
 }
 
 #opponent_head4 {
@@ -573,10 +580,10 @@ button {
 }
 
 #opponent_head4 img {
-    animation: bob 3s .7s infinite;
-    -moz-animation: bob 3s .7s infinite; /* Firefox */
-    -webkit-animation: bob 3s .7s infinite; /* Safari and Chrome */
-    -o-animation: bob 3s .7s infinite; /* Opera */
+    animation: bob 3s 5s infinite;
+    -moz-animation: bob 3s .5s infinite; /* Firefox */
+    -webkit-animation: bob 3s .5s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .5s infinite; /* Opera */
 }
 
 /* Food */
