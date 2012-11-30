@@ -206,7 +206,6 @@ button:hover {
 #target_window {
   position: absolute;
   top: -340px;
-  height: 600px;
   width: 150px;
   background-color: #ededed;
   -webkit-border-radius: 5px;
@@ -321,6 +320,24 @@ button:hover {
   /* Safari and Chrome */
 
   -o-animation: rotate_in 1s;
+  /* Opera */
+
+}
+.selected_char_pic_out {
+  position: relative;
+  left: -160px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+  animation: rotate_out .5s;
+  -moz-animation: rotate_out .5s;
+  /* Firefox */
+
+  -webkit-animation: rotate_out .5s;
+  /* Safari and Chrome */
+
+  -o-animation: rotate_out .5s;
   /* Opera */
 
 }
@@ -485,6 +502,7 @@ button:hover {
   background-image: url('/static/images/icons/productivity.png');
 }
 /* Animations */
+/* ROTATE IN */
 @keyframes rotate_in {
   from {
     -webkit-transform: rotate(0deg);
@@ -547,5 +565,70 @@ button:hover {
     -ms-transform: rotate(30deg);
     transform: rotate(30deg);
     left: -80px;
+  }
+}
+/* ROTATE OUT */
+@keyframes rotate_out {
+  from {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+}
+@-moz-keyframes rotate_out {
+  from {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+}
+@-webkit-keyframes rotate_out {
+  from {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+}
+@-o-keyframes rotate_out {
+  from {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
   }
 }
