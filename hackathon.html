@@ -28,16 +28,36 @@
         }
 
         #tip{
-         position : absolute;
-         border : 1px solid gray;
-         background-color : #efefef;
-         padding : 3px;
-         z-index: 1000;
-         /* set this to create word wrap */
-         max-width: 200px;
+            position : absolute;
+            border : 1px solid gray;
+            background-color : #efefef;
+            padding : 3px;
+            z-index: 1000;
+            /* set this to create word wrap */
+            max-width: 200px;
         }
 
-
+        #enemy_progress_bar, #ep_bar_label {
+            bottom: 12px;
+            left: 12px;
+            position: absolute;
+            width: 575px;
+            color: #333;
+        }
+        #enemy_progress_bar .bar_outer {
+            background-color: #FFF;
+            box-shadow: inset 2px 3px 8px #B8B8B8;
+        }
+        #enemy_progress_bar .bar_inner {
+            background: rgb(206,125,125);
+            background: -moz-linear-gradient(top,  rgba(206,125,125,1) 58%, rgba(206,66,66,1) 58%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(58%,rgba(206,125,125,1)), color-stop(58%,rgba(206,66,66,1)));
+            background: -webkit-linear-gradient(top,  rgba(206,125,125,1) 58%,rgba(206,66,66,1) 58%);
+            background: -o-linear-gradient(top,  rgba(206,125,125,1) 58%,rgba(206,66,66,1) 58%);
+            background: -ms-linear-gradient(top,  rgba(206,125,125,1) 58%,rgba(206,66,66,1) 58%);
+            background: linear-gradient(to bottom,  rgba(206,125,125,1) 58%,rgba(206,66,66,1) 58%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce7d7d', endColorstr='#ce4242',GradientType=0 );
+        }
     </style>
 </head>
 <body>
@@ -61,7 +81,8 @@
 			<div id="wall_interface">
 				<div id="screen_outer">
 					<div id="screen_inner">
-
+                        <div id="enemy_progress_bar"></div>
+                        <div id="ep_bar_label">Competitor's progress</div>
 					</div>
 				</div>
 			</div>
@@ -120,7 +141,6 @@
                             <div class="selected_char_name_wrapper">
                                 <span id="selected_first_name"></span><br>
                                 <span id="selected_last_name"></span><br>
-                                <span id="selected_catchphrase"></span>
                             </div>
 						</div>
 						<div class="selected_char_current_task section">
@@ -197,6 +217,8 @@
         engine.start(graph.nodes, HACKERS, USERS);
         ui.init(HACKERS);
         document.getElementById("soundeffect").play();
+
+        make_stat_bar($("#enemy_progress_bar"), 100);
     </script>
 
 </body>
