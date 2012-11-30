@@ -438,16 +438,59 @@ button {
     height: @head-back-height;
 }
 
+.head_back img {
+    position: relative;
+}
+
 .head_pos(@num){
     position: absolute;
     left: @head-back-start-x + ((@num)*@head-back-tile-x);
     top: @head-back-start-y;
 }
 
-#head_back1 {.head_pos(0)}
-#head_back2 {.head_pos(1)}
-#head_back3 {.head_pos(2)}
-#head_back4 {.head_pos(3)}
+#head_back1 {
+    .head_pos(0);
+}
+
+#head_back1 img {
+    animation: bob 3s 1s infinite;
+    -moz-animation: bob 3s 1s infinite; /* Firefox */
+    -webkit-animation: bob 3s 1s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 1s infinite; /* Opera */
+}
+
+#head_back2 {
+    .head_pos(1);
+}
+
+#head_back2 img {
+    animation: bob 3s .2s infinite;
+    -moz-animation: bob 3s .2s infinite; /* Firefox */
+    -webkit-animation: bob 3s .2s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .2s infinite; /* Opera */
+}
+
+#head_back3 {
+    .head_pos(2);
+}
+
+#head_back3 img {
+    animation: bob 3s 1.4s infinite;
+    -moz-animation: bob 3s 1.4s infinite; /* Firefox */
+    -webkit-animation: bob 3s 1.4s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s 1.4s infinite; /* Opera */
+}
+
+#head_back4 {
+    .head_pos(3);
+}
+
+#head_back4 img {
+    animation: bob 3s .7s infinite;
+    -moz-animation: bob 3s .7s infinite; /* Firefox */
+    -webkit-animation: bob 3s .7s infinite; /* Safari and Chrome */
+    -o-animation: bob 3s .7s infinite; /* Opera */
+}
 
 /* Icons */
 
@@ -550,5 +593,21 @@ button {
     to {
         .rotation(0deg);
         left: -160px;
+    }
+}
+
+/* HEAD BOB */
+@-webkit-keyframes bob {
+    0% {
+        top: 0px  
+    }
+    40% {
+        top: -4px;
+    }
+    80% {
+        top: 0px
+    }
+    100% {
+        top: 0px;
     }
 }
