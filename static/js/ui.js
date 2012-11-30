@@ -56,20 +56,22 @@ ui.init = function(user) {
     }
 
     //Add hacker ids to all monitors
-    console.log("Hacker ids");
-    console.log(hacker_ids);
     $(".monitor").each(function(i, elem) {
         $(this).data("hacker", hacker_ids[i]);
     });
 }
 
 $(".hacker").click(function() {
-    HACKER_SELECTED = $(this).data('id');
-    var hacker = engine.hackers[HACKER_SELECTED];
-    $(".hacker").removeClass('selected');
-    $(this).addClass('selected');
-    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
-    console.log("Selected "+HACKER_SELECTED);
+    if (HACKER_SELECTED === $(this).data('id')) {
+        // already selected
+    } else {
+        HACKER_SELECTED = $(this).data('id');
+        var hacker = engine.hackers[HACKER_SELECTED];
+        $(".hacker").removeClass('selected');
+        $(this).addClass('selected');
+        $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
+        console.log("Selected "+HACKER_SELECTED);
+    }
 });
 
 $(document).keypress(function(event) {
