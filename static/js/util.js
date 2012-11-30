@@ -3,7 +3,7 @@ function make_stat_bar(div, out_of) {
     var percent = parseInt(parseFloat(div.html()) * 100 / out_of);
     var bar = $("<div class='bar_outer'></div>");
     bar.append("<div class='bar_inner' style='width:" + percent +"%'></div>");
-    bar.append("<div class='bar_inner blank' style='width:" + (100 - percent) +"%'></div>");
+    //bar.append("<div class='bar_inner blank' style='width:" + (100 - percent) +"%'></div>");
     div.html(bar);
 }
 
@@ -25,19 +25,25 @@ function generate_normal_int(min, max) {
     return Math.round(r);
 }
 
-// generates a valid-looking random name!
-function generate_name() {
-    return fake_names[generate_int(0, fake_names.length - 1)];
+// generates a valid-looking random name and image to match gender
+function generate_gender_specific() {
+    var data = {};
+    if (Math.random() < 0.5) {
+        var imagesets = ['zuck', 'guy1', 'guy2', 'guy3'];
+        data.name = male_names[generate_int(0, male_names.length - 1)];
+        data.img = imagesets[generate_int(0, imagesets.length - 1)];
+    } else {
+        var imagesets = ['girl1', 'girl2'];
+        data.name = female_names[generate_int(0, female_names.length - 1)];
+        data.img = imagesets[generate_int(0, imagesets.length - 1)];
+    }
+    return data;
+
 }
 // selects a random class
 function generate_class() {
     var classes = ['Programming', 'Design', 'Business'];
     return classes[generate_int(0, classes.length - 1)];
-}
-// selects a random image
-function generate_image() {
-    var imagesets = ['zuck', 'girl1', 'girl2', 'guy1', 'guy2'];
-    return imagesets[generate_int(0, imagesets.length - 1)];
 }
 
 // ==== Other helper functions
