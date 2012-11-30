@@ -40,7 +40,6 @@ ui.updateVisualStats = function() {
     for (hacker_index in USER_HACKERS) {
 
         var hacker = engine.hackers[USER_HACKERS[hacker_index]];
-        console.log(hacker);
         if (USER_HACKERS[hacker_index] === HACKER_SELECTED) {
             $("#current_task").html(hacker['state'].charAt(0).toUpperCase() + hacker['state'].slice(1));
             $(".energy.statbar").html(hacker['stats']['energy']);
@@ -107,6 +106,11 @@ ui.select_character = function(index) {
     }
     $("#selected_first_name").html(hacker['first_name']);
     $("#selected_last_name").html(hacker['last_name']);
+    $("#selected_class").html(hacker['talents'][0]);
+    $("#top_bar").removeClass('programming_bg').removeClass('design_bg').removeClass('business_bg')
+        .addClass(hacker['talents'][0].toLowerCase() + '_bg');
+    $(".selected_char_pic_wrapper").removeClass('programming_bg_lt').removeClass('design_bg_lt').removeClass('business_bg_lt')
+        .addClass(hacker['talents'][0].toLowerCase() + '_bg_lt');
 }
 
 $("#top_bar .close").click(function(){
