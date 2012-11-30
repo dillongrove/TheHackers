@@ -1,11 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+/* other file imports */
 /*---------------------------------------------------
     LESS Elements 0.7
   ---------------------------------------------------
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
+/* imports (fonts, etc) */
 /* mixins */
+/* global vars */
+/* structure and global styling */
 body,
 html {
   font-family: 'Droid Sans', sans-serif;
@@ -186,7 +190,33 @@ button:hover {
   background-repeat: no-repeat;
   background-image: url("../images/tables.png");
 }
+.monitor {
+  background-color: #ffffff;
+  width: 80px;
+  height: 44px;
+}
+#monitor1 {
+  position: absolute;
+  left: 156px;
+  top: 62px;
+}
+#monitor2 {
+  position: absolute;
+  left: 263px;
+  top: 62px;
+}
+#monitor3 {
+  position: absolute;
+  left: 370px;
+  top: 62px;
+}
+#monitor4 {
+  position: absolute;
+  left: 477px;
+  top: 62px;
+}
 #target_window {
+  display: none;
   position: relative;
   top: -340px;
   height: 600px;

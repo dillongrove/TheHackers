@@ -1,7 +1,7 @@
-// other file imports
+/* other file imports */
 @import "elements.less";
 
-// imports (fonts, etc)
+/* imports (fonts, etc) */
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
 
 /* mixins */
@@ -11,13 +11,18 @@
     -ms-user-select: none;      /* IE 10+ */
 }
 
-// global vars
+/* global vars */
 @cl-black: #2a2a2a;
 @cl-white: #e6e6e6;
 @cl-design: #A0B3DB;
 @cl-programming: #69CD7C;
+@monitor-height: 44px;
+@monitor-width: 80px;
+@monitor-tile-x: 107px;
+@monitor-start-x: 156px;
+@monitor-start-y: 62px;
 
-// structure and global styling
+/* structure and global styling */
 body, html {
     font-family: 'Droid Sans', sans-serif;
     font-size: 12px;
@@ -181,7 +186,25 @@ button {
     background-image: url("../images/tables.png");
 }
 
+.monitor {
+    background-color: #ffffff;
+    width: @monitor-width;
+    height: @monitor-height;
+}
+
+.monitor_pos(@num){
+    position: absolute;
+    left: @monitor-start-x + ((@num)*@monitor-tile-x);
+    top: @monitor-start-y;
+}
+
+#monitor1 {.monitor_pos(0)}
+#monitor2 {.monitor_pos(1)}
+#monitor3 {.monitor_pos(2)}
+#monitor4 {.monitor_pos(3)}
+
 #target_window {
+    display: none;
     position: relative;
     top: -340px;
     height: 600px;
