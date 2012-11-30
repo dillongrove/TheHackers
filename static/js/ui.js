@@ -37,30 +37,26 @@ ui.updateVisualStats = function() {
 
 ui.updateMonitors = function() {
     $(".monitor").each(function(i, elem) {
-        var hacker = engine.hackers[$(this).data("hacker")];
+        var hacker = engine.hackers[USER_HACKERS[i]];
         $(elem).attr("class", "monitor");
-        $(elem).addClass(hacker.talents[0].toLowerCase()); //Add class
+        if (hacker.talents.length > 0)
+            $(elem).addClass(hacker.talents[0].toLowerCase()); //Add class
         $(elem).addClass(hacker['state']);
     });
 }
 
 ui.init = function(user) {
     hacker_ids = [];
-    for (hackerid in HACKERS)
+    for (hackerid in USER_HACKERS)
         hacker_ids.push(hackerid);
 
     //Add hacker ids to all monitors
+    console.log("Hacker ids");
+    console.log(hacker_ids);
     $(".monitor").each(function(i, elem) {
         $(this).data("hacker", hacker_ids[i]);
     });
 }
-
-$("#complete_node").click(function() {
-    PROGRESS += 10;
-    $.get('/hackathon/node_done/' + PROGRESS, {}, function(data) {
-        console.log(data);
-    });
-});
 
 $(".hacker").click(function() {
     if ($(this).data('id') === HACKER_SELECTED) { // if clicking again, deselect

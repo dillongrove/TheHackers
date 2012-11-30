@@ -90,15 +90,28 @@ engine.assign_to_node = function(hacker_id, node_id) {
     console.log("Assigning "+hacker_id+" to "+node_id);
     var hacker = engine.hackers[hacker_id];
     
+    if (hacker['stats']['active_node']) {
+        activeNode = hacker['stats']['active_node']
+        graph.activity[activeNode]--;
+        graph.updateActivity(activeNode);
+    }
+    
     if (node_id == undefined || node_id == null || 
         (engine.unused_dependencies[node_id] && engine.unused_dependencies[node_id].length > 0))
     {
+        
+    
         hacker['state'] = STATE_IDLE;
         hacker['stats']['active_node'] = null;
         return;
     }
+    else
+    {
+        graph.activity[node_id]++;
+        graph.updateActivity(node_id);
+    }
     
-    var node = graph.nodes[node_id];
+    
     
     //Don't do anything if too tired or sleeping
     if (hacker['stats']['energy'] < ENERGY_TIRED) {
@@ -127,12 +140,18 @@ engine.node_completed = function(node_id) {
         
         //TODO: Reveal hidden (now workable) nodes
         
+        
         //TODO: send progress to server
+        var progress_index = engine.users.indexOf(USER);
+        console.log(progress_index);
+        engine.progress[progress_index] = Math.max(engine.progress[progress_index], graph.node_data[node_id]['wave']/graph.max_wave * 100);
+        $.get('/hackathon/node_done/' + engine.progress[progress_index], {}, function(data) {
+            console.log(data);
+        });
     }
 };
 
-//Greys out finished nodes, deassigns hackers, and
-//reveals new nodes!
+//Updates node stats. UI updates are done in graph
 engine.update_nodes = function() {
     for (i in engine.nodes) {
         var node = graph.nodes[i][1];
@@ -143,8 +162,6 @@ engine.update_nodes = function() {
             for (j in node_hackers)
                 hackers[node_hackers]['stats']['active_node'] = null;
         }
-        
-        //TODO: Update health ticker
     }
 };
 
@@ -159,9 +176,10 @@ engine.update = function() {
         window.setTimeout(engine.update, GAME_SPEED);
 };
 
-engine.start = function(nodes, hackers) {
+engine.start = function(nodes, hackers, users) {
     //Set hacker stats
     engine.hackers = hackers;
+    engine.users = users;
     for (i in engine.hackers) {
         hacker = engine.hackers[i];
         
