@@ -204,7 +204,6 @@ button:hover {
   background-image: url("../images/tables.png");
 }
 .monitor {
-  background-color: #ffffff;
   width: 80px;
   height: 44px;
 }
@@ -329,6 +328,7 @@ button:hover {
   height: 300px;
   overflow: hidden;
   padding-top: 8px;
+  position: relative;
 }
 .selected_char_pic {
   position: relative;
@@ -347,6 +347,20 @@ button:hover {
   -o-animation: rotate_in 1s;
   /* Opera */
 
+}
+.selected_char_name_wrapper {
+  position: absolute;
+  bottom: 6px;
+  height: 70px;
+  width: 136px;
+  text-align: right;
+  color: #333;
+}
+.selected_char_name_wrapper #selected_first_name {
+  font-size: 22px;
+}
+.selected_char_name_wrapper #selected_last_name {
+  font-size: 14px;
 }
 .selected_char_current_task {
   height: 40px;
@@ -373,6 +387,35 @@ button:hover {
 }
 .section:last-child {
   border-bottom: none;
+}
+/* Monitor Screens */
+.monitor {
+  background-image: url("/static/images/monitor_screens.png");
+  background-repeat: no-repeat;
+}
+.monitor.sleep {
+  background-position: 0px 0px;
+}
+.monitor.business {
+  background-position: 0px -88px;
+}
+.monitor.business.sleep {
+  background-position: 0px 0px;
+}
+.monitor.programming {
+  background-position: 0px -132px;
+}
+.monitor.programming.sleep {
+  background-position: 0px 0px;
+}
+.monitor.design {
+  background-position: 0px -176px;
+}
+.monitor.design.sleep {
+  background-position: 0px 0px;
+}
+.monitor.idle {
+  background-position: 0px -44px;
 }
 /* Icons */
 .icon {

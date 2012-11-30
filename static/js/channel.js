@@ -29,6 +29,13 @@ channel.onMessage = function(msg) {
     if (args.success === "match found") {
         window.location = "/hackathon";
     }
+    else if (args.progress[0] == 100 || args.progress[1] == 100)
+    {
+        if (args.progress[USERS.indexOf(USER)] == 100)
+            alert("You won!");
+        else alert("You lost!");
+        window.location.href = "/loadout"
+    }
 }
 
 channel.onDisconnect = function() {

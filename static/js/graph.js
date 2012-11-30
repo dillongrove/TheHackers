@@ -1,5 +1,5 @@
-var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117", "business": "#C65D57"};
-var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317", "business": "#A02422"};
+var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117", "finish": "#EAC117", "business": "#C65D57"};
+var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317", "finish": "#C7A317", "business": "#A02422"};
 var ARC_RAD = 13;
 var CIRCLE_RAD = 18;
 var CIRCLE_COLLAPSED = 5;
@@ -16,7 +16,12 @@ graph.testgraph = [{"health": 3000, "wave": 0, "out": [2], "class": "design"},
                  {"health": 3000, "wave": 2, "out": [8], "class": "business"},
                  {"health": 3000, "wave": 3, "out": [], "class": "design"},
                  {"health": 3000, "wave": 3, "out": [9], "class": "business"},
-                 {"health": 3000, "wave": 4, "out": [], "class": "mvp"},
+                 {"health": 3000, "wave": 4, "out": [10, 11], "class": "mvp"},
+                 {"health": 3000, "wave": 5, "out": [12], "class": "design"},
+                 {"health": 3000, "wave": 5, "out": [13], "class": "programming"},
+                 {"health": 3000, "wave": 6, "out": [14], "class": "programming"},
+                 {"health": 3000, "wave": 6, "out": [14], "class": "design"},
+                 {"health": 3000, "wave": 7, "out": [], "class": "finish"},
                  ];
 
 
@@ -178,11 +183,21 @@ graph.generate = function(node_data) {
         });
         
         var textobj = graph.paper.text(posx+20, posy-20, " ");
+        textobj.data("id", x);
         
         //MVP Only - display text
+        var innerText = null;
         if (node['class'] == "mvp")
-             graph.paper.text(posx, posy, "MVP")
+             innerText = graph.paper.text(posx, posy, "MVP")
+        else if (node['class'] == "finish")
+             innerText = graph.paper.text(posx, posy, "END")
         
+        if (innerText) {
+            innerText.data("id", x);
+            innerText.click(function() {
+                ui.nodeClicked(this.data("id"));
+            });
+        }
         
         waves_occupied[node['wave']]++;
         nodes[x] = [nodeobj, timerobj, glowobj, textobj]; 
