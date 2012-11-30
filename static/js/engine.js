@@ -68,9 +68,13 @@ engine.update_hackers = function() {
             hacker['stats']['productivity'] = hacker['base']['productivity'] * (100 + hacker['stats']['energy'] + hacker['stats']['focus']) / 200;
             
             //Performance hit if not affinity
-            if (hacker['talents'][0] != graph.node_data[hacker['stats']['active_node']]['class'])
+            if (hacker['talents'].length == 0 ||
+                hacker['talents'][0].toLowerCase() != graph.node_data[hacker['stats']['active_node']]['class'])
+            {
+                console.log("Performance hit");
                 hacker['stats']['productivity'] *= 0.5;
-                
+            }
+            
             //Update their active node
             graph.buildNode(hacker['stats']['active_node'], hacker['stats']['productivity']);
         }

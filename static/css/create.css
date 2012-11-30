@@ -40,14 +40,15 @@ a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  background: #2a2a2a;
+  position: relative;
 }
 .bar_outer .bar_inner {
   height: 100%;
   display: inline-block;
   background: #e6e6e6;
-}
-.bar_outer .blank {
-  background: #2a2a2a;
+  position: absolute;
+  left: 0px;
 }
 .right {
   float: right;
@@ -57,6 +58,8 @@ a {
 }
 button:hover {
   cursor: pointer;
+  transition: background 0.3s;
+  -webkit-transition: background 0.3s;
 }
 /* Here by Hackathons! */
 #nav_bar {
@@ -197,6 +200,19 @@ button:hover {
   -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+  border: 2px solid #ffffff;
+}
+.selected_char_wrapper {
+  height: 200px;
+  overflow: hidden;
+}
+.selected_char_pic {
+  position: relative;
+  left: -60px;
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg);
 }
 .icon {
   width: 11px;
@@ -212,11 +228,18 @@ button:hover {
 .productivity.icon {
   background-image: url('/static/images/icons/productivity.png');
 }
+h1 {
+  border-bottom: 1px solid #e6e6e6;
+}
 .hacker {
   width: 245px;
-  margin: 0px 3px 22px 3px;
+  margin: 0px 2px 2px 2px;
+  padding: 12px 1px;
   display: inline-block;
   text-align: center;
+  background: -webkit-radial-gradient(circle, #5d5d5d, #2a2a2a);
+  background: -moz-radial-gradient(circle, #5d5d5d, #2a2a2a);
+  background: -ms-radial-gradient(circle, #5d5d5d, #2a2a2a);
 }
 .hacker .name {
   font-size: 16px;
@@ -224,6 +247,7 @@ button:hover {
 }
 .hacker img {
   padding: 2px;
+  height: 200px;
 }
 .hacker table {
   width: 100%;

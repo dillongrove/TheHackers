@@ -1,5 +1,5 @@
-var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117"};
-var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317"};
+var FILLS = {"design": "#A0B3DB", "programming": "#69CD7C", "mvp": "#EAC117", "business": "#C65D57"};
+var TIME_FILLS = {"design": "#3B5998", "programming": "#0B7920", "mvp": "#C7A317", "business": "#A02422"};
 var ARC_RAD = 13;
 var CIRCLE_RAD = 18;
 var CIRCLE_COLLAPSED = 5;
@@ -13,9 +13,9 @@ graph.testgraph = [{"health": 3000, "wave": 0, "out": [2], "class": "design"},
                  {"health": 3000, "wave": 1, "out": [], "class": "design"},
                  {"health": 3000, "wave": 2, "out": [], "class": "programming"},
                  {"health": 3000, "wave": 2, "out": [7], "class": "design"},
-                 {"health": 3000, "wave": 2, "out": [8], "class": "design"},
+                 {"health": 3000, "wave": 2, "out": [8], "class": "business"},
                  {"health": 3000, "wave": 3, "out": [], "class": "design"},
-                 {"health": 3000, "wave": 3, "out": [9], "class": "design"},
+                 {"health": 3000, "wave": 3, "out": [9], "class": "business"},
                  {"health": 3000, "wave": 4, "out": [], "class": "mvp"},
                  ];
 

@@ -17,6 +17,8 @@ ui.updateVisualStats = function() {
                 $(this).html(hacker['state']);
             else if (id == "teamwork")
                 $(this).html(hacker['base']['teamwork']);
+            else if (id == "talents")
+                $(this).html(hacker['talents'].join(", "));
             else
                 $(this).html(hacker['stats'][id]);
         });
