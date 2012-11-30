@@ -22,19 +22,6 @@ h1 {
         padding: 2px;
         height: 200px;
     }
-    table {
-        width: 100%;
-        td {
-            width: 100%;
-            .bar_inner {
-                box-shadow: inset 0 0 10px #000000;
-            }
-            .blank {
-                background-color: lighten(@cl-black, 5%);
-                box-shadow: none;
-            }
-        }
-    }
     .recruit {
         margin-top: 5px;
         font-size: 14px;
@@ -47,6 +34,23 @@ h1 {
         }
         &:active {
             background-color: lighten(@cl-black, 3%);
+        }
+    }
+    .stats_table {
+        td {
+            .bar_inner {
+                box-shadow: inset 0 0 10px #000000;
+            }
+            .blank {
+                background-color: lighten(@cl-black, 5%);
+                box-shadow: none;
+            }
+        }
+        .bar_outer {
+            border-radius: 6px;
+            .bar_inner {
+                border-radius: 6px;
+            }
         }
     }
 }

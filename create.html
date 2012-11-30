@@ -105,7 +105,7 @@
                         .data('energy', args.energy)
                         .data('productivity', args.productivity)
                         .data('teamwork', args.teamwork);
-                var table = $("<table></table>")
+                var table = $("<table class='stats_table'></table>")
                         .append("<tr><th><div class='energy icon' title='Energy determines how long the hacker can work for'></div></th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
                         .append("<tr><th><div class='productivity icon' title='Productivity determines how quickly the hacker works'></div></th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
                         .append("<tr><th><div class='teamwork icon' title='Teamwork determines how effectively the hacker works with others'></div></th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
