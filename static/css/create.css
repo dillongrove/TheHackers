@@ -38,11 +38,26 @@ a:hover {
 .programming {
   color: #69cd7c;
 }
+.business {
+  color: #cf6465;
+}
 .design_bg {
-  background-color: #a0b3db;
+  background-color: #a0b3db !important;
 }
 .programming_bg {
-  background-color: #69cd7c;
+  background-color: #69cd7c !important;
+}
+.business_bg {
+  background-color: #cf6465 !important;
+}
+.design_bg_lt {
+  background-color: #d7dff0 !important;
+}
+.programming_bg_lt {
+  background-color: #b5e7bf !important;
+}
+.business_bg_lt {
+  background-color: #edc5c6 !important;
 }
 .bar_outer {
   height: 15px;
@@ -239,12 +254,12 @@ button:hover {
   border-top-right-radius: 5px;
   border-top: 1px solid #eee;
 }
-#target_window #top_bar .char_name {
+#target_window #top_bar #selected_class {
   text-transform: uppercase;
   line-height: 28px;
   margin-left: 10px;
-  color: #666;
-  font-size: 11px;
+  color: #444;
+  font-size: 12px;
 }
 #target_window #top_bar .close {
   float: right;
