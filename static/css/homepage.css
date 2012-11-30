@@ -235,3 +235,18 @@ button:hover {
 .productivity.icon {
   background-image: url('/static/images/icons/productivity.png');
 }
+body {
+  font-size: 16px;
+}
+#page {
+  text-align: center;
+}
+#characters {
+  padding: 10px 0px;
+  background: -webkit-radial-gradient(circle, #505050, #2a2a2a);
+  background: -moz-radial-gradient(circle, #505050, #2a2a2a);
+  background: -ms-radial-gradient(circle, #505050, #2a2a2a);
+}
+#login {
+  font-size: 20px;
+}

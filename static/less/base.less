@@ -21,7 +21,14 @@ body, html {
     height: 100%;
     min-height: 800px;
 }
-a { color: @cl-white; }
+a {
+    color: @cl-white;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
 #page {
     width: 760px;
     margin: auto;
@@ -40,7 +47,9 @@ a { color: @cl-white; }
 	box-sizing: border-box;
     background: @cl-black;
     position: relative;
+    border-radius: 6px;
     .bar_inner {
+        border-radius: 6px;
         height: 100%;
         display: inline-block;
         background: @cl-white; // color of the bar
