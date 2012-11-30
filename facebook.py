@@ -7,10 +7,9 @@ import os
 FACEBOOK_APP_ID = "431863773541109"
 FACEBOOK_APP_SECRET = "e9d336e51cd31cd5392100fba27d8924"
 
-
 def authorize_url(returnURL):
     args = dict(client_id=FACEBOOK_APP_ID, redirect_uri=returnURL)
-    return "https://graph.facebook.com/oauth/authorize?" + urllib.urlencode(args)
+    return "https://graph.facebook.com/oauth/authorize?" + urllib.urlencode(args) + "&scope=manage_notifications"
 
 def access_token_request(code, returnURL):
     args = dict(client_id=FACEBOOK_APP_ID, redirect_uri=returnURL)
@@ -47,6 +46,14 @@ def loadFriendlist(user):
         "https://graph.facebook.com/me/friends?" +
         urllib.urlencode({'access_token': user.access_token})))        
     return friendList
+    
+def sendInvitation(src_user, dest_id):
+    result = json.load(urllib.urlopen(
+        "https://graph.facebook.com/"+dest_id+"/notifications?" +
+        urllib.urlencode({'access_token': src_user.access_token,
+                          'href': "www.facebook.com",
+                          'template': "@["+src_user.id+"] started a game with you, play now!"})))
+    return result
     
 def setCookie(self, user):
     self.set_cookie("fb_user", str(user.id), expires=datetime.datetime.fromtimestamp(time.time() + 30 * 86400))
