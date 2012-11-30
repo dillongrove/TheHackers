@@ -34,12 +34,12 @@ from google.appengine.api import channel
 
 def broadcast(match, msg):
     for user in match.users:
-        channel.send_message(user, msg)     
+        channel.send_message(user, msg)
 
 def message(user, msg):
     channel.send_message(user, msg)
-        
-def initChannel(userid): 
+
+def initChannel(userid):
     #Refreshes the channel api
     chan = Channel.get_by_key_name(userid)
     if not chan:
@@ -47,7 +47,7 @@ def initChannel(userid):
     chan.token = channel.create_channel(userid)
     chan.put()
     return chan.token
-        
+
 def getCurrentMatchByUser(current_user_id):
     #Gets the match the user is currently participating in, or None if no match started.
     #TODO: Check & Confirm creation order
@@ -70,41 +70,41 @@ class CreationHandler(FBRequestHandler):
         if not self._current_user:
             self.authenticate()
             return
-        
+
         self._current_user.hackers = Hacker.all().filter("user =", self._current_user.id).fetch(1000)
-        
+
         path = os.path.join(os.path.dirname(__file__), 'create.html')
         self.response.out.write(template.render(path, {"user": self._current_user}))
-        
+
 class LoadoutHandler(FBRequestHandler):
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
             self.authenticate()
             return
-        
+
         token = initChannel(self._current_user.id)
         #Resolve hackers for this user
         self._current_user.hackers = Hacker.all().filter("user =", self._current_user.id).fetch(1000)
-        
+
         if len(self._current_user.hackers) == 0:
             self.redirect("/create")
-        
+
         path = os.path.join(os.path.dirname(__file__), 'loadout.html')
         self.response.out.write(template.render(path, {"user": self._current_user, "token": token}))
-        
+
 class HackathonHandler(FBRequestHandler):
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
             self.authenticate()
             return
-            
+
         match = getCurrentMatchByUser(self._current_user.id)
         if not match:
             self.redirect("/loadout")
             return
-            
+
         #Resolve hacker ids to actual hacker data
         hacker_list = {}
         for hacker in match.hacker_list:
@@ -116,29 +116,29 @@ class HackathonHandler(FBRequestHandler):
                              "base": {"energy": hacker_instance.base_energy,
                                       "productivity": hacker_instance.base_productivity,
                                       "teamwork": hacker_instance.base_teamwork}}
-            
+
         #Resolve hackers for this user
         self._current_user.hackers = Hacker.all().filter("user =", self._current_user.id).fetch(1000)
-        
+
         #Resolve project
         project = Project.get(match.project_id)
-        
+
         #Resolve users
         users = [User.get_by_key_name(id) for id in match.users]
-        
+
         #Start appengine channel
         token = initChannel(self._current_user.id)
-        
+
         path = os.path.join(os.path.dirname(__file__), 'hackathon.html')
-        self.response.out.write(template.render(path, {"user": self._current_user, 
-                                                        "users": users, 
-                                                        "hackathon": match, 
-                                                        "hackers": json.dumps(hacker_list), 
+        self.response.out.write(template.render(path, {"user": self._current_user,
+                                                        "users": users,
+                                                        "hackathon": match,
+                                                        "hackers": json.dumps(hacker_list),
                                                         "project": project,
                                                         "token": token}))
-        
-        
-        
+
+
+
 # -------------- API calls ----------------
 class API_CreateHackerHandler(FBRequestHandler):
     def get(self):
@@ -146,12 +146,13 @@ class API_CreateHackerHandler(FBRequestHandler):
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
-         
+
         newhacker = Hacker(first_name = self.request.get("first_name"),
                            last_name = self.request.get("last_name"),
-                           user = self._current_user.id, 
+                           user = self._current_user.id,
                            catchphrase = self.request.get("catchphrase"),
                            imageset = self.request.get("image"),
+                           level = 1,
                            base_energy = int(self.request.get("energy")),
                            base_productivity = int(self.request.get("productivity")),
                            base_teamwork = int(self.request.get("teamwork")))
@@ -166,33 +167,33 @@ class API_NodeCompletedHandler(FBRequestHandler):
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
-        
+
         match = getCurrentMatchByUser(self._current_user.id)
         if not match:
             self.response.out.write(json.dumps({"error": "couldn't find current match"}))
             return
-        
+
         #Update the match data
         userindex = match.users.index(self._current_user.id)
         match.outcome[userindex] = int(progress)
         match.put()
-        
+
         #Notify all participating users
         broadcast(match, json.dumps({"progress": match.outcome}))
-        
+
         self.response.out.write(json.dumps({"success": "node completed"}))
-        
+
 class API_LobbyHandler(FBRequestHandler):
     def get(self):
         self._current_user = self.require_login()
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
-        
+
         q = Queue.all().get()
         if not q:
-            q = Queue()   
-        
+            q = Queue()
+
         #Push onto queue
         if str(self._current_user.id) in q.users:
             self.response.out.write(json.dumps({"success": "already in queue"}))
@@ -202,59 +203,59 @@ class API_LobbyHandler(FBRequestHandler):
         else: #Found a match. Pop & Serve
             matched = q.users[0]
             q.users = q.users[1:]
-            
+
             #Randomly choose a project
             projects = Project.all().fetch(1000)
             random.seed()
             project = random.choice(projects)
-            
+
             #Actually create the match
             match = Match(project_id = str(project.key()),
                           users = [self._current_user.id, matched],
                           outcome = [0, 0])
-            
+
             hackers = Hacker.all().filter("user IN", match.users).fetch(8)
             match.hacker_list = []
             for hacker in hackers:
                 match.hacker_list.append(str(hacker.key()))
-            
+
             match.put()
-            
+
             #Notify the users via socket
             broadcast(match, json.dumps({"success": "match found"}))
             self.response.out.write("herp")
         q.put()
-        
-     
+
+
 class API_LevelupHandler(FBRequestHandler):
     def get(self, hacker_id, skill):
-        
+
         self._current_user = self.require_login()
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
-        
+
         hacker = Hacker.get_by_id(hacker_id)
         if not hacker or hacker.user != self._current_user.id:
-            self.response.out.write(json.dumps({"error": "could not find hacker or hacker not owned by you"})) 
+            self.response.out.write(json.dumps({"error": "could not find hacker or hacker not owned by you"}))
             return
-            
+
         hacker.talents.append(skill)
         hacker.put()
         self.response.out.write(json.dumps({"success": "level up successful"}))
-     
-     
+
+
 class API_PopulateDatastoreHandler(FBRequestHandler):
     def get(self):
         #Wipe datastore of all projects
         projs = Project.all().fetch(1000)
         for proj in projs:
             proj.delete()
-            
+
         Project(name="Sendery", graph_json = "asdf", mvp_effect = "lasers").put()
-        
+
         self.response.out.write("done")
-   
+
 class API_UserRequestHandler(FBRequestHandler):
     #TODO: Finish
     def get(self, user):
@@ -262,21 +263,21 @@ class API_UserRequestHandler(FBRequestHandler):
         if not self._current_user:
             self.response.out.write(json.dumps({"error": "please log in"}))
             return
-        
+
         message(user, msg)
-        
+
         self.response.out.write(json.dumps({"success": "message sent"}))
-     
 
 
 
-        
+
+
 class ChannelTestHandler(webapp2.RequestHandler):
     def get(self):
         for chan in Channel.all().fetch(1000):
-            channel.send_message(chan.key().name(),"hi")   
+            channel.send_message(chan.key().name(),"hi")
             self.response.out.write(str(chan.key().name())+"<br>")
-        
+
 app = webapp2.WSGIApplication([
     ('/', HomepageHandler),
     ('/create', CreationHandler),
@@ -296,6 +297,6 @@ def main():
     # App Engine reuses your request handlers when you specify a main function
     logging.getLogger().setLevel(logging.DEBUG)
     webapp.util.run_wsgi_app(application)
-    
+
 if __name__ == '__main__':
     main()

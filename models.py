@@ -10,15 +10,16 @@ class Hacker(db.Model):
     catchphrase = db.StringProperty()
     user = db.StringProperty() #Facebook id of user
     talents = db.ListProperty(str) #List of acquired talents
-    imageset = db.StringProperty() #Image set to use. TODO: Talk with sara about this!
+    imageset = db.StringProperty()
+    level  = db.IntegerProperty()
     base_energy       = db.IntegerProperty()
     base_productivity = db.IntegerProperty()
-    base_teamwork  = db.IntegerProperty() 
-    
+    base_teamwork  = db.IntegerProperty()
+
 class Queue(db.Model):
     """ Queue for users in lobby """
     users = db.ListProperty(str)
-    
+
 class Match(db.Model):
     """ Necessary information for individual matches """
     project_id = db.StringProperty(required=True)
@@ -26,7 +27,7 @@ class Match(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     outcome = db.ListProperty(int) # Index of stage/wave position
     hacker_list = db.ListProperty(str) #List of all participating hackers
-    
+
 class Project(db.Model):
     """ Contains all information  pertaining to a project graph """
     name = db.StringProperty(required = True)
