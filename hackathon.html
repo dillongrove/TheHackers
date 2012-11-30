@@ -58,6 +58,15 @@
             background: linear-gradient(to bottom,  rgba(206,125,125,1) 58%,rgba(206,66,66,1) 58%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce7d7d', endColorstr='#ce4242',GradientType=0 );
         }
+        #versus {
+            position: relative;
+            top: 100px;
+            left: 50%;
+            z-index: 200;
+            font-size: 2em;
+            margin-left: -85px;
+        }
+        
     </style>
 </head>
 <body>
@@ -67,12 +76,12 @@
     <audio id="ambiance"></audio>
     <audio id="music"></audio>
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
+    
     {% if users.0.name == user.name %}
-        <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
+        <h1 id="versus">{{ users.0.name }} vs {{ users.1.name }}</h1>
     {% else %}
-        <h1>{{ users.1.name }} vs {{ users.0.name }}</h1>
+        <h1 id="versus">{{ users.1.name }} vs {{ users.0.name }}</h1>
     {% endif %}
-
 	<div id="nav_bar">
 		<div id="logo"></div>
 	</div>

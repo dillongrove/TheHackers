@@ -134,6 +134,12 @@ ui.init = function(user) {
         }
     }
 
+    $(".sleep_button").click(function() {
+        //Puts dem ho's to sleep.
+        if (engine.hackers[HACKER_SELECTED]['stats']['active_node']) engine.assign_to_node(HACKER_SELECTED, null);
+        engine.hackers[HACKER_SELECTED]['state'] = STATE_SLEEP; //TODO: Warn the player
+    });
+    
     //Tooltips
     $(".stats_table .icon").tipsy({'gravity':'sw'});
 
