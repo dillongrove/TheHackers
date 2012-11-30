@@ -66,10 +66,15 @@ $(".hacker").click(function() {
     var hacker = engine.hackers[HACKER_SELECTED];
     $(".hacker").removeClass('selected');
     $(this).addClass('selected');
-    $("#selected_char_pic").attr('src', hacker['imgset']);
+    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
     console.log("Selected "+HACKER_SELECTED);
 });
 
-$(".action").click(function() {
-    // Set hacker start_time to current time
-})
+$(document).keypress(function(event) {
+    console.log(event.which);
+    if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
+        event.preventDefault();
+        var hacker_num = event.which -= 49;
+        $("[data-id='" + USER_HACKERS[hacker_num] +"']").click();
+    }
+});

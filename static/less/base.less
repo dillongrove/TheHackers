@@ -16,11 +16,24 @@
 @cl-white: #e6e6e6;
 @cl-design: #A0B3DB;
 @cl-programming: #69CD7C;
+
 @monitor-height: 44px;
 @monitor-width: 80px;
 @monitor-tile-x: 107px;
-@monitor-start-x: 156px;
+@monitor-start-x: 256px;
 @monitor-start-y: 62px;
+
+@seat-width: 126px;
+@seat-height: 163px;
+@seat-start-x: 230px;
+@seat-start-y: 150px;
+@seat-tile-x: 116px;
+
+@head-back-width: 100px;
+@head-back-height: 100px;
+@head-back-start-x: 242px;
+@head-back-start-y: 90px;
+@head-back-tile-x: 116px;
 
 /* structure and global styling */
 body, html {
@@ -70,7 +83,7 @@ a {
     width: 100%;
     td {
         padding-left: 5px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
         width: 100%;
     }
 }
@@ -190,7 +203,7 @@ button {
 }
 
 #floor_interface {
-    width: 760px;
+    width: 860px;
     height: 300px;
     left: 50%;
     margin-left: -380px;
@@ -201,24 +214,8 @@ button {
     background-image: url("../images/tables.png");
 }
 
-.monitor {
-    width: @monitor-width;
-    height: @monitor-height;
-}
-
-.monitor_pos(@num){
-    position: absolute;
-    left: @monitor-start-x + ((@num)*@monitor-tile-x);
-    top: @monitor-start-y;
-}
-
-#monitor1 {.monitor_pos(0)}
-#monitor2 {.monitor_pos(1)}
-#monitor3 {.monitor_pos(2)}
-#monitor4 {.monitor_pos(3)}
-
 #target_window {
-    position: relative;
+    position: absolute;
     top: -340px;
     height: 600px;
     width: 150px;
@@ -355,9 +352,22 @@ button {
 
 /* Monitor Screens */
 .monitor {
+    width: @monitor-width;
+    height: @monitor-height;
     background-image: url("/static/images/monitor_screens.png");
     background-repeat: no-repeat;
 }
+
+.monitor_pos(@num){
+    position: absolute;
+    left: @monitor-start-x + ((@num)*@monitor-tile-x);
+    top: @monitor-start-y;
+}
+
+#monitor1 {.monitor_pos(0)}
+#monitor2 {.monitor_pos(1)}
+#monitor3 {.monitor_pos(2)}
+#monitor4 {.monitor_pos(3)}
 
 .monitor.sleep {
     background-position: 0px 0*@monitor-height;
@@ -391,6 +401,43 @@ button {
     background-position: 0px -1*@monitor-height;
 }
 
+/* Seats */
+.seat {
+    background-image: url("/static/images/seat.png");
+    background-repeat: no-repeat;
+    width: @seat-width;
+    height: @seat-height;
+}
+
+.seat_pos(@num){
+    position: absolute;
+    left: @seat-start-x + ((@num)*@seat-tile-x);
+    top: @seat-start-y;
+}
+
+#seat1 {.seat_pos(0)}
+#seat2 {.seat_pos(1)}
+#seat3 {.seat_pos(2)}
+#seat4 {.seat_pos(3)}
+
+/* Head Backs */
+.head_back {
+    background-image: url("/static/images/head_back.png");
+    background-repeat: no-repeat;
+    width: @head-back-width;
+    height: @head-back-height;
+}
+
+.head_pos(@num){
+    position: absolute;
+    left: @head-back-start-x + ((@num)*@head-back-tile-x);
+    top: @head-back-start-y;
+}
+
+#head_back1 {.head_pos(0)}
+#head_back2 {.head_pos(1)}
+#head_back3 {.head_pos(2)}
+#head_back4 {.head_pos(3)}
 
 /* Icons */
 
