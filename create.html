@@ -4,6 +4,7 @@
         <title>Recruit Your Hacker Team</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <link href="/static/css/create.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="static/css/tipsy.css">
     </head>
     <body>
         <div id="page">
@@ -16,6 +17,7 @@
         <script src="/static/js/jquery-1.8.3.min.js"></script>
         <script src="/static/js/fake-names.js"></script>
         <script src="/static/js/util.js"></script>
+        <script src="/static/js/jquery.tipsy.js"></script>
         <script>
             var HACKER_CHOICES = 8; // number of hackers to generate
             var TEAM_SIZE = 4;
@@ -67,6 +69,9 @@
                 $(".statbar").each(function(index) {
                     make_stat_bar($(this), 100);
                 });
+                
+                //Tooltips                   
+                $(".icon").tipsy({'gravity':'sw'});
             });
 
             // when a user clicks a hacker, send all their info to server & increment current team
@@ -130,6 +135,7 @@
                 CURRENT_TEAM.push(div.data('name'));
                 $("#spots").html((TEAM_SIZE - CURRENT_TEAM.length));
             }
+            
         </script>
     </body>
 </html>

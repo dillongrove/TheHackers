@@ -4,6 +4,7 @@
         <title>Your Hacker Team</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <link href="/static/css/create.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="static/css/tipsy.css">
         <style>
             #page {
                 text-align: center;
@@ -45,9 +46,14 @@
 
         <script src="/static/js/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+        <script src="/static/js/jquery.tipsy.js"></script>
         <script src="/static/js/util.js"></script>
         <!-- user interaction, etc -->
         <script>
+            $(function() {
+                $(".icon").tipsy({'gravity': 'sw'});
+            });
+        
             {% for hacker in user.hackers %}
                 var html = insert_hacker({
                     name: '{{ hacker.first_name }} {{ hacker.last_name }}',

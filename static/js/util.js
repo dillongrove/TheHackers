@@ -29,7 +29,7 @@ function generate_normal_int(min, max) {
 function generate_gender_specific() {
     var data = {};
     if (Math.random() < 0.5) {
-        var imagesets = ['zuck', 'guy1', 'guy2', 'guy3', 'guy4'];
+        var imagesets = ['zuck', 'guy1', 'guy2', 'guy3', 'guy4', 'billnye', 'cmu'];
         data.name = male_names[generate_int(0, male_names.length - 1)];
         data.img = imagesets[generate_int(0, imagesets.length - 1)];
     } else {
