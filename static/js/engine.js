@@ -90,18 +90,16 @@ engine.assign_to_node = function(hacker_id, node_id) {
     console.log("Assigning "+hacker_id+" to "+node_id);
     var hacker = engine.hackers[hacker_id];
     
-    var activeCount = null;
-    var node = null;
+    if (hacker['stats']['active_node']) {
+        activeNode = hacker['stats']['active_node']
+        graph.activity[activeNode]--;
+        graph.updateActivity(activeNode);
+    }
+    
     if (node_id == undefined || node_id == null || 
         (engine.unused_dependencies[node_id] && engine.unused_dependencies[node_id].length > 0))
     {
-        if (hacker['stats']['active_node']) {
-            node = graph.nodes[hacker['stats']['active_node']];
-            console.log(node[0]);
-            activeCount = parseInt(node[0].data("activity"));
-            console.log("ActiveCount:"+activeCount);
-            activeCount--;
-        }
+        
     
         hacker['state'] = STATE_IDLE;
         hacker['stats']['active_node'] = null;
@@ -109,17 +107,11 @@ engine.assign_to_node = function(hacker_id, node_id) {
     }
     else
     {
-        node = graph.nodes[node_id];
-        activeCount = parseInt(node[0].data("activity"));
-        activeCount++;
+        graph.activity[node_id]++;
+        graph.updateActivity(node_id);
     }
     
-    //Set active user count
-    node[0].data("activity", activeCount);
-    if (node[0].data("activity") > 0)
-        node[3].attr("text", activeCount);
-    else
-        node[3].attr("text", " ");
+    
     
     //Don't do anything if too tired or sleeping
     if (hacker['stats']['energy'] < ENERGY_TIRED) {

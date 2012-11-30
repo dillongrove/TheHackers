@@ -126,11 +126,19 @@ graph.makeEdge = function(fromNode, toNode) {
     var edge = graph.paper.path(pathcmd).attr({"stroke": "#AAAAAA", "stroke-width": 3}).toBack();
 }
     
+graph.updateActivity = function(node_id) {
+    var activity = graph.activity[node_id];
+    if (activity == 0 || graph.nodes[node_id][1].data("completed"))
+        activity = "";
+    graph.nodes[node_id][3].attr("text", activity);
+}
+    
 graph.generate = function(node_data) {
     //Node format: array of 
     //                  {"health": x, "reqs": [1, 2, 3], "out": [1, 2, 3]}
     var wavelengths = [];
     graph.node_data = node_data;
+    graph.activity = [];
     graph.max_wave = 0;
     for (x in node_data)
     {
@@ -140,6 +148,7 @@ graph.generate = function(node_data) {
             wavelengths[node_data[x]['wave']] += 1;
             
         graph.max_wave = Math.max(node_data[x]['wave'], graph.max_wave);
+        graph.activity[x] = 0;
     }
     
     //Generate nodes
