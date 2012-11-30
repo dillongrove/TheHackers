@@ -85,14 +85,42 @@ ui.init = function(user) {
 }
 
 ui.select_character = function(index) {
-    $(".head_back").removeClass('selected');
-    $("#head_back"+(index+1)).addClass('selected');
-    HACKER_SELECTED = USER_HACKERS[index];
-    console.log(engine);
-    var hacker = engine.hackers[HACKER_SELECTED];
-    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
-    
+    var target_window = $("#target_window");
+
+    // no previous hacker selected
+    if(HACKER_SELECTED == null){
+        $(".head_back").removeClass('selected');
+        $("#head_back"+(index+1)).addClass('selected');
+        HACKER_SELECTED = USER_HACKERS[index];
+        console.log(engine);
+        var hacker = engine.hackers[HACKER_SELECTED];
+        $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
+        target_window.fadeIn(300);
+    }
+
+    else if (HACKER_SELECTED !== USER_HACKERS[index]) { /* a new hacker was selected */
+        $(".head_back").removeClass('selected');
+        $("#head_back"+(index+1)).addClass('selected');
+        HACKER_SELECTED = USER_HACKERS[index];
+        console.log(engine);
+        var hacker = engine.hackers[HACKER_SELECTED];
+
+        // fade the targeting window to left
+        $(".selected_char_pic").addClass("selected_char_pic_out");
+        target_window.fadeOut(200, function(){
+            $(".selected_char_pic").removeClass("selected_char_pic_out");
+            $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
+            target_window.fadeIn(200);
+        });
+    }
 }
+
+$("#top_bar .close").click(function(){
+    var target_window = $("#target_window");
+    HACKER_SELECTED == null;
+    target_window.fadeOut(100);
+
+})
 
 $(".monitor, .head_back, .seat").click(function() {
     ui.playClick();
