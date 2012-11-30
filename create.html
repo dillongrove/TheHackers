@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id="page">
-            <h1>Available Hackers (<span id="spots">4</span> spots remaining)</h1>
+            <h1>Available Hackers (select <span id="spots">4</span> more)</h1>
             <div id="available_hackers"></div>
             <h1>Your Hackers</h1>
             <div id="your_hackers"></div>
@@ -48,7 +48,7 @@
                     var teamwork = generate_normal_int(1, 100);
 
                     if (energy + productivity + teamwork < 150) {
-                        
+                        // TODO balance hackers by making sure their sum = 150
                     } else {
 
                     }
@@ -105,10 +105,10 @@
                         .data('energy', args.energy)
                         .data('productivity', args.productivity)
                         .data('teamwork', args.teamwork);
-                var table = $("<table></table>")
-                        .append("<tr><th><div class='energy icon'></div></th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
-                        .append("<tr><th><div class='productivity icon'></div></th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
-                        .append("<tr><th><div class='teamwork icon'></div></th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
+                var table = $("<table class='stats_table'></table>")
+                        .append("<tr><th><div class='energy icon' title='Energy determines how long the hacker can work for'></div></th><td><div class='statbar energy'>" + args.energy + "</div></td></tr>")
+                        .append("<tr><th><div class='productivity icon' title='Productivity determines how quickly the hacker works'></div></th><td><div class='statbar productivity'>" + args.productivity + "</div></td></tr>")
+                        .append("<tr><th><div class='teamwork icon' title='Teamwork determines how effectively the hacker works with others'></div></th><td><div class='statbar teamwork'>" + args.teamwork + "</div></td></tr>")
                 output.append(table)
                         .append("<button class='recruit'>Add to team ></button>");
                 return output;

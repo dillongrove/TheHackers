@@ -204,6 +204,7 @@ button:hover {
   background-image: url("../images/tables.png");
 }
 .monitor {
+  background-color: #ffffff;
   width: 80px;
   height: 44px;
 }
@@ -373,35 +374,6 @@ button:hover {
 .section:last-child {
   border-bottom: none;
 }
-/* Monitor Screens */
-.monitor {
-  background-image: url("/static/images/monitor_screens.png");
-  background-repeat: no-repeat;
-}
-.monitor.sleep {
-  background-position: 0px 0px;
-}
-.monitor.business {
-  background-position: 0px -88px;
-}
-.monitor.business.sleep {
-  background-position: 0px 0px;
-}
-.monitor.programming {
-  background-position: 0px -132px;
-}
-.monitor.programming.sleep {
-  background-position: 0px 0px;
-}
-.monitor.design {
-  background-position: 0px -176px;
-}
-.monitor.design.sleep {
-  background-position: 0px 0px;
-}
-.monitor.idle {
-  background-position: 0px -44px;
-}
 /* Icons */
 .icon {
   width: 11px;
@@ -482,51 +454,18 @@ button:hover {
     left: -80px;
   }
 }
-h1 {
-  border-bottom: 1px solid #e6e6e6;
-}
-.hacker {
-  width: 245px;
-  margin: 0px 2px 2px 2px;
-  padding: 12px 1px;
-  display: inline-block;
-  text-align: center;
-  background: -webkit-radial-gradient(circle, #5d5d5d, #2a2a2a);
-  background: -moz-radial-gradient(circle, #5d5d5d, #2a2a2a);
-  background: -ms-radial-gradient(circle, #5d5d5d, #2a2a2a);
-}
-.hacker .name {
+body {
   font-size: 16px;
-  font-weight: bold;
 }
-.hacker img {
-  padding: 2px;
-  height: 200px;
+#page {
+  text-align: center;
 }
-.hacker .recruit {
-  margin-top: 5px;
-  font-size: 14px;
-  background-color: #3c3c3c;
-  border: 1px solid #5d5d5d;
-  border-radius: 3px;
-  color: #e6e6e6;
+#characters {
+  padding: 10px 0px;
+  background: -webkit-radial-gradient(circle, #505050, #2a2a2a);
+  background: -moz-radial-gradient(circle, #505050, #2a2a2a);
+  background: -ms-radial-gradient(circle, #505050, #2a2a2a);
 }
-.hacker .recruit:hover {
-  background-color: #494949;
-}
-.hacker .recruit:active {
-  background-color: #323232;
-}
-.hacker .stats_table td .bar_inner {
-  box-shadow: inset 0 0 10px #000000;
-}
-.hacker .stats_table td .blank {
-  background-color: #373737;
-  box-shadow: none;
-}
-.hacker .stats_table .bar_outer {
-  border-radius: 6px;
-}
-.hacker .stats_table .bar_outer .bar_inner {
-  border-radius: 6px;
+#login {
+  font-size: 20px;
 }

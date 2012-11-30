@@ -111,7 +111,7 @@ engine.assign_to_node = function(hacker_id, node_id) {
     {
         node = graph.nodes[node_id];
         activeCount = parseInt(node[0].data("activity"));
-        activeCount ++;
+        activeCount++;
     }
     
     //Set active user count

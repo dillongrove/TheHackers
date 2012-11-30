@@ -15,15 +15,15 @@
             width: 400px;
             z-index:9001;
         }
-        
+
         circle {
             cursor:pointer;
         }
-        
+
         path:not([stroke="#aaaaaa"]) {
             cursor:pointer;
-        }       
-        
+        }
+
         #screen_inner text {
             cursor:pointer;
         }
@@ -45,6 +45,7 @@
     <div id="tip"></div>
 
 
+
     <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
     {% if users.0.name == user.name %}
         <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
@@ -55,10 +56,10 @@
     {{ project }}<br/>
     {{ users }}<br/>
     {{ hackers }}<br/>
-    
+
     <div id="hackers">
         {% for hacker in user.hackers %}
-            <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }} 
+            <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }}
                 </br>
                        Energy: <span id="energy"></span></br>
                        Teamwork: <span id="teamwork">0</span></br>
@@ -82,20 +83,20 @@
 			<div id="wall_interface">
 				<div id="screen_outer">
 					<div id="screen_inner">
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="floor">
 			<div id="floor_highlight">
-				
+
 			</div>
 			<div id="baseboard">
-				
+
 			</div>
 			<div id="carpet">
-				
+
 			</div>
 			<div id="floor_interface">
 				<div id="monitor1" class="monitor"></div>
@@ -105,7 +106,6 @@
 
 				<div id="target_window">
 					<div id="top_bar">
-						<span class="char_name">Jim Smith</span>
 						<div class="close">
 							x
 						</div>
@@ -118,7 +118,37 @@
 							<span>Currently:</span><br>
 							<span id="current_task">Idle</span>
 						</div>
-						<div class="selected_char_stats section"></div>
+						<div class="selected_char_stats section">
+                            <table class='stats_table'>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <div class="energy icon"></div>
+                                        </th>
+                                        <td>
+                                            <div class="statbar energy"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div class="productivity icon"></div>
+                                        </th>
+                                        <td>
+                                            <div class="statbar productivity"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div class="teamwork icon"></div>
+                                        </th>
+                                        <td>
+                                            <div class="statbar teamwork"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 						<div class="selected_char_abilities section"></div>
 					</div>
 				</div>
@@ -130,6 +160,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/raphael-min.js"></script>
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script src="/static/js/util.js"></script>
     <script src="/static/js/ui.js"></script>
     <script src="/static/js/graph.js"></script>
     <script src="/static/js/channel.js"></script>
@@ -137,7 +168,9 @@
     <script >
         var USER = "{{ user.id }}";
         var USERS = [{% for u in users %} "{{ u.id }}", {% endfor %} null];
+        var USER_HACKERS = [{% for hacker in user.hackers %} "{{ hacker.key }}", {% endfor %} null];
         USERS.pop();
+        USER_HACKERS.pop();
         var HACKERS = {{ hackers|safe }};
         var TOKEN = "{{ token }}";
         channel.init();
@@ -145,6 +178,6 @@
         ui.init(HACKERS);
         engine.start(graph.nodes, HACKERS, USERS);
     </script>
-    
+
 </body>
 </html>
