@@ -126,9 +126,14 @@ engine.node_completed = function(node_id) {
             if (depIndex == -1)
                 continue;
             engine.unused_dependencies[children[c]].splice(depIndex, 1);
+            
+            //Reveal hidden (now workable) nodes
+            console.log(engine.unused_dependencies);
+            if (engine.unused_dependencies[children[c]].length == 0)
+                graph.revealNode(children[c]);
         }
         
-        //TODO: Reveal hidden (now workable) nodes
+        
         
         //TODO: send progress to server
         var progress_index = engine.users.indexOf(USER);
@@ -182,7 +187,7 @@ engine.start = function(nodes, hackers, users) {
         hacker["state"] = STATE_IDLE;
     }
     
-    engine.unused_dependencies = graph.dependencies;
+    engine.unused_dependencies = jQuery.extend(true, {}, graph.dependencies);
     
     engine.update(); //Start updating
 };
