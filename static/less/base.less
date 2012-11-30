@@ -103,8 +103,8 @@ button {
     width: 100%;
     min-height: 400px;
     background-color: #333;
-    perspective:150;
-    -webkit-perspective:150; /* Safari and Chrome */
+    perspective:280;
+    -webkit-perspective:280; /* Safari and Chrome */
     perspective-origin: 50% 0;
     -webkit-perspective-origin: 50% 0;
 }
@@ -126,8 +126,10 @@ button {
     background-image: url("../images/carpet_pattern.jpg");
     transform: rotateX(45deg);
     -webkit-transform: rotateX(45deg); /* Safari and Chrome */
+    transform-origin: 0% 0% 0%;
+    -webkit-transform-origin: 0% 50%;
     margin-left: -100%;
-    margin-top: -2%;
+    margin-top: -2.4%;
 }
 
 #baseboard {
@@ -159,5 +161,27 @@ button {
     margin: 12px;
     .gradient(#f5f5f5, #f0f0f0, #f5f5f5);
     height: 256px;
+}
+
+#floor_interface {
+    width: 760px;
+    height: 300px;
+    left: 50%;
+    margin-left: -380px;
+    position: absolute;
+    top: 40px;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-image: url("../images/tables.png");
+}
+
+#target_window {
+    position: relative;
+    top: -340px;
+    height: 600px;
+    width: 150px;
+    background-color: #ededed;
+    .rounded(5px);
+    .drop-shadow(0, 0, 24px, .8);
 }
 

@@ -101,8 +101,8 @@ button:hover {
   width: 100%;
   min-height: 400px;
   background-color: #333;
-  perspective: 150;
-  -webkit-perspective: 150;
+  perspective: 280;
+  -webkit-perspective: 280;
   /* Safari and Chrome */
 
   perspective-origin: 50% 0;
@@ -126,8 +126,10 @@ button:hover {
   -webkit-transform: rotateX(45deg);
   /* Safari and Chrome */
 
+  transform-origin: 0% 0% 0%;
+  -webkit-transform-origin: 0% 50%;
   margin-left: -100%;
-  margin-top: -2%;
+  margin-top: -2.4%;
 }
 #baseboard {
   height: 20px;
@@ -165,6 +167,33 @@ button:hover {
   background: -moz-linear-gradient(center bottom, #f0f0f0 0%, #f5f5f5 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#f0f0f0', GradientType=0);
   height: 256px;
+}
+#floor_interface {
+  width: 760px;
+  height: 300px;
+  left: 50%;
+  margin-left: -380px;
+  position: absolute;
+  top: 40px;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-image: url("../images/tables.png");
+}
+#target_window {
+  position: relative;
+  top: -340px;
+  height: 600px;
+  width: 150px;
+  background-color: #ededed;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
 }
 .hacker {
   width: 245px;
