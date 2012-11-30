@@ -13,6 +13,7 @@ html {
   background: #2a2a2a;
   color: #e6e6e6;
   height: 100%;
+  min-height: 800px;
 }
 #page {
   width: 760px;
@@ -55,14 +56,6 @@ button:hover {
   cursor: pointer;
 }
 /* Here by Hackathons! */
-#back_wall {
-  height: 100%;
-  background: #afafaf;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #afafaf), color-stop(1, #838383));
-  background: -ms-linear-gradient(bottom, #afafaf, #838383);
-  background: -moz-linear-gradient(center bottom, #afafaf 0%, #838383 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#838383', endColorstr='#afafaf', GradientType=0);
-}
 #nav_bar {
   background-color: #363636;
   background-image: url("../images/titlebar.jpg");
@@ -76,6 +69,7 @@ button:hover {
   -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
   -moz-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.8);
+  z-index: 9999;
 }
 #logo {
   background-image: url("../images/logo.png");
@@ -84,4 +78,31 @@ button:hover {
   background-repeat: no-repeat;
   display: inline-block;
   text-align: center;
+}
+#backdrop {
+  height: 100%;
+  min-height: 800px;
+  position: relative;
+  background: #afafaf;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #afafaf), color-stop(1, #838383));
+  background: -ms-linear-gradient(bottom, #afafaf, #838383);
+  background: -moz-linear-gradient(center bottom, #afafaf 0%, #838383 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#838383', endColorstr='#afafaf', GradientType=0);
+}
+#wall {
+  height: 50%;
+  min-height: 400px;
+}
+#floor {
+  position: absolute;
+  top: 50%;
+  height: 50%;
+  width: 100%;
+  min-height: 400px;
+  background-color: #333;
+}
+#baseboard {
+  height: 20px;
+  background-color: #b0b0b0;
+  border-top: 2px solid #cecece;
 }
