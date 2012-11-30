@@ -26,7 +26,23 @@ ui.updateVisualStats = function() {
 }
 
 ui.updateMonitors = function() {
+    $(".monitor").each(function(i, elem) {
+        var hacker = engine.hackers[$(this).data("hacker")];
+        $(elem).attr("class", "monitor");
+        $(elem).addClass(hacker.talents[0].toLowerCase()); //Add class
+        $(elem).addClass(hacker['state']);
+    });
+}
 
+ui.init = function(user) {
+    hacker_ids = [];
+    for (hackerid in HACKERS)
+        hacker_ids.push(hackerid);
+        
+    //Add hacker ids to all monitors
+    $(".monitor").each(function(i, elem) {
+        $(this).data("hacker", hacker_ids[i]);
+    });
 }
 
 $("#complete_node").click(function() {
@@ -51,3 +67,4 @@ $(".hacker").click(function() {
 $(".action").click(function() {
     // Set hacker start_time to current time
 })
+

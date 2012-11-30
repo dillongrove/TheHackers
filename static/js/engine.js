@@ -71,7 +71,6 @@ engine.update_hackers = function() {
             if (hacker['talents'].length == 0 ||
                 hacker['talents'][0].toLowerCase() != graph.node_data[hacker['stats']['active_node']]['class'])
             {
-                console.log("Performance hit");
                 hacker['stats']['productivity'] *= 0.5;
             }
             
@@ -123,10 +122,7 @@ engine.node_completed = function(node_id) {
         var children = graph.node_data[node_id]['out'];
         for (c in children) {
             var depIndex = engine.unused_dependencies[children[c]].indexOf(node_id);
-            console.log("Removing "+depIndex);
-            console.log(engine.unused_dependencies[children[c]]);
             engine.unused_dependencies[children[c]].splice(depIndex, 1);
-            console.log(engine.unused_dependencies[children[c]]);
         }
         
         //TODO: Reveal hidden (now workable) nodes
@@ -157,6 +153,7 @@ engine.update = function() {
     engine.update_hackers();
     engine.update_nodes();
     ui.updateVisualStats();
+    ui.updateMonitors();
     graph.updateNodes();
     if (!engine.gameOver)
         window.setTimeout(engine.update, GAME_SPEED);
