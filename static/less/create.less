@@ -1,16 +1,26 @@
 @import 'base.less';
 
+h1 {
+    border-bottom: 1px solid @cl-white;
+}
 .hacker {
     width: 245px;
-    margin: 0px 3px 22px 3px;
+    margin: 0px 2px 2px 2px;
+    padding: 12px 1px;
     display: inline-block;
     text-align: center;
+
+    background: -webkit-radial-gradient(circle, lighten(@cl-black, 20%), @cl-black);
+    background: -moz-radial-gradient(circle, lighten(@cl-black, 20%), @cl-black);
+    background: -ms-radial-gradient(circle, lighten(@cl-black, 20%), @cl-black);
+
     .name {
         font-size: 16px;
         font-weight: bold;
     }
     img {
         padding: 2px;
+        height: 200px;
     }
     table {
         width: 100%;
