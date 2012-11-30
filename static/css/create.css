@@ -1,10 +1,15 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+/* other file imports */
 /*---------------------------------------------------
     LESS Elements 0.7
   ---------------------------------------------------
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
+/* imports (fonts, etc) */
+/* mixins */
+/* global vars */
+/* structure and global styling */
 body,
 html {
   font-family: 'Droid Sans', sans-serif;
@@ -192,7 +197,33 @@ button:hover {
   background-repeat: no-repeat;
   background-image: url("../images/tables.png");
 }
+.monitor {
+  background-color: #ffffff;
+  width: 80px;
+  height: 44px;
+}
+#monitor1 {
+  position: absolute;
+  left: 156px;
+  top: 62px;
+}
+#monitor2 {
+  position: absolute;
+  left: 263px;
+  top: 62px;
+}
+#monitor3 {
+  position: absolute;
+  left: 370px;
+  top: 62px;
+}
+#monitor4 {
+  position: absolute;
+  left: 477px;
+  top: 62px;
+}
 #target_window {
+  display: none;
   position: relative;
   top: -340px;
   height: 600px;
@@ -208,19 +239,106 @@ button:hover {
   -moz-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   border: 2px solid #ffffff;
+  color: #999;
 }
-.selected_char_wrapper {
-  height: 200px;
+#target_window #top_bar {
+  height: 26px;
+  background-color: #ccc;
+  border-bottom: 2px solid #aaa;
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-top: -2px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top: 1px solid #eee;
+}
+#target_window #top_bar .char_name {
+  text-transform: uppercase;
+  line-height: 28px;
+  margin-left: 10px;
+  color: #666;
+  font-size: 11px;
+}
+#target_window #top_bar .close {
+  float: right;
+  margin-right: 4px;
+  margin-top: 5px;
+  vertical-align: center;
+}
+.close {
+  font-weight: bold;
+  color: #333;
+  padding: 2px 5px 3px 5px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+
+  -moz-user-select: none;
+  /* Firefox all */
+
+  -ms-user-select: none;
+  /* IE 10+ */
+
+}
+.close:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+.selected_char_pic_wrapper {
+  height: 300px;
   overflow: hidden;
+  padding-top: 8px;
 }
 .selected_char_pic {
   position: relative;
-  left: -60px;
+  left: -80px;
   -webkit-transform: rotate(30deg);
   -moz-transform: rotate(30deg);
   -ms-transform: rotate(30deg);
   transform: rotate(30deg);
+  animation: rotate_in 1s;
+  -moz-animation: rotate_in 1s;
+  /* Firefox */
+
+  -webkit-animation: rotate_in 1s;
+  /* Safari and Chrome */
+
+  -o-animation: rotate_in 1s;
+  /* Opera */
+
 }
+.selected_char_current_task {
+  height: 40px;
+}
+.selected_char_current_task #current_task {
+  font-size: 22px;
+  color: #333;
+}
+.selected_char_stats {
+  height: 90px;
+}
+.selected_char_abilities {
+  height: 40px;
+}
+/* Sections */
+.section {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 6px;
+  line-height: 22px;
+}
+.section:first-child {
+  border-top: none;
+}
+.section:last-child {
+  border-bottom: none;
+}
+/* Icons */
 .icon {
   width: 11px;
   height: 16px;
@@ -234,6 +352,71 @@ button:hover {
 }
 .productivity.icon {
   background-image: url('/static/images/icons/productivity.png');
+}
+/* Animations */
+@keyframes rotate_in {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+  to {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+}
+@-moz-keyframes rotate_in {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+  to {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+}
+@-webkit-keyframes rotate_in {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+  to {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
+}
+@-o-keyframes rotate_in {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    left: -160px;
+  }
+  to {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg);
+    left: -80px;
+  }
 }
 h1 {
   border-bottom: 1px solid #e6e6e6;

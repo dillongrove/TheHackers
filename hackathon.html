@@ -1,44 +1,136 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Hackulator</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <link href="/static/css/base.css" rel="stylesheet" type="text/css" />
-        <style>
-            .selected { background: #ccc; }
-        </style>
-    </head>
-    <body>
-        <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
-        {% if users.0.name == user.name %}
-            <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
-        {% else %}
-            <h1>{{ users.1.name }} vs {{ users.0.name }}</h1>
-        {% endif %}
-        {{ user }}<br/>
-        {{ project }}<br/>
-        {{ users }}<br/>
-        {{ hackers }}<br/>
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>The Hackers</title>
+	<link rel="stylesheet" href="static/css/reset.css">
+	<link rel="stylesheet" href="static/css/base.css">
+    <style>
+        #hackers {
+            position:absolute;
+            top:20px;
+            left:20px;
+            width: 400px;
+            z-index:9001;
+        }
+        
+        circle {
+            cursor:pointer;
+        }
+        
+        path:not([stroke="#aaaaaa"]) {
+            cursor:pointer;
+        }       
+        
+        #screen_inner text {
+            cursor:pointer;
+        }
+            
+        
+    </style>
+</head>
+<body>
 
-        <button id="complete_node">Complete node</button>
-        <div id="hackers">
-            {% for hacker in user.hackers %}
-                <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.name }}</div>
-            {% endfor %}
-        </div>
-        <button class="action">Do Something</button>
 
-        <script>
-            var HACKERS = {{ hackers|safe }};
-        </script>
-        <script src="/static/js/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="/_ah/channel/jsapi"></script>
-        <script src="/static/js/ui.js"></script>
-        <script src="/static/js/graph.js"></script>
-        <!-- channel messaging -->
-        <script >
-            var TOKEN = "{{ token }}";
-        </script>
-        <script src="/static/js/channel.js"></script>
-    </body>
+
+    <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
+    {% if users.0.name == user.name %}
+        <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
+    {% else %}
+        <h1>{{ users.1.name }} vs {{ users.0.name }}</h1>
+    {% endif %}
+    {{ user }}<br/>
+    {{ project }}<br/>
+    {{ users }}<br/>
+    {{ hackers }}<br/>
+    
+    <div id="hackers">
+        {% for hacker in user.hackers %}
+            <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }} 
+                </br>
+                       Energy: <span id="energy"></span></br>
+                       Teamwork: <span id="teamwork">0</span></br>
+                       Focus: <span id="focus">0</span></br>
+                       Productivity: <span id="productivity">0</span></br>
+                       Work_Start: <span id="work_start">0</span></br>
+                       Active_node: <span id="active_node">0</span></br>
+                       State: <span id="state">0</span></br>
+                       Talents: <span id="talents">0</span></br>
+            </div>
+            </br></br>
+        {% endfor %}
+    </div>
+
+
+
+
+	<div id="nav_bar">
+		<div id="logo"></div>
+	</div>
+	<div id="backdrop">
+		<div id="wall">
+			<div id="wall_interface">
+				<div id="screen_outer">
+					<div id="screen_inner">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="floor">
+			<div id="floor_highlight">
+				
+			</div>
+			<div id="baseboard">
+				
+			</div>
+			<div id="carpet">
+				
+			</div>
+			<div id="floor_interface">
+				<div id="monitor1" class="monitor"></div>
+				<div id="monitor2" class="monitor"></div>
+				<div id="monitor3" class="monitor"></div>
+				<div id="monitor4" class="monitor"></div>
+
+				<div id="target_window">
+					<div id="top_bar">
+						<span class="char_name">Jim Smith</span>
+						<div class="close">
+							x
+						</div>
+					</div>
+					<div>
+						<div class="selected_char_pic_wrapper section">
+							<img src="static/images/hackers/guy2front.png" class="selected_char_pic"></img>
+						</div>
+						<div class="selected_char_current_task section">
+							<span>Currently:</span><br>
+							<span id="current_task">Idle</span>
+						</div>
+						<div class="selected_char_stats section"></div>
+						<div class="selected_char_abilities section"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/raphael-min.js"></script>
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/graph.js"></script>
+    <script src="/static/js/channel.js"></script>
+    <script src="/static/js/engine.js"></script>
+    <script >
+        var HACKERS = {{ hackers|safe }};
+        var TOKEN = "{{ token }}";
+        channel.init();
+        graph.init(graph.testgraph);
+        ui.init(HACKERS);
+        engine.start(graph.nodes, HACKERS);
+    </script>
+    
+</body>
 </html>

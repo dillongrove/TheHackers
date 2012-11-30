@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hackulator</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link href="/static/css/base.css" rel="stylesheet" type="text/css" />
+        <style>
+            .selected { background: #ccc; }
+        </style>
+    </head>
+    <body>
+        <div id="connection_failure" class="hidden">Failed to connect - try refreshing the page</div>
+        {% if users.0.name == user.name %}
+            <h1>{{ users.0.name }} vs {{ users.1.name }}</h1>
+        {% else %}
+            <h1>{{ users.1.name }} vs {{ users.0.name }}</h1>
+        {% endif %}
+        {{ user }}<br/>
+        {{ project }}<br/>
+        {{ users }}<br/>
+        {{ hackers }}<br/>
+        
+        <div id="hackers">
+            {% for hacker in user.hackers %}
+                <div class="hacker" data-id="{{ hacker.key }}">{{ hacker.first_name }} {{ hacker.last_name }} 
+                    </br>
+                           Energy: <span id="energy"></span></br>
+                           Reliability: <span id="reliability">0</span></br>
+                           Focus: <span id="focus">0</span></br>
+                           Productivity: <span id="productivity">0</span></br>
+                           Work_Start: <span id="work_start">0</span></br>
+                           Active_node: <span id="active_node">0</span></br>
+                           State: <span id="state">0</span></br>
+                </div>
+                </br></br>
+            {% endfor %}
+        </div>
+
+        <script src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/raphael-min.js"></script>
+        <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+        <script src="/static/js/ui.js"></script>
+        <script src="/static/js/graph.js"></script>
+        <script src="/static/js/channel.js"></script>
+        <script src="/static/js/engine.js"></script>
+        <script >
+            var HACKERS = {{ hackers|safe }};
+            var TOKEN = "{{ token }}";
+            channel.init();
+            graph.init(graph.testgraph);
+            engine.start(graph.nodes, HACKERS);
+        </script>
+    </body>
+</html>

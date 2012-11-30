@@ -40,5 +40,3 @@ channel.quit = function(){
         sock.close();
     sock=null;
 }
-
-channel.init();

@@ -1,8 +1,5 @@
 
-//TEST DATA
-var HACKERS = [{'base': {'energy': 4L, 'reliability': 3L, 'productivity': 6L}, 'name': u'Celine Jones', 'id': datastore_types.Key.from_path(u'Hacker', 244L, _app=u'dev~hackulator-app')}, {'base': {'energy': 6L, 'reliability': 6L, 'productivity': 4L}, 'name': u'James Erikson', 'id': datastore_types.Key.from_path(u'Hacker', 249L, _app=u'dev~hackulator-app')}, {'base': {'energy': 4L, 'reliability': 5L, 'productivity': 4L}, 'name': u'Myrtle McAllister', 'id': datastore_types.Key.from_path(u'Hacker', 250L, _app=u'dev~hackulator-app')}, {'base': {'energy': 4L, 'reliability': 6L, 'productivity': 6L}, 'name': u'Carrie Dardar', 'id': datastore_types.Key.from_path(u'Hacker', 251L, _app=u'dev~hackulator-app')}, {'base': {'energy': 6L, 'reliability': 5L, 'productivity': 6L}, 'name': u'Sherri Brunk', 'id': datastore_types.Key.from_path(u'Hacker', 252L, _app=u'dev~hackulator-app')}, {'base': {'energy': 5L, 'reliability': 5L, 'productivity': 5L}, 'name': u'Nila Sallee', 'id': datastore_types.Key.from_path(u'Hacker', 253L, _app=u'dev~hackulator-app')}, {'base': {'energy': 7L, 'reliability': 6L, 'productivity': 7L}, 'name': u'Blanca Daggett', 'id': datastore_types.Key.from_path(u'Hacker', 254L, _app=u'dev~hackulator-app')}, {'base': {'energy': 6L, 'reliability': 6L, 'productivity': 5L}, 'name': u'Joel Magnus', 'id': datastore_types.Key.from_path(u'Hacker', 255L, _app=u'dev~hackulator-app')}];
 
-var NODES = null; //Get from generated graph on init.
 
 function getTime() { return ((new Date()).getTime() / 1000); };
 
@@ -13,51 +10,132 @@ var STATE_IDLE = "idle";
 var STATE_SLEEP = "sleep";
 var STATE_ACTIVE = "active";
 
+//Comparison tools
+var ENERGY_TIRED = 10;
+var ENERGY_EXHAUSTED = 5;
+
 //Increases/drops per tick
-var ENERGY_DRAIN_RATE = 0.05;
-var SLEEP_RATE = 0.1;
+var ENERGY_ACTIVE_DRAIN = 1;
+var ENERGY_PARASITIC_DRAIN = ENERGY_ACTIVE_DRAIN / 10.0;
+var ENERGY_SLEEP_GAIN = 2*ENERGY_ACTIVE_DRAIN;
 
 
 var engine = {
                 gameOver: false,
                 progress: [0, 0], //TODO: Set this from the server
+                hackers: null
              };
 
+//TEST DATA
+engine.DEMO_HACKERS = [{"first_name": "Nancy", "last_name": "Mitchell", "id": "257", "base": {"teamwork": 57, "energy": 20, "productivity": 62}}, {"first_name": "Betty", "last_name": "Woods", "id": "258", "base": {"teamwork": 59, "energy": 51, "productivity": 43}}, {"first_name": "Deangelo", "last_name": "Gonzalez", "id": "259", "base": {"teamwork": 23, "energy": 62, "productivity": 54}}, {"first_name": "John", "last_name": "Clark", "id": "260", "base": {"teamwork": 46, "energy": 44, "productivity": 49}}, {"first_name": "Shawn", "last_name": "Gomez", "id": "261", "base": {"teamwork": 53, "energy": 31, "productivity": 43}}, {"first_name": "Jason", "last_name": "Davis", "id": "262", "base": {"teamwork": 32, "energy": 40, "productivity": 76}}, {"first_name": "Amy", "last_name": "Tritt", "id": "263", "base": {"teamwork": 64, "energy": 52, "productivity": 54}}, {"first_name": "Charles", "last_name": "Minix", "id": "264", "base": {"teamwork": 57, "energy": 41, "productivity": 43}}];
+             
 //Update all hackers - their stats
 //and chip away at the nodes they're working on
 engine.update_hackers = function() {
-    for (i in HACKERS) {
-        hacker = HACKERS[i];
+    for (i in engine.hackers) {
+        hacker = engine.hackers[i];
         
         //Update energy
         if (hacker['state'] == STATE_ACTIVE)
-            hacker['stats']['energy'] -= ENERGY_DRAIN_RATE;
+            hacker['stats']['energy'] -= ENERGY_ACTIVE_DRAIN;
+        else if (hacker['state'] == STATE_IDLE) 
+            hacker['stats']['energy'] -= ENERGY_PARASITIC_DRAIN;
+        else if (hacker['state'] == STATE_SLEEP)
+            hacker['stats']['energy'] = Math.min(hacker['stats']['energy'] + ENERGY_SLEEP_GAIN, hacker['base']['energy']);
         
-        //Update productivity
-        hacker['stats']['productivity'] = hacker['base']['productivity'] * (100 + hacker['stats']['energy'] + hacker['stats']['focus']) / 200;
+        
+        if (hacker['state'] != STATE_SLEEP) {
+            //If REALLY tired, set to sleep
+            if (hacker['stats']['energy'] < ENERGY_EXHAUSTED) {
+                if (hacker['stats']['active_node']) engine.assign_to_node(i, null);
+                hacker['state'] = STATE_SLEEP; //TODO: Warn the player
+            }
+            //If too tired, put to idle 
+            else if (hacker['stats']['energy'] < ENERGY_TIRED) {
+                if (hacker['stats']['active_node']) engine.assign_to_node(i, null);
+                hacker['state'] = STATE_IDLE; //TODO: Warn the player
+            }
+        }
+        
+        
         
         //Update focus
         if (hacker['stats']['active_node'] != null) {
-            var work_time = hacker['stats']['work_start'] - getTime(); //Seconds since start
-            hacker['stats']['focus'] = 1.0 - Math.pow(16, -work_time/60.0); //Gets damn close to 100% by 60 seconds of work.
+            var work_time = getTime() - hacker['stats']['work_start']; //Seconds since start
+            hacker['stats']['focus'] = 100*(1.0 - Math.pow(16, -work_time/60.0)); //Gets damn close to 100% by 60 seconds of work.
         
+            //Update productivity
+            hacker['stats']['productivity'] = hacker['base']['productivity'] * (100 + hacker['stats']['energy'] + hacker['stats']['focus']) / 200;
+            
+            //Performance hit if not affinity
+            if (hacker['talents'].length == 0 ||
+                hacker['talents'][0].toLowerCase() != graph.node_data[hacker['stats']['active_node']]['class'])
+            {
+                hacker['stats']['productivity'] *= 0.5;
+            }
+            
             //Update their active node
-            var node = engine.nodes[hacker['stats']['active_node']];
-            node.data('health', node.data('health') - hacker['stats']['productivity']);
+            graph.buildNode(hacker['stats']['active_node'], hacker['stats']['productivity']);
         }
         else {
             hacker['stats']['focus'] = 0;
             hacker['stats']['work_start'] = null;
+            hacker['stats']['productivity'] = 0;
         }
         
     }
-}
+};
+
+engine.assign_to_node = function(hacker_id, node_id) {
+    console.log("Assigning "+hacker_id+" to "+node_id);
+    var hacker = engine.hackers[hacker_id];
+    
+    if (node_id == undefined || node_id == null || 
+        (engine.unused_dependencies[node_id] && engine.unused_dependencies[node_id].length > 0))
+    {
+        hacker['state'] = STATE_IDLE;
+        hacker['stats']['active_node'] = null;
+        return;
+    }
+    
+    var node = graph.nodes[node_id];
+    
+    //Don't do anything if too tired or sleeping
+    if (hacker['stats']['energy'] < ENERGY_TIRED) {
+        //TODO: Warn the user
+        return;
+    }
+    
+    hacker['state'] = STATE_ACTIVE;
+    hacker['stats']['active_node'] = node_id;
+    hacker['stats']['work_start'] = getTime();
+    
+};
+
+engine.node_completed = function(node_id) {
+    for (i in engine.hackers) {
+        var hacker = engine.hackers[i];
+        if (hacker['stats']['active_node'] != node_id) continue;
+        engine.assign_to_node(i, null); //Deassign this user
+        
+        //Remove used dependencies
+        var children = graph.node_data[node_id]['out'];
+        for (c in children) {
+            var depIndex = engine.unused_dependencies[children[c]].indexOf(node_id);
+            engine.unused_dependencies[children[c]].splice(depIndex, 1);
+        }
+        
+        //TODO: Reveal hidden (now workable) nodes
+        
+        //TODO: send progress to server
+    }
+};
 
 //Greys out finished nodes, deassigns hackers, and
 //reveals new nodes!
 engine.update_nodes = function() {
     for (i in engine.nodes) {
-        var node = engine.nodes[i];
+        var node = graph.nodes[i][1];
         if (node.data('completion') > node.data("health")) //make hackers of completed nodes idle
         {
             var node_hackers = null; //TODO: Get hackers hacking this node
@@ -68,21 +146,25 @@ engine.update_nodes = function() {
         
         //TODO: Update health ticker
     }
-}
+};
 
 //Called async every tick... updates EVERYTHING
 engine.update = function() {
     engine.update_hackers();
     engine.update_nodes();
-    
-    if (!gameOver)
-        setTimer(update, engine.GAME_SPEED);
-}
+    ui.updateVisualStats();
+    ui.updateMonitors();
+    graph.updateNodes();
+    if (!engine.gameOver)
+        window.setTimeout(engine.update, GAME_SPEED);
+};
 
-engine.start = function(nodes) {
+engine.start = function(nodes, hackers) {
     //Set hacker stats
-    for (i in HACKERS) {
-        hacker = HACKERS[i];
+    engine.hackers = hackers;
+    for (i in engine.hackers) {
+        hacker = engine.hackers[i];
+        
         hacker["stats"] = {"energy": hacker['base']['energy'],
                            "reliability": hacker['base']['reliability'],
                            "focus": 0.0,
@@ -92,10 +174,10 @@ engine.start = function(nodes) {
         hacker["state"] = STATE_IDLE;
     }
     
-    engine.nodes = nodes;
-
+    engine.unused_dependencies = graph.dependencies;
+    
     engine.update(); //Start updating
-}
+};
 
 
 
