@@ -11,7 +11,6 @@ var STATE_SLEEP = "sleep";
 var STATE_ACTIVE = "active";
 
 //Comparison tools
-var ENERGY_TIRED = 10;
 var ENERGY_EXHAUSTED = 5;
 
 //Increases/drops per tick
@@ -50,13 +49,7 @@ engine.update_hackers = function() {
                 if (hacker['stats']['active_node']) engine.assign_to_node(i, null);
                 hacker['state'] = STATE_SLEEP; //TODO: Warn the player
             }
-            //If too tired, put to idle 
-            else if (hacker['stats']['energy'] < ENERGY_TIRED) {
-                if (hacker['stats']['active_node']) engine.assign_to_node(i, null);
-                hacker['state'] = STATE_IDLE; //TODO: Warn the player
-            }
         }
-        
         
         
         //Update focus
@@ -114,7 +107,7 @@ engine.assign_to_node = function(hacker_id, node_id) {
     
     
     //Don't do anything if too tired or sleeping
-    if (hacker['stats']['energy'] < ENERGY_TIRED) {
+    if (hacker['stats']['energy'] < ENERGY_EXHAUSTED) {
         //TODO: Warn the user
         return;
     }

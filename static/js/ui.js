@@ -59,16 +59,11 @@ ui.init = function(user) {
 }
 
 $(".hacker").click(function() {
-    if ($(this).data('id') === HACKER_SELECTED) { // if clicking again, deselect
-        HACKER_SELECTED = null;
-        $(this).removeClass('selected');
-    } else {
-        HACKER_SELECTED = $(this).data('id');
-        var hacker = engine.hackers[HACKER_SELECTED];
-        $(".hacker").removeClass('selected');
-        $(this).addClass('selected');
-        $("#selected_char_pic").attr('src', hacker['imgset']);
-    }
+    HACKER_SELECTED = $(this).data('id');
+    var hacker = engine.hackers[HACKER_SELECTED];
+    $(".hacker").removeClass('selected');
+    $(this).addClass('selected');
+    $("#selected_char_pic").attr('src', hacker['imgset']);
     console.log("Selected "+HACKER_SELECTED);
 });
 

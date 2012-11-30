@@ -29,6 +29,10 @@ channel.onMessage = function(msg) {
     if (args.success === "match found") {
         window.location = "/hackathon";
     }
+    else if (100 in args.progress)
+    {
+        alert("Hackathon was won!");
+    }
 }
 
 channel.onDisconnect = function() {
