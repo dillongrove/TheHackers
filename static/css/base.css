@@ -144,13 +144,13 @@ button:hover {
 #mural_left {
   position: absolute;
   left: -460px;
-  top: 24px;
+  top: -14px;
   z-index: 2;
 }
 #mural_right {
   position: absolute;
   left: 780px;
-  top: 24px;
+  top: -14px;
   z-index: 2;
 }
 #floor {
@@ -242,6 +242,7 @@ button:hover {
 #target_window {
   position: absolute;
   top: -300px;
+  left: -10px;
   width: 150px;
   background-color: #ededed;
   -webkit-border-radius: 5px;
