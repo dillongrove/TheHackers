@@ -4,8 +4,24 @@ var HACKER_SELECTED = null;
 var ui = {};
 ui.nodeClicked = function(id) {
     if (HACKER_SELECTED == null) return;
+    ui.playClick2(); 
     engine.assign_to_node(HACKER_SELECTED, id);
 }
+
+ui.playClick = function() {
+    document.getElementById("soundeffect").src = "/static/sound/click.wav";
+    document.getElementById("soundeffect").play();
+};
+
+ui.playClick2 = function() {
+    document.getElementById("soundeffect3").src = "/static/sound/click.wav";
+    document.getElementById("soundeffect3").play();
+};
+
+ui.playPop = function() {
+    document.getElementById("soundeffect2").src = "/static/sound/pop.wav";
+    document.getElementById("soundeffect2").play();
+};
 
 ui.updateVisualStats = function() {
     $(".hacker").each(function() {
@@ -55,29 +71,26 @@ ui.init = function(user) {
         $("#head_back" + (num) + " img").attr('src', "/static/images/hackers/" + HACKERS[USER_HACKERS[hackerid]]['imgset'] + "back.png");
     }
 
-    //Add hacker ids to all monitors
-    $(".monitor").each(function(i, elem) {
-        $(this).data("hacker", hacker_ids[i]);
-    });
+    
 }
 
-$(".hacker").click(function() {
-    if (HACKER_SELECTED === $(this).data('id')) {
-        // already selected
-    } else {
-        HACKER_SELECTED = $(this).data('id');
-        var hacker = engine.hackers[HACKER_SELECTED];
-        $(".hacker").removeClass('selected');
-        $(this).addClass('selected');
-        $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
-        console.log("Selected "+HACKER_SELECTED);
-    }
+$(".monitor, .head_back, .seat").click(function() {
+    ui.playClick();
+    var id = $(this).attr("id");
+    var index = parseInt(id[id.length - 1]) - 1;
+    HACKER_SELECTED = USER_HACKERS[index]
+    var hacker = engine.hackers[HACKER_SELECTED];
+    $(".head_back").removeClass('selected');
+    $("#head_back"+(index+1)).addClass('selected');
+    $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
 });
 
 $(document).keypress(function(event) {
+    ui.playClick();
+    console.log(event.which);
     if ( event.which >= 49 && event.which <= 52 ) {// 49=1, 52=4
         event.preventDefault();
         var hacker_num = event.which -= 49;
         $("[data-id='" + USER_HACKERS[hacker_num] +"']").click();
-    }
+    }    
 });

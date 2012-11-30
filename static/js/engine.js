@@ -25,9 +25,6 @@ var engine = {
                 hackers: null
              };
 
-//TEST DATA
-engine.DEMO_HACKERS = [{"first_name": "Nancy", "last_name": "Mitchell", "id": "257", "base": {"teamwork": 57, "energy": 20, "productivity": 62}}, {"first_name": "Betty", "last_name": "Woods", "id": "258", "base": {"teamwork": 59, "energy": 51, "productivity": 43}}, {"first_name": "Deangelo", "last_name": "Gonzalez", "id": "259", "base": {"teamwork": 23, "energy": 62, "productivity": 54}}, {"first_name": "John", "last_name": "Clark", "id": "260", "base": {"teamwork": 46, "energy": 44, "productivity": 49}}, {"first_name": "Shawn", "last_name": "Gomez", "id": "261", "base": {"teamwork": 53, "energy": 31, "productivity": 43}}, {"first_name": "Jason", "last_name": "Davis", "id": "262", "base": {"teamwork": 32, "energy": 40, "productivity": 76}}, {"first_name": "Amy", "last_name": "Tritt", "id": "263", "base": {"teamwork": 64, "energy": 52, "productivity": 54}}, {"first_name": "Charles", "last_name": "Minix", "id": "264", "base": {"teamwork": 57, "energy": 41, "productivity": 43}}];
-             
 //Update all hackers - their stats
 //and chip away at the nodes they're working on
 engine.update_hackers = function() {
@@ -50,7 +47,6 @@ engine.update_hackers = function() {
                 hacker['state'] = STATE_SLEEP; //TODO: Warn the player
             }
         }
-        
         
         //Update focus
         if (hacker['stats']['active_node'] != null) {
@@ -105,7 +101,6 @@ engine.assign_to_node = function(hacker_id, node_id) {
     }
     
     
-    
     //Don't do anything if too tired or sleeping
     if (hacker['stats']['energy'] < ENERGY_EXHAUSTED) {
         //TODO: Warn the user
@@ -135,7 +130,6 @@ engine.node_completed = function(node_id) {
         
         //TODO: Reveal hidden (now workable) nodes
         
-        
         //TODO: send progress to server
         var progress_index = engine.users.indexOf(USER);
         console.log(progress_index);
@@ -144,6 +138,7 @@ engine.node_completed = function(node_id) {
             console.log(data);
         });
     }
+    ui.playPop();
 };
 
 //Updates node stats. UI updates are done in graph

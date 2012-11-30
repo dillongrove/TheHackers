@@ -34,7 +34,7 @@ channel.onMessage = function(msg) {
         if (args.progress[USERS.indexOf(USER)] == 100)
             alert("You won!");
         else alert("You lost!");
-        window.location.href = "/loadout"
+        window.location.href = "/loadout";
     }
 }
 
