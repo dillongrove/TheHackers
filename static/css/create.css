@@ -193,7 +193,7 @@ button:hover {
   height: 256px;
 }
 #floor_interface {
-  width: 760px;
+  width: 860px;
   height: 300px;
   left: 50%;
   margin-left: -380px;
@@ -204,7 +204,7 @@ button:hover {
   background-image: url("../images/tables.png");
 }
 #target_window {
-  position: relative;
+  position: absolute;
   top: -340px;
   height: 600px;
   width: 150px;
@@ -373,22 +373,22 @@ button:hover {
 }
 #monitor1 {
   position: absolute;
-  left: 156px;
+  left: 256px;
   top: 62px;
 }
 #monitor2 {
   position: absolute;
-  left: 263px;
+  left: 363px;
   top: 62px;
 }
 #monitor3 {
   position: absolute;
-  left: 370px;
+  left: 470px;
   top: 62px;
 }
 #monitor4 {
   position: absolute;
-  left: 477px;
+  left: 577px;
   top: 62px;
 }
 .monitor.sleep {
@@ -424,23 +424,50 @@ button:hover {
 }
 #seat1 {
   position: absolute;
-  left: 130px;
+  left: 230px;
   top: 150px;
 }
 #seat2 {
   position: absolute;
-  left: 246px;
+  left: 346px;
   top: 150px;
 }
 #seat3 {
   position: absolute;
-  left: 362px;
+  left: 462px;
   top: 150px;
 }
 #seat4 {
   position: absolute;
-  left: 478px;
+  left: 578px;
   top: 150px;
+}
+/* Head Backs */
+.head_back {
+  background-image: url("/static/images/head_back.png");
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+#head_back1 {
+  position: absolute;
+  left: 242px;
+  top: 90px;
+}
+#head_back2 {
+  position: absolute;
+  left: 358px;
+  top: 90px;
+}
+#head_back3 {
+  position: absolute;
+  left: 474px;
+  top: 90px;
+}
+#head_back4 {
+  position: absolute;
+  left: 590px;
+  top: 90px;
 }
 /* Icons */
 .icon {
