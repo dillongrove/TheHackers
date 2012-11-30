@@ -288,6 +288,7 @@ button {
     height: 300px;
     overflow: hidden;
     padding-top: 8px;
+    position: relative;
 }
 
 .selected_char_pic {
@@ -299,6 +300,24 @@ button {
     -moz-animation: rotate_in 1s; /* Firefox */
     -webkit-animation: rotate_in 1s; /* Safari and Chrome */
     -o-animation: rotate_in 1s; /* Opera */
+}
+
+.selected_char_name_wrapper {
+    position: absolute;
+    bottom: 6px;
+    height: 70px;
+    width: 136px;
+    text-align: right;
+    color: #333;
+
+    #selected_first_name {
+        font-size: 22px;
+    }
+
+    #selected_last_name {
+        font-size: 14px;
+    }
+
 }
 
 .selected_char_current_task {

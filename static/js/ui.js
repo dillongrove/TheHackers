@@ -70,6 +70,9 @@ $(".hacker").click(function() {
         $(".hacker").removeClass('selected');
         $(this).addClass('selected');
         $(".selected_char_pic").attr('src', "/static/images/hackers/" + hacker['imgset'] + "front.png");
+        $("#selected_first_name").text(hacker["first_name"]);
+        $("#selected_last_name").text(hacker['last_name']);
+        $("#selected_catchphrase_name").text(hacker['catchphrase']);
     }
     console.log("Selected "+HACKER_SELECTED);
 });
