@@ -28,7 +28,7 @@
                     energy: {{ hacker.base_energy }},
                     productivity: {{ hacker.base_productivity }},
                     teamwork: {{ hacker.base_teamwork }}
-                });
+                }, true);
                 $("#your_hackers").append(html);
                 recruit_hacker(html);
             {% endfor %}
@@ -83,7 +83,7 @@
                         window.location = '/loadout';
                     }
                 });
-                recruit_hacker(parent); // change UI
+                recruit_hacker(parent, false); // change UI
             });
 
             // hacker template
@@ -106,10 +106,20 @@
                         .append("<button class='recruit'>Add to team ></button>");
                 return output;
             }
-            function recruit_hacker(div) {
-                $("#your_hackers").prepend(div);
-                div.children('button').remove();
-                div.addClass('recruited');
+            function recruit_hacker(div, silent) {
+                if (silent) {
+                    $("#your_hackers").prepend(div);
+                    div.show();
+                    div.children('button').remove();
+                    div.addClass('recruited');
+                } else {
+                    div.fadeOut(200, function() {
+                        $("#your_hackers").prepend(div);
+                        div.fadeIn(200);
+                        div.children('button').remove();
+                        div.addClass('recruited');
+                    });
+                }
                 CURRENT_TEAM.push(div.data('name'));
                 $("#spots").html((TEAM_SIZE - CURRENT_TEAM.length));
             }
