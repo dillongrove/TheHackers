@@ -689,6 +689,11 @@ button:hover {
   right: 160px;
   top: 38px;
 }
+#numbers {
+  position: absolute;
+  top: 180px;
+  left: 280px;
+}
 /* Icons */
 .icon {
   width: 11px;
@@ -855,26 +860,26 @@ button:hover {
 }
 body {
   font-size: 16px;
+  line-height: 22px;
 }
 #page {
   text-align: center;
   margin-top: 100px;
 }
 #characters {
-  padding: 10px 0px;
-  margin: 0px 0px 10px 0px;
-  background: #262626;
-  background: -moz-linear-gradient(left, #262626 10%, #424242 50%, #262626 90%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(10%, #262626), color-stop(50%, #424242), color-stop(90%, #262626));
-  background: -webkit-linear-gradient(left, #262626 10%, #424242 50%, #262626 90%);
-  background: -o-linear-gradient(left, #262626 10%, #424242 50%, #262626 90%);
-  background: -ms-linear-gradient(left, #262626 10%, #424242 50%, #262626 90%);
-  background: linear-gradient(to right, #262626 10%, #424242 50%, #262626 90%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#262626', endColorstr='#262626', GradientType=1);
+  padding: 30px 0px;
+  margin: 0px 0px 15px 0px;
+  background: -moz-linear-gradient(left, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(42, 42, 42, 0)), color-stop(50%, #424242), color-stop(100%, rgba(42, 42, 42, 0)));
+  background: -webkit-linear-gradient(left, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
+  background: -o-linear-gradient(left, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
+  background: linear-gradient(to right, rgba(42, 42, 42, 0) 0%, #424242 50%, rgba(42, 42, 42, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#002a2a2a', endColorstr='#002a2a2a', GradientType=1);
 }
 #login {
-  margin-top: 15px;
-  font-size: 20px;
+  margin-top: 30px;
+  font-size: 24px;
 }
 #nav_bar {
   background-color: #363636;
