@@ -689,6 +689,11 @@ button:hover {
   right: 160px;
   top: 38px;
 }
+#numbers {
+  position: absolute;
+  top: 180px;
+  left: 280px;
+}
 /* Icons */
 .icon {
   width: 11px;
