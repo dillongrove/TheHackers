@@ -211,7 +211,6 @@ button:hover {
   background-image: url("../images/tables.png");
 }
 #target_window {
-  display: none;
   position: absolute;
   top: -340px;
   width: 150px;
@@ -227,6 +226,7 @@ button:hover {
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
   border: 2px solid #ffffff;
   color: #999;
+  display: none;
 }
 #target_window #top_bar {
   height: 26px;
@@ -320,14 +320,14 @@ button:hover {
   -moz-transform: rotate(30deg);
   -ms-transform: rotate(30deg);
   transform: rotate(30deg);
-  animation: rotate_in 1s;
-  -moz-animation: rotate_in 1s;
+  animation: rotate_in .3s;
+  -moz-animation: rotate_in .3s;
   /* Firefox */
 
-  -webkit-animation: rotate_in 1s;
+  -webkit-animation: rotate_in .3s;
   /* Safari and Chrome */
 
-  -o-animation: rotate_in 1s;
+  -o-animation: rotate_in .3s;
   /* Opera */
 
 }
@@ -338,14 +338,14 @@ button:hover {
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
   transform: rotate(0deg);
-  animation: rotate_out .5s;
-  -moz-animation: rotate_out .5s;
+  animation: rotate_out .3s;
+  -moz-animation: rotate_out .3s;
   /* Firefox */
 
-  -webkit-animation: rotate_out .5s;
+  -webkit-animation: rotate_out .3s;
   /* Safari and Chrome */
 
-  -o-animation: rotate_out .5s;
+  -o-animation: rotate_out .3s;
   /* Opera */
 
 }
