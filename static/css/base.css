@@ -485,7 +485,6 @@ button:hover {
 }
 /* Head Backs */
 .head_back {
-  background-image: url("/static/images/head_back.png");
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
