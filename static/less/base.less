@@ -93,6 +93,7 @@ button {
 #wall {
     height: 50%;
     min-height: 400px;
+    position: relative;
 }
 
 #floor {
@@ -133,5 +134,30 @@ button {
     height: 20px;
     background-color: #b0b0b0;
     border-top: 2px solid #cecece;
+}
+
+#wall_interface {
+    width: 760px;
+    height: 300px;
+    left: 50%;
+    margin-left: -380px;
+    position: absolute;
+    bottom: 0;
+}
+
+#screen_outer {
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+    width: 600px;
+    height: 280px;
+    .gradient(#161616, #121212, #292929);
+    .drop-shadow(1px, 4px, 8px, .8);
+}
+
+#screen_inner {
+    margin: 12px;
+    .gradient(#f5f5f5, #f0f0f0, #f5f5f5);
+    height: 256px;
 }
 

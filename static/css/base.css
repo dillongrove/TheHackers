@@ -92,6 +92,7 @@ button:hover {
 #wall {
   height: 50%;
   min-height: 400px;
+  position: relative;
 }
 #floor {
   position: absolute;
@@ -132,4 +133,36 @@ button:hover {
   height: 20px;
   background-color: #b0b0b0;
   border-top: 2px solid #cecece;
+}
+#wall_interface {
+  width: 760px;
+  height: 300px;
+  left: 50%;
+  margin-left: -380px;
+  position: absolute;
+  bottom: 0;
+}
+#screen_outer {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  width: 600px;
+  height: 280px;
+  background: #161616;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #121212), color-stop(1, #292929));
+  background: -ms-linear-gradient(bottom, #121212, #292929);
+  background: -moz-linear-gradient(center bottom, #121212 0%, #292929 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#292929', endColorstr='#121212', GradientType=0);
+  -webkit-box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.8);
+}
+#screen_inner {
+  margin: 12px;
+  background: #f5f5f5;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f0f0f0), color-stop(1, #f5f5f5));
+  background: -ms-linear-gradient(bottom, #f0f0f0, #f5f5f5);
+  background: -moz-linear-gradient(center bottom, #f0f0f0 0%, #f5f5f5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#f0f0f0', GradientType=0);
+  height: 256px;
 }
