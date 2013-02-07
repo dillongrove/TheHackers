@@ -5,7 +5,7 @@ TheHackers
 
 About
 ==========
-This game was built over a 24 hour period by [Dillon Grove](https://www.github.com/dillongrove), [Scott Martin](https://www.github.com/smartin015), [Todd Medema](https://www.toddmedema.com), and [Sara Ladley](http://saraladley.com/#/0) at the Facebook World Hackathon Finals in Menlo Park, California.  We took 4th place with this game.
+This game was built over a 24 hour period by [Dillon Grove](https://www.github.com/dillongrove), [Scott Martin](https://www.github.com/smartin015), [Todd Medema](http://www.toddmedema.com), and [Sara Ladley](http://saraladley.com/#/0) at the Facebook World Hackathon Finals in Menlo Park, California.  We took 4th place with this game.
 
 The back end of "THe Hackers" is built using Python on Google AppEngine.  The front-end is written in HTML5, CSS3, and Javascript, with the generous help of many art assets created in Adobe Photoshop and Illustrator.
 
